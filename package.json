@@ -1,0 +1,34 @@
+{
+  "name": "agent-skills-maintainer",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.13.1",
+  "description": "Maintainer-only validation and evaluation tooling",
+  "engines": {
+    "node": ">=22.20.0"
+  },
+  "scripts": {
+    "test": "PYTHONDONTWRITEBYTECODE=1 uv run python -m maintenance.safe_exec python -m unittest discover -s tests -v",
+    "validate": "PYTHONDONTWRITEBYTECODE=1 uv run python -m maintenance.safe_exec python -m maintenance.validate",
+    "validate:sources": "PYTHONDONTWRITEBYTECODE=1 uv run python -m maintenance.safe_exec python -m maintenance.validate --live-sources",
+    "validate:official": "PYTHONDONTWRITEBYTECODE=1 uv run python -m maintenance.official_validate",
+    "validate:installation": "PYTHONDONTWRITEBYTECODE=1 uv run python -m maintenance.validate_installation",
+    "catalog:check": "PYTHONDONTWRITEBYTECODE=1 uv run python -m maintenance.catalog --check",
+    "promptfoo:validate": "PYTHONDONTWRITEBYTECODE=1 uv run python -m maintenance.promptfoo_validate",
+    "eval:dry-run": "PYTHONDONTWRITEBYTECODE=1 uv run python -m evals.runner --dry-run",
+    "eval:auth:status": "PYTHONDONTWRITEBYTECODE=1 uv run python -m evals.auth status",
+    "eval:login": "PYTHONDONTWRITEBYTECODE=1 uv run python -m evals.auth login",
+    "eval:smoke": "PYTHONDONTWRITEBYTECODE=1 uv run python -m evals.runner --suite smoke --execute",
+    "eval:routing": "PYTHONDONTWRITEBYTECODE=1 uv run python -m evals.runner --suite routing --execute",
+    "eval:behavior": "PYTHONDONTWRITEBYTECODE=1 uv run python -m evals.runner --suite behavior --execute",
+    "eval:composition": "PYTHONDONTWRITEBYTECODE=1 uv run python -m evals.runner --suite composition --execute",
+    "eval:security": "PYTHONDONTWRITEBYTECODE=1 uv run python -m evals.runner --suite security --execute",
+    "eval:compare": "PYTHONDONTWRITEBYTECODE=1 uv run python -m evals.runner --suite compare --execute",
+    "eval:full": "PYTHONDONTWRITEBYTECODE=1 uv run python -m evals.runner --suite full --execute"
+  },
+  "devDependencies": {
+    "@openai/codex-sdk": "0.146.0",
+    "promptfoo": "0.122.0",
+    "skills": "1.5.22"
+  }
+}

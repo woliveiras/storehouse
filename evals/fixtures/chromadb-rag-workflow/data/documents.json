@@ -1,0 +1,1 @@
+[{"id":"a-1","tenant":"a","score":0.9,"text":"alpha"},{"id":"a-2","tenant":"a","score":0.8,"text":"alpha two"},{"id":"b-1","tenant":"b","score":0.95,"text":"beta"},{"id":"b-2","tenant":"b","score":0.7,"text":"beta two"}]
