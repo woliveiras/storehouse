@@ -1,0 +1,42 @@
+# SPEC-0001 behavior and oracle matrix
+
+This matrix was written before destination skills, catalogs, validators, or the
+evaluation harness existed. Per-skill routing, behavior, composition, and
+security cases refine these rows without changing their governing oracles.
+
+| Criterion | Scenario | Invariant | Observable oracle | Provenance | Planned verification | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| AS-001 | Source inventory | All source skills receive one disposition | Exact equality with the normative 33/16 sets and equation 49 = 33 + 16 | independent | Read-only inventory test against both repositories | Live-source gate passes |
+| AS-002 | Source drift | Migration baseline cannot silently move | Frozen commit objects exist; frozen and clean live governed trees are byte-identical; any later HEAD is recorded without replacing provenance | spec-derived | Baseline verifier, live-tree comparison, and negative drift test | Frozen digests and tree-identical late-checkout rule pass |
+| AS-003 | Destination inventory | Only migrated skills are canonical here | Exact 33-directory equality and excluded-set absence | spec-derived | Repository structure test | Exact-set test passes |
+| AS-004 | Recursive migration | No owned resource disappears silently | Every source file has a disposition and every preserved/adapted destination exists | independent | Source/destination manifest reconciliation | 106 source files reconciled |
+| AS-005 | Skill metadata | Discovery identifiers remain unambiguous | Official/schema validation plus folder/name equality and unique names | external | Official validator and repository tests | 33 official validations pass |
+| AS-006 | Links and scripts | Activated skills can reach their resources | All local targets resolve; syntax and representative script tests pass | independent | Markdown/resource scan and subprocess tests | Link/resource scans and six functional smokes pass |
+| AS-007 | Standalone portability | Geremmyas/Tuxedo are optional to consumers | CLI, pack, manifest, target, hook, instruction, command, and dependency references all have portable dispositions; intentional Codex surfaces are declared | spec-derived | Content scanner and migration-reference inventory | Full-tree portability scan passes |
+| AS-008 | Game scope | Migration does not broaden engine/domain scope | Game skill metadata and body contain no default Unity, PixiJS, or 3D expansion | spec-derived | Scoped content assertions | Full game-tree scope scan passes |
+| AS-009 | Provenance/license | Source and adaptations remain auditable | Inventory has commit, path, hashes, disposition, license hash/scope, notices, and adaptation notes | external | Git-object license inspection and JSON integrity test | 77 preserved and 29 adapted files reconciled |
+| AS-010 | Collection schema | Collections remain declarative data | Schema/version/allowed-key validation passes | spec-derived | JSON schema validator | Draft 2020-12 validation passes |
+| AS-011 | Collection expansion | Aggregates are deterministic and safe | Exact normative collection set; depth-first expansion has no missing, duplicate, or cyclic names | independent | Graph expansion tests including wrong fixtures | Positive and three negative graph tests pass |
+| AS-012 | Catalog coverage | No skill becomes undiscoverable in the catalog | Inventory equality with union of categories/expanded collections | spec-derived | Set reconciliation test | All 33 covered |
+| AS-013 | README content | Users can operate the official CLI without project lore | Required concepts and commands are present | spec-derived | Documentation contract test | README contract passes |
+| AS-014 | README drift | Commands cannot name stale skills | Checked command block equals catalog renderer output | independent | Snapshot/render comparison | Exact renderer comparison passes |
+| AS-015 | Official CLI | Documented install surface works cleanly | Official CLI lists and installs exact selected local skills in temp Git project | external | Pinned CLI clean-room integration test | skills 1.5.22 clean-room pass |
+| AS-016 | Official validation | Every migrated skill follows the public format | Official validator returns success 33 times | external | Validator subprocess runner | 33/33 pass |
+| AS-017 | Deterministic gate | One command detects every mechanical invariant | Deliberate invalid fixtures fail and repository candidate passes | spec-derived | Unit suite plus validate command | `validate:sources` passes |
+| AS-018 | Routing coverage | Each skill has distinguishable activation boundaries | 33 explicit, applicable implicit with per-skill applicability, 33 negative/collision mappings, plus composition/Tuxedo cases validate | spec-derived | Eval catalog schema and generated config tests | 132 routing cases dry-run |
+| AS-019 | Behavior coverage | Every skill must produce observable scoped work | 33 criteria have fixtures, required outputs, no-op rejection, protected hashes, outside sentinels, and non-circular oracles | independent | Eval catalog and fixture tests | 66 trials; no-op and implementation mutants rejected |
+| AS-020 | Composition coverage | Specialized skills work alone and compose optionally | Baseline, focal, related, minimal-Tuxedo, viable full-plugin, and applicable current/proposed variants have distinct oracles without copied Tuxedo skills | spec-derived | Variant applicability tests and dry-run | 113 applicable trials dry-run; full plugin technically unavailable and documented |
+| AS-021 | Security coverage | Sensitivity cannot be omitted and sensitive skills cannot pass by refusing or violating boundaries | All 33 classifications are justified; every derived sensitive case has stimulus, required mutation, hashes, sentinel, canary, and trajectory policy | independent | Classification reconciliation and security fixture tests | 21 cases and all 88 forbidden markers pass deterministic tests |
+| AS-022 | Verdict integrity | Semantic review never erases deterministic failure | Synthetic rows prove `fail` precedence and preserve `needs-review` | independent | Mocked adapter unit tests | Verdict-precedence tests pass |
+| AS-023 | Eval isolation | Provider state cannot inherit personal behavior or credentials | Enumerated personal/unknown behavior surfaces, symlinks, unsafe paths/config/status, sharing, and undeclared network fail before workspaces; minimal allowed fixtures pass | independent | Isolated filesystem/auth/network/sharing mocks | Fail-closed isolation suite passes |
+| AS-024 | Evidence privacy | Durable output contains only bounded sanitized fields | Synthetic secret/raw response/trace/canary absent from saved checkpoint | independent | Report sanitizer tests | Nested secrets absent; exclusive checkpoints pass |
+| AS-025 | Command surface | Model calls are never implicit | Every command routes to intended suite; dry-run/validate paths avoid provider | spec-derived | CLI tests and package script inspection | Command contract and config validation pass |
+| AS-026 | Budget gate | Human sees exact cost before provider use | Suite-selectable dry-run emits exact cases, calls, judges, serial shard-process concurrency and bounded case concurrency; execution lacks the matching fresh approval token and fails | independent | Runner unit/CLI tests | 332 + 33 = 365 for full; exact IDs/token/concurrency tests pass |
+| AS-027 | Dependency boundary | Installed skills have no maintainer runtime | Skill trees contain no maintainer manifests/dependency roots | spec-derived | Package-boundary scan | Distribution boundary test passes |
+| AS-028 | Documentation/review | Durable claims match shipped behavior | Links, criteria, evidence, and three phase records reconcile | implementation-aware | Review contract and doc tests | Spec review clean; test/code review records present |
+| AS-029 | Source/Git authority | Only authorized local state changes | Geremmyas HEAD/status remain baseline-clean; Tuxedo status and governed tree remain clean/identical while any unrelated later HEAD is recorded; destination changes are task-owned; no remote/model evidence | independent | Final Git/evidence inspection | Final read-only source and destination Git inspection recorded |
+
+Operational scratch used by AS-015/AS-023 is part of their oracle only when its
+resolved path is outside all checkouts and personal configuration, its contents
+are synthetic, and cleanup is observed. The dedicated home is never created by
+those deterministic checks.

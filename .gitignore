@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+node_modules/
+.DS_Store
+
+# Generated provider inputs and append-only local sanitized results.
+evals/promptfoo/generated/*
+!evals/promptfoo/generated/.gitkeep
+evals/promptfoo/results/*
+!evals/promptfoo/results/.gitkeep
