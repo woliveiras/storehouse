@@ -1,0 +1,17 @@
+[project]
+name = "agent-skills-maintainer"
+version = "0.0.0"
+description = "Maintainer-only validation for the agent-skills repository"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "PyYAML==6.0.2",
+  "Pillow==12.0.0",
+  "skills-ref==0.1.1",
+  "jsonschema==4.25.1",
+]
+
+[tool.uv]
+package = false

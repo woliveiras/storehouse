@@ -1,0 +1,1468 @@
+{
+  "schema_version": 1,
+  "source": {
+    "repository": "woliveiras/geremmyas",
+    "commit": "783ac878213b61acb914b9151c779c6de0b84286",
+    "skills_tree_listing_sha256": "7de30d71108e8c4e73641a70aaa2d9541ce97f6b826cca528f6eeed0bb73e20d",
+    "license": "MIT",
+    "license_sha256": "24923e703cfafa4e2c5098f4d5b0442ab43f9405dbdbb9fd961707c32e5e4702",
+    "license_scope": "Geremmyas repository files at the frozen source commit; no skill-local exception was found."
+  },
+  "tuxedo_exclusion_source": {
+    "repository": "woliveiras/tuxedo",
+    "commit": "168922a54b695fd2446295c58157981079d2d5d6",
+    "skills_tree_listing_sha256": "3ed55c2bcd4614cd7074a6ff4ff01199a81b4dd9f31d9912fa25f191c85a967f"
+  },
+  "skills": [
+    {
+      "name": "android-ci-setup",
+      "source_path": "content/skills/android-ci-setup",
+      "source_tree_sha256": "ee9713ac4fbc1d24a154b1d73b02fe5febeccd5a93d92ea014148eee74a00e97",
+      "categories": [
+        "android"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "ci-authority",
+          "supply-chain",
+          "release-credentials"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "preserved",
+          "source_sha256": "80ec79ea41a6a4a1be9a64bdca350f710c8b2f3b5f6126c82b44f4bb1d176f1e",
+          "destination_sha256": "80ec79ea41a6a4a1be9a64bdca350f710c8b2f3b5f6126c82b44f4bb1d176f1e"
+        },
+        {
+          "path": "references/configuration-examples.md",
+          "disposition": "preserved",
+          "source_sha256": "988e6d1c19e5afe78e2162e8e8d8db283b0913d920ff2db515f4f9b04f18862a",
+          "destination_sha256": "988e6d1c19e5afe78e2162e8e8d8db283b0913d920ff2db515f4f9b04f18862a"
+        }
+      ]
+    },
+    {
+      "name": "chromadb-rag-workflow",
+      "source_path": "content/skills/chromadb-rag-workflow",
+      "source_tree_sha256": "7d9ff9984a3d148cdec050058eeb40f5b4c51a7910de0cc9ef78afa40cf3ae8f",
+      "categories": [
+        "data",
+        "ai"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "database",
+          "persistence",
+          "tenancy"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "preserved",
+          "source_sha256": "cdb8f95ea691e91a2a88670cb2c9a162ff6644b4d058411ed8eb645e79e2a087",
+          "destination_sha256": "cdb8f95ea691e91a2a88670cb2c9a162ff6644b4d058411ed8eb645e79e2a087"
+        }
+      ]
+    },
+    {
+      "name": "game-ai-2d",
+      "source_path": "content/skills/game-ai-2d",
+      "source_tree_sha256": "78c948f0d75e747204c7a1ece14a9ab9a62146fab8e93078b9eb588c0616a572",
+      "categories": [
+        "game-systems",
+        "game-dev"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "d317b2e5c0b9e516fff968fb5c607ca91b94099a5575782db5f5a078cacc077f",
+          "destination_sha256": "48c215fb694daf85a55d0e6eff9237dffd962a96663cb4522e970bbed1e3a88c",
+          "note": "Made companion specialized-skill composition explicitly optional."
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "preserved",
+          "source_sha256": "b3fdf2c3035221d396e87ee583be1d702df52832413d6b3af435fcb637d329ef",
+          "destination_sha256": "b3fdf2c3035221d396e87ee583be1d702df52832413d6b3af435fcb637d329ef"
+        },
+        {
+          "path": "references/ai-architecture.md",
+          "disposition": "preserved",
+          "source_sha256": "fbc840b8950345a4b5bfc9b16add9f609c814bd5ffbdaa4180ffb6c3202a3f3b",
+          "destination_sha256": "fbc840b8950345a4b5bfc9b16add9f609c814bd5ffbdaa4180ffb6c3202a3f3b"
+        },
+        {
+          "path": "references/godot.md",
+          "disposition": "preserved",
+          "source_sha256": "722f9e688b5d61723a288e4245d50118a78606ebefd41115a95e6a14231624c8",
+          "destination_sha256": "722f9e688b5d61723a288e4245d50118a78606ebefd41115a95e6a14231624c8"
+        },
+        {
+          "path": "references/phaser.md",
+          "disposition": "preserved",
+          "source_sha256": "3f53a75af7fb3f7a43e0e507371df1550ca1ffec145891df1210526d962d5b85",
+          "destination_sha256": "3f53a75af7fb3f7a43e0e507371df1550ca1ffec145891df1210526d962d5b85"
+        }
+      ]
+    },
+    {
+      "name": "game-art-2d",
+      "source_path": "content/skills/game-art-2d",
+      "source_tree_sha256": "70f1b4fdcc372e79f2851578a89441afcb1baacc67f7c1e395c65b2154e53754",
+      "categories": [
+        "game-art",
+        "game-dev"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "filesystem",
+          "image-generation"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "63f405c6521f6dc74b1885bc86762288f0dc5c3b9eb7f390e373c3979be9f2e4",
+          "destination_sha256": "a6c21cf89cb577ccd6a0e4ca9b29c065b061f4c731a1468f91f33d845430f70b",
+          "note": "Kept deliberate Codex image tooling while adding a standalone cross-client fallback."
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "preserved",
+          "source_sha256": "1cc3896a07d3c29d3da0dfe4e83c242859414b4563cce3f04b2c3ee9b225acc1",
+          "destination_sha256": "1cc3896a07d3c29d3da0dfe4e83c242859414b4563cce3f04b2c3ee9b225acc1"
+        },
+        {
+          "path": "references/animation-and-spritesheets.md",
+          "disposition": "preserved",
+          "source_sha256": "bbea9c12b127d4afe6dbeb7e5d16f7122389d286c9bb53e651c5e534d06792c1",
+          "destination_sha256": "bbea9c12b127d4afe6dbeb7e5d16f7122389d286c9bb53e651c5e534d06792c1"
+        },
+        {
+          "path": "references/art-direction.md",
+          "disposition": "preserved",
+          "source_sha256": "301ee60e2b3a9df3b63cd4163981372403315dead860b8fb60a0b7fdc3794132",
+          "destination_sha256": "301ee60e2b3a9df3b63cd4163981372403315dead860b8fb60a0b7fdc3794132"
+        },
+        {
+          "path": "references/characters-and-enemies.md",
+          "disposition": "preserved",
+          "source_sha256": "19be823c9586c6048de9945046cabb002186a72e6f576054a7ccac0127d7cd03",
+          "destination_sha256": "19be823c9586c6048de9945046cabb002186a72e6f576054a7ccac0127d7cd03"
+        },
+        {
+          "path": "references/godot/asset-pipeline.md",
+          "disposition": "preserved",
+          "source_sha256": "fda369a2b858364b7e01d46cd95fbc182a1cc6abff0177c942d729f98dd07c99",
+          "destination_sha256": "fda369a2b858364b7e01d46cd95fbc182a1cc6abff0177c942d729f98dd07c99"
+        },
+        {
+          "path": "references/items-props-vfx-and-ui.md",
+          "disposition": "preserved",
+          "source_sha256": "54113a4cb850e7d8eec2e3139b4c808a60b78d624549bc04b6d6be975eaf1abd",
+          "destination_sha256": "54113a4cb850e7d8eec2e3139b4c808a60b78d624549bc04b6d6be975eaf1abd"
+        },
+        {
+          "path": "references/maps-and-levels.md",
+          "disposition": "preserved",
+          "source_sha256": "8f5fbeb0f9037b7f78960d6791cbe9fa836d62ef22e4c852215779921e1c8036",
+          "destination_sha256": "8f5fbeb0f9037b7f78960d6791cbe9fa836d62ef22e4c852215779921e1c8036"
+        },
+        {
+          "path": "references/phaser/asset-pipeline.md",
+          "disposition": "preserved",
+          "source_sha256": "0d41b1d017e4b050382ad61ad3f63d7631ee32a223e8f094ce3172594bb352db",
+          "destination_sha256": "0d41b1d017e4b050382ad61ad3f63d7631ee32a223e8f094ce3172594bb352db"
+        },
+        {
+          "path": "references/pixel-art/style-guide.md",
+          "disposition": "preserved",
+          "source_sha256": "947f8024d778d750433250a5854c0a4bb70080cc11e8ea29076577692b9ac2f5",
+          "destination_sha256": "947f8024d778d750433250a5854c0a4bb70080cc11e8ea29076577692b9ac2f5"
+        },
+        {
+          "path": "references/pop-art/style-guide.md",
+          "disposition": "preserved",
+          "source_sha256": "edb27772e436f362aeb7efdf63917b2d7187baa97b3b80221933da529c5d8573",
+          "destination_sha256": "edb27772e436f362aeb7efdf63917b2d7187baa97b3b80221933da529c5d8573"
+        },
+        {
+          "path": "references/runtime-packaging-and-qa.md",
+          "disposition": "preserved",
+          "source_sha256": "60d46ad78d25e60508fa858c301ba66d6886004c7f32579279671292dad01a34",
+          "destination_sha256": "60d46ad78d25e60508fa858c301ba66d6886004c7f32579279671292dad01a34"
+        },
+        {
+          "path": "references/style-pack-contract.md",
+          "disposition": "preserved",
+          "source_sha256": "2c13a3f273c83a126d0da43ab4b0a51700d8cf733a88aa7cd2365794e1169aab",
+          "destination_sha256": "2c13a3f273c83a126d0da43ab4b0a51700d8cf733a88aa7cd2365794e1169aab"
+        },
+        {
+          "path": "scripts/asset_qa.py",
+          "disposition": "adapted",
+          "source_sha256": "37ef9ef15d3c3c34d295f2d7aa8bd587733c431f1c2500dbb77b7569f3be2aa1",
+          "destination_sha256": "11838a94abf806c7667468c13c10115b5a4fc895ae7efa8c821186f2ebd6dca2",
+          "note": "Adapted for standalone portable use."
+        },
+        {
+          "path": "scripts/make_contact_sheet.py",
+          "disposition": "adapted",
+          "source_sha256": "af772add0930fe1e4d5852e956e2116a14fb89ebd94a54e54a4494b38c0ea141",
+          "destination_sha256": "f09b7ad79f01b948de4e99a47a355cba0b990cc310ecc2548ab9ecfb08ee8734",
+          "note": "Adapted for standalone portable use."
+        },
+        {
+          "path": "scripts/pack_spritesheet.py",
+          "disposition": "adapted",
+          "source_sha256": "f452a755427703ada1b94a54da3ff72d22e29933e524f582d8309990b3ff21e1",
+          "destination_sha256": "b23cec97b8693c0b844cad5403663c22d524b5d1578767a4e1f5fd9f1b74c45f",
+          "note": "Adapted for standalone portable use."
+        },
+        {
+          "path": "scripts/pixel_art_process.py",
+          "disposition": "adapted",
+          "source_sha256": "03a487f654617ec851a6d1b96a6efc0496616655e68aef4f96180983e16e7f6e",
+          "destination_sha256": "0febc1db2e3c5335e66529d7c4855cc40d69c685b31b8aec4c26ac1cb9bfc43a",
+          "note": "Adapted for standalone portable use."
+        },
+        {
+          "path": "scripts/slice_spritesheet.py",
+          "disposition": "adapted",
+          "source_sha256": "2680cea0ef47602c4019c0b433bd20d5e763dcb97887bfdbb79c13fd3ee15fe1",
+          "destination_sha256": "cbbb024990bc00b29ebf093995ed9384347bd42709b810361ccb34f30634c29d",
+          "note": "Adapted for standalone portable use."
+        }
+      ]
+    },
+    {
+      "name": "game-audio-2d",
+      "source_path": "content/skills/game-audio-2d",
+      "source_tree_sha256": "b9fbcdf212f2074894bb8b0fe7ca04a0f929475f2d6bf67746421fdcd1530082",
+      "categories": [
+        "game-audio",
+        "game-dev"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "4237bd3d6b83683ee0cc3b980d8aa1223f9ac284703b3bf4f70ce1b102845226",
+          "destination_sha256": "4c748731406fb892e980c5554dca40a1c3f90dc49eacc6140da0e950b19f28ad",
+          "note": "Made companion specialized-skill composition explicitly optional."
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "preserved",
+          "source_sha256": "e39475ca4f71b14e5ee374500653249c9bbc59e4fdae13c5e764a066ec344170",
+          "destination_sha256": "e39475ca4f71b14e5ee374500653249c9bbc59e4fdae13c5e764a066ec344170"
+        },
+        {
+          "path": "references/audio-system.md",
+          "disposition": "preserved",
+          "source_sha256": "e1f8f7f4115828ddc10b10b877ec59f6c30a9a2be7e96a9b4bbf04243c55d648",
+          "destination_sha256": "e1f8f7f4115828ddc10b10b877ec59f6c30a9a2be7e96a9b4bbf04243c55d648"
+        },
+        {
+          "path": "references/godot.md",
+          "disposition": "preserved",
+          "source_sha256": "2f35192fb46aa6248ea9c24818cbb07ed2fce6524d25d29553a317293fffdcef",
+          "destination_sha256": "2f35192fb46aa6248ea9c24818cbb07ed2fce6524d25d29553a317293fffdcef"
+        },
+        {
+          "path": "references/phaser.md",
+          "disposition": "preserved",
+          "source_sha256": "2cb5aa656aba4dac7d862c90363330f556dc2084a324cdf7c180611b80118018",
+          "destination_sha256": "2cb5aa656aba4dac7d862c90363330f556dc2084a324cdf7c180611b80118018"
+        }
+      ]
+    },
+    {
+      "name": "game-build-and-release",
+      "source_path": "content/skills/game-build-and-release",
+      "source_tree_sha256": "2f3f3de7b2243e1c55539dceb2f1931bbe74c57646c08c6b1d0a0c18cffe6381",
+      "categories": [
+        "game-delivery",
+        "game-dev"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "artifact-integrity",
+          "secrets",
+          "release-authority"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "e7ff09cf83392dfe57b8ee284f7b69126ca7af1ec6378cc13168da8509936678",
+          "destination_sha256": "2b2187893bdd6e56b71570cca6beff727f170b3c3b54718e6f334a91fcf94f43",
+          "note": "Made companion specialized-skill composition explicitly optional."
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "preserved",
+          "source_sha256": "243d2289f32517779b546ac67f36ef9233daa6032fc6d629986299896263b055",
+          "destination_sha256": "243d2289f32517779b546ac67f36ef9233daa6032fc6d629986299896263b055"
+        },
+        {
+          "path": "references/godot.md",
+          "disposition": "preserved",
+          "source_sha256": "771b81d005faead49d60c96416d618274fbc8533bcd89165293dddd22c9cabc9",
+          "destination_sha256": "771b81d005faead49d60c96416d618274fbc8533bcd89165293dddd22c9cabc9"
+        },
+        {
+          "path": "references/phaser.md",
+          "disposition": "preserved",
+          "source_sha256": "9b6f0482c074dbe8da4465aeb4151662338e2f6bf145986fc065070b0d51b43e",
+          "destination_sha256": "9b6f0482c074dbe8da4465aeb4151662338e2f6bf145986fc065070b0d51b43e"
+        },
+        {
+          "path": "references/release-pipeline.md",
+          "disposition": "preserved",
+          "source_sha256": "8cf0a643faab5d3e83559d12ec316f05015dad7b0aaebf67cbe050787070f0cc",
+          "destination_sha256": "8cf0a643faab5d3e83559d12ec316f05015dad7b0aaebf67cbe050787070f0cc"
+        }
+      ]
+    },
+    {
+      "name": "game-feel-2d",
+      "source_path": "content/skills/game-feel-2d",
+      "source_tree_sha256": "bc0a4253287f8aeb3e13a9538e88423209b3bdb05b17a9eedaf280b4f81ff380",
+      "categories": [
+        "game-ui",
+        "game-dev"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "5fc6486ef5d67981b3c955c13388c57ec925671d6ceaa5ec54d5c2421eae2c13",
+          "destination_sha256": "6552af449a22a0c8c0a0e865bc2a3a8ca860fc2da14811aecc0d2bc8fe978352",
+          "note": "Made companion specialized-skill composition explicitly optional."
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "preserved",
+          "source_sha256": "a1f57ac7723fad2aedf1b91c317a5dce428b6fe42c2e429ddce4b02675347588",
+          "destination_sha256": "a1f57ac7723fad2aedf1b91c317a5dce428b6fe42c2e429ddce4b02675347588"
+        },
+        {
+          "path": "references/feel-patterns.md",
+          "disposition": "preserved",
+          "source_sha256": "50d997537d56c59411fd5cd4f87098e952a6b48efd8b8bdc8851bdbdb6419ec7",
+          "destination_sha256": "50d997537d56c59411fd5cd4f87098e952a6b48efd8b8bdc8851bdbdb6419ec7"
+        },
+        {
+          "path": "references/godot.md",
+          "disposition": "preserved",
+          "source_sha256": "d641ca5d745d381a1301d0394281d955bdb0a03fc69fb05df14c1932662b210b",
+          "destination_sha256": "d641ca5d745d381a1301d0394281d955bdb0a03fc69fb05df14c1932662b210b"
+        },
+        {
+          "path": "references/phaser.md",
+          "disposition": "preserved",
+          "source_sha256": "3234e6126112d15047c9fac4886a849b6fe142e157bb8cbf1121c3e6252739e0",
+          "destination_sha256": "3234e6126112d15047c9fac4886a849b6fe142e157bb8cbf1121c3e6252739e0"
+        }
+      ]
+    },
+    {
+      "name": "game-performance-2d",
+      "source_path": "content/skills/game-performance-2d",
+      "source_tree_sha256": "4be08123495d32bd6605cd0bd91aaa02f471993f74fa9e00a16151f144b990f6",
+      "categories": [
+        "game-performance",
+        "game-dev"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "fa83c05c06776ff8995130fc3e519fa26715a7b272b39853fc866b30023bb5e3",
+          "destination_sha256": "46f7c6c86fab69b1d712ea870116706131520fc5861a7c616a23a2a3c5815a84",
+          "note": "Made companion specialized-skill composition explicitly optional."
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "preserved",
+          "source_sha256": "8117ce012791b289dd40b84957ac7b6be9b19f9247a5f31a9f65b98facfe1798",
+          "destination_sha256": "8117ce012791b289dd40b84957ac7b6be9b19f9247a5f31a9f65b98facfe1798"
+        },
+        {
+          "path": "references/godot.md",
+          "disposition": "preserved",
+          "source_sha256": "71cd1316491e26007921dae130a385ae1c51f3a2f392319b75e716828a8e2432",
+          "destination_sha256": "71cd1316491e26007921dae130a385ae1c51f3a2f392319b75e716828a8e2432"
+        },
+        {
+          "path": "references/phaser.md",
+          "disposition": "preserved",
+          "source_sha256": "a13827bf74dd6d2b2390dd6e8d3f7d7dfc63ce692dde4dbd9c37b8d356226c2e",
+          "destination_sha256": "a13827bf74dd6d2b2390dd6e8d3f7d7dfc63ce692dde4dbd9c37b8d356226c2e"
+        },
+        {
+          "path": "references/profiling-and-budgets.md",
+          "disposition": "preserved",
+          "source_sha256": "625da1dc3a19812311838f0757cb7faf6841870e946a9068a732fac9df44a3f4",
+          "destination_sha256": "625da1dc3a19812311838f0757cb7faf6841870e946a9068a732fac9df44a3f4"
+        }
+      ]
+    },
+    {
+      "name": "game-save-n-progress",
+      "source_path": "content/skills/game-save-n-progress",
+      "source_tree_sha256": "e20fc99713221bd2c7a337ec351a3865c554ae741ea6d27a590833ea38a74b51",
+      "categories": [
+        "game-systems",
+        "game-dev"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "persistence",
+          "data-loss"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "9ca324c8fd7a16b5cecab83f57c94aeef9406f5ea54794d09a0a0964e1a21653",
+          "destination_sha256": "b74cd04d3e08cfba806fdf9836fea5c34affcc25ae37f86bde964a0aeb3c50a7",
+          "note": "Made companion specialized-skill composition explicitly optional."
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "preserved",
+          "source_sha256": "89d69139e30edd50c973074ff17499c63717ba4a4a8b140fba94decfcd0a7901",
+          "destination_sha256": "89d69139e30edd50c973074ff17499c63717ba4a4a8b140fba94decfcd0a7901"
+        },
+        {
+          "path": "references/godot.md",
+          "disposition": "preserved",
+          "source_sha256": "b41dfca88a12852399184042ad5e394114717e1bf153911941001424abb284cc",
+          "destination_sha256": "b41dfca88a12852399184042ad5e394114717e1bf153911941001424abb284cc"
+        },
+        {
+          "path": "references/phaser.md",
+          "disposition": "preserved",
+          "source_sha256": "ea3a0c6d5cc1fc9819d3fcb829d449def97eae866f3a38eae539422293d6aece",
+          "destination_sha256": "ea3a0c6d5cc1fc9819d3fcb829d449def97eae866f3a38eae539422293d6aece"
+        },
+        {
+          "path": "references/save-architecture.md",
+          "disposition": "preserved",
+          "source_sha256": "c5daf3ba39933ef5afab77f1941017f7388f6cf4aefef7564913d6bbe5cf70d0",
+          "destination_sha256": "c5daf3ba39933ef5afab77f1941017f7388f6cf4aefef7564913d6bbe5cf70d0"
+        }
+      ]
+    },
+    {
+      "name": "game-testing-2d",
+      "source_path": "content/skills/game-testing-2d",
+      "source_tree_sha256": "f0f0d592b0083e8bce4878dfc0a611fba3024b075ccd60ecac2d466e46837af8",
+      "categories": [
+        "game-core",
+        "game-dev"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "42b185d2008aa290f572c6f653270ac4c4d9715e502dc155d62c05c7b3c1bc5e",
+          "destination_sha256": "44d6676e850c633ce9e471239fe9ba19cfb343aaa5fbea6a59f51272b7e8b39b",
+          "note": "Made companion specialized-skill composition explicitly optional."
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "preserved",
+          "source_sha256": "253ee608e315146374bf27484b2c9f51a3cd4ab5724f15c44dbc12448cf2202b",
+          "destination_sha256": "253ee608e315146374bf27484b2c9f51a3cd4ab5724f15c44dbc12448cf2202b"
+        },
+        {
+          "path": "references/godot.md",
+          "disposition": "preserved",
+          "source_sha256": "df504dcdac7e26689570e1cf4b68dd46bf014995a8e09d081589520921e497b8",
+          "destination_sha256": "df504dcdac7e26689570e1cf4b68dd46bf014995a8e09d081589520921e497b8"
+        },
+        {
+          "path": "references/phaser.md",
+          "disposition": "preserved",
+          "source_sha256": "6ba0f40da09b5a25d998683a14a846c1a6bee61987657de4147eb0e321b2450b",
+          "destination_sha256": "6ba0f40da09b5a25d998683a14a846c1a6bee61987657de4147eb0e321b2450b"
+        },
+        {
+          "path": "references/testing-strategy.md",
+          "disposition": "preserved",
+          "source_sha256": "44471b9884ef904af8490ce8e9910eb2d245a8105adbfe10cbd595e9ca3df52b",
+          "destination_sha256": "44471b9884ef904af8490ce8e9910eb2d245a8105adbfe10cbd595e9ca3df52b"
+        }
+      ]
+    },
+    {
+      "name": "game-ui-accessibility",
+      "source_path": "content/skills/game-ui-accessibility",
+      "source_tree_sha256": "614ff53c0af3e5fd61aec2980e902f27b8d08a117073b712c034bdc212562f08",
+      "categories": [
+        "game-ui",
+        "game-dev"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "42d40aa16b7174631ea8fff769624d04aa9f95ece016d81b6957b270b3ea9399",
+          "destination_sha256": "cba6f194f756e5d1f84e44213278058e3f503840fb62f9fca7ba757844ac9fe0",
+          "note": "Made companion specialized-skill composition explicitly optional."
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "preserved",
+          "source_sha256": "10579bb13a50997e6f19e56fe6475ef66ab1ad595a6752a402c87e1224e9ee00",
+          "destination_sha256": "10579bb13a50997e6f19e56fe6475ef66ab1ad595a6752a402c87e1224e9ee00"
+        },
+        {
+          "path": "references/accessible-ui.md",
+          "disposition": "preserved",
+          "source_sha256": "6ae3f03e038bae36dd67d06d72de3421df03c6453c575f56ee94f152d816bc04",
+          "destination_sha256": "6ae3f03e038bae36dd67d06d72de3421df03c6453c575f56ee94f152d816bc04"
+        },
+        {
+          "path": "references/godot.md",
+          "disposition": "preserved",
+          "source_sha256": "c2a06a8640e2cd7059459312e959cb73a49b0646bf4cf8598f7e1d33e848b8f4",
+          "destination_sha256": "c2a06a8640e2cd7059459312e959cb73a49b0646bf4cf8598f7e1d33e848b8f4"
+        },
+        {
+          "path": "references/phaser.md",
+          "disposition": "preserved",
+          "source_sha256": "cb565824c9b2e07177ba96b3b8283fa6418b6345f1f33e30674cf6bebac93193",
+          "destination_sha256": "cb565824c9b2e07177ba96b3b8283fa6418b6345f1f33e30674cf6bebac93193"
+        }
+      ]
+    },
+    {
+      "name": "gameplay-programming-2d",
+      "source_path": "content/skills/gameplay-programming-2d",
+      "source_tree_sha256": "f6ce37941298c4a87149072a94a90531bfffb64df3a4a8722b0e780896c11acc",
+      "categories": [
+        "game-core",
+        "game-dev"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "71d424d54f5b9e6ff2cce19697a309fef3144364f3274fb8686dc99aa1512bd6",
+          "destination_sha256": "e3fa1762c20da6b4dc62534137ce6f9807f33ac41ebb3df6512b1fdebc0471fb",
+          "note": "Made companion specialized-skill composition explicitly optional."
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "preserved",
+          "source_sha256": "d4f9cb70d87035d127b1c8e461db45b6831e09ff5f11498268582911f4936ce8",
+          "destination_sha256": "d4f9cb70d87035d127b1c8e461db45b6831e09ff5f11498268582911f4936ce8"
+        },
+        {
+          "path": "references/godot.md",
+          "disposition": "preserved",
+          "source_sha256": "73bd9ca74fe3c9d8c1410acc4c6be0286bfeb497cb9493e4edb18107c6348d67",
+          "destination_sha256": "73bd9ca74fe3c9d8c1410acc4c6be0286bfeb497cb9493e4edb18107c6348d67"
+        },
+        {
+          "path": "references/phaser.md",
+          "disposition": "preserved",
+          "source_sha256": "8907f65f213cc21b3692512ab0448190bfe4b79f34663fcc47ac6039eeee9516",
+          "destination_sha256": "8907f65f213cc21b3692512ab0448190bfe4b79f34663fcc47ac6039eeee9516"
+        },
+        {
+          "path": "references/shared-foundations.md",
+          "disposition": "preserved",
+          "source_sha256": "1a717c141e8f173f022c82fad46919ee1afcaf034705415c7905dd14f477f554",
+          "destination_sha256": "1a717c141e8f173f022c82fad46919ee1afcaf034705415c7905dd14f477f554"
+        }
+      ]
+    },
+    {
+      "name": "gcloud-operation",
+      "source_path": "content/skills/gcloud-operation",
+      "source_tree_sha256": "6276b4829beea244bf427523d39a039caca98d08f9d6711792821639279d6887",
+      "categories": [
+        "infrastructure"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "cloud",
+          "iam",
+          "billing",
+          "remote-mutation"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "6f24a8bcc3b91478de68de6ac5a045fba19b30c3b1284aef0e9f2189ad4b73e0",
+          "destination_sha256": "efa373744b588a9afea79959a99de7ee56884f98267ab00c515fdad793c1071d",
+          "note": "Replaced the Geremmyas target marker with portable target evidence."
+        }
+      ]
+    },
+    {
+      "name": "go-ci-setup",
+      "source_path": "content/skills/go-ci-setup",
+      "source_tree_sha256": "7ab5a5acbfcdff33479bdd57b219bd9c3d56c2897da6cf9afea6b8641c50c816",
+      "categories": [
+        "go"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "ci-authority",
+          "dependency-execution",
+          "supply-chain"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "e4171a9093afc1a84ced20da846c3acdc82b183d77d3badb3ae90c6c30a0cbc3",
+          "destination_sha256": "1a17854fc6513f17e777aad041097f50a72afa2c83d7ea012b93f66e2982f529",
+          "note": "Adapted for standalone portable use."
+        }
+      ]
+    },
+    {
+      "name": "langgraph-agent-design",
+      "source_path": "content/skills/langgraph-agent-design",
+      "source_tree_sha256": "8209a2bc890d7dcd1a0d536d58dbbecca9fd22ca7802da7d05756bd316b60f91",
+      "categories": [
+        "ai"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "tool-side-effects",
+          "external-systems"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "preserved",
+          "source_sha256": "ffa03941753981a46b6d3743fd51da50d1005c5bcb1207996df2db6b6dc7b8f2",
+          "destination_sha256": "ffa03941753981a46b6d3743fd51da50d1005c5bcb1207996df2db6b6dc7b8f2"
+        }
+      ]
+    },
+    {
+      "name": "llm-integration-review",
+      "source_path": "content/skills/llm-integration-review",
+      "source_tree_sha256": "07f5ba97bf4a504906f15c792db4079d9894ad500b378336d4963ce934ab9bec",
+      "categories": [
+        "ai"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "external-model-service",
+          "private-data",
+          "privileged-tools"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "preserved",
+          "source_sha256": "2ab4e032135cd8503ff1f502454744d96449128f4d78e1ff85ea4b8f051ed947",
+          "destination_sha256": "2ab4e032135cd8503ff1f502454744d96449128f4d78e1ff85ea4b8f051ed947"
+        }
+      ]
+    },
+    {
+      "name": "manage-state-with-zustand",
+      "source_path": "content/skills/manage-state-with-zustand",
+      "source_tree_sha256": "da91875e981c3e3385ca2a710171f90c7e01eeaf5c9e71f98c326f7bf5c5e679",
+      "categories": [
+        "web"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "1ed7b01fc60cac434399b61558f3ff44c7945e19f369e31e5fe53ccbbf7e5726",
+          "destination_sha256": "6b289934818340b0028fd182aeca098e9895c8ea921a16a89d20cfaad887bef1",
+          "note": "Removed reliance on Geremmyas-installed auto-loading instruction files."
+        }
+      ]
+    },
+    {
+      "name": "migrate-react-router",
+      "source_path": "content/skills/migrate-react-router",
+      "source_tree_sha256": "66764e7bc61f6a4a61f8563cffec8bc3181d536053862bd2a437276345525824",
+      "categories": [
+        "web"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "dependency-mutation",
+          "filesystem-rewrite"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "bb06550606d828b1210fbf0a7de908713831c3a7960480b36f2c866b64a29169",
+          "destination_sha256": "9e36f182d4c1429968371e1a8d78108b0bbfc6cf3abad7f4c88835e7d73c8c51",
+          "note": "Made dependency updates respect the consumer project's package manager."
+        }
+      ]
+    },
+    {
+      "name": "model-state-with-xstate",
+      "source_path": "content/skills/model-state-with-xstate",
+      "source_tree_sha256": "94f8c6e2b7dacb87dbb34c122b6388b81eec5f808a1a178164041f2b8586de6a",
+      "categories": [
+        "web"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "a9d49725abe09775dfea4908efc4695465b20ad93ce8e3f0e7dfd0b7193f702e",
+          "destination_sha256": "a8e680076b96c93adb023503363c48ac7029fa154193e34c06d7ded85fb7d31b",
+          "note": "Removed reliance on Geremmyas-installed auto-loading instruction files."
+        }
+      ]
+    },
+    {
+      "name": "paper-review",
+      "source_path": "content/skills/paper-review",
+      "source_tree_sha256": "cc555210939ad8d6f27da3002f932ce81f7a08a79f0899d63f9bbccca3dd9528",
+      "categories": [
+        "scientific-research"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "in-place-overwrite"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "preserved",
+          "source_sha256": "1be1f89d219a31e5b7efc8f6bd940a449f4145ccac574693658182973f0085e9",
+          "destination_sha256": "1be1f89d219a31e5b7efc8f6bd940a449f4145ccac574693658182973f0085e9"
+        }
+      ]
+    },
+    {
+      "name": "postgres-query-review",
+      "source_path": "content/skills/postgres-query-review",
+      "source_tree_sha256": "ae8edbcccd0e23df533ee4f61137c660266226b18612a519b81e0ed566bc3276",
+      "categories": [
+        "data"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "database",
+          "locks",
+          "migration",
+          "data-loss"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "bf8b92d7b4de2158525bca3d254ea1bda37d4b9e245a663c733b28fea5f08c26",
+          "destination_sha256": "e38cbb0e623ef184cef4fe4beeec71bc29f6d0a523a7ee956b8c735e094fc120",
+          "note": "Replaced the Geremmyas target marker with portable target evidence."
+        }
+      ]
+    },
+    {
+      "name": "procedural-generation-2d",
+      "source_path": "content/skills/procedural-generation-2d",
+      "source_tree_sha256": "d8274a3a717a83a5d3283715ff460f8012f2fc7a12b1d0d82c4661e0d181ba03",
+      "categories": [
+        "game-systems",
+        "game-dev"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "495f126ffd3249bc3cb67ec4dec81ebec3a86dc2017da6dd0cd2b38a052ae7d3",
+          "destination_sha256": "fe3f19dd0d125997cc9c46a5e5f7ec5b7ecb36b3774d6d2c4c6877bb4cbf1d27",
+          "note": "Made companion specialized-skill composition explicitly optional."
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "preserved",
+          "source_sha256": "343dc18e1c45e2d26558726be9e8152d21c3683e4646da4ebf10901178290da2",
+          "destination_sha256": "343dc18e1c45e2d26558726be9e8152d21c3683e4646da4ebf10901178290da2"
+        },
+        {
+          "path": "references/generation-and-validation.md",
+          "disposition": "preserved",
+          "source_sha256": "81ebd84ab86733aa97d76e9aebf9d7404a40da1a5741d0361c07828bbfc23f34",
+          "destination_sha256": "81ebd84ab86733aa97d76e9aebf9d7404a40da1a5741d0361c07828bbfc23f34"
+        },
+        {
+          "path": "references/godot.md",
+          "disposition": "preserved",
+          "source_sha256": "c20a2eaaabd416976869f75f711bf1466d037a5aa950f2217a4bdc59204b2243",
+          "destination_sha256": "c20a2eaaabd416976869f75f711bf1466d037a5aa950f2217a4bdc59204b2243"
+        },
+        {
+          "path": "references/phaser.md",
+          "disposition": "preserved",
+          "source_sha256": "ec32c95bf78d151cb31551a5cb13c4902c5e5d06e4d855a03d427194a9e46d2a",
+          "destination_sha256": "ec32c95bf78d151cb31551a5cb13c4902c5e5d06e4d855a03d427194a9e46d2a"
+        }
+      ]
+    },
+    {
+      "name": "python-ci-setup",
+      "source_path": "content/skills/python-ci-setup",
+      "source_tree_sha256": "105810c20ef19f195ff722ce4c33ff281c61973de69884944a7cc98f05446e84",
+      "categories": [
+        "python"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "ci-authority",
+          "dependency-execution",
+          "publication"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "preserved",
+          "source_sha256": "e86f78b029013d008a2f0c643663dde363ae37e5b422fc085292720f1e227fe7",
+          "destination_sha256": "e86f78b029013d008a2f0c643663dde363ae37e5b422fc085292720f1e227fe7"
+        }
+      ]
+    },
+    {
+      "name": "rust-ci-setup",
+      "source_path": "content/skills/rust-ci-setup",
+      "source_tree_sha256": "bd1cd03906219ed6c68d59e87d4fc37828931f3924fcca2326a6144026f1cfc9",
+      "categories": [
+        "rust"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "ci-authority",
+          "dependency-execution",
+          "supply-chain"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "396a9f432cfa616183c7652187eb1e8ac5763cdb35da6d795897d9e0b0f7ee3c",
+          "destination_sha256": "157a6f8294e06ecf037202dcf30bb56f0dae09a813ea3eae575b7ffeabbb993e",
+          "note": "Adapted for standalone portable use."
+        }
+      ]
+    },
+    {
+      "name": "rust-release",
+      "source_path": "content/skills/rust-release",
+      "source_tree_sha256": "4ff8d76e832407a8a1abf46830f9470054d53c8cc61c27e290c5072b81c11f04",
+      "categories": [
+        "rust"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "tag",
+          "push",
+          "publish",
+          "upload"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "4ffb14bb8d817a2fd8b49123239050627ac70004244e3ed082e5e52839066de5",
+          "destination_sha256": "1b84469f718b029d2156139a00169eaf765e310f94920ab84b3775cb91d2408e",
+          "note": "Adapted for standalone portable use."
+        }
+      ]
+    },
+    {
+      "name": "scientific-case-study-research",
+      "source_path": "content/skills/scientific-case-study-research",
+      "source_tree_sha256": "6ff9f2dfaa823ff541fc53dfa9a187dc22ac3c7caf14434f537b64cd320e464e",
+      "categories": [
+        "scientific-research"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "participant-data",
+          "private-research-data"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "preserved",
+          "source_sha256": "02850a3869e7c72cc73f469a6b18308c0f95a696dd1a099420025804dfc1fbf2",
+          "destination_sha256": "02850a3869e7c72cc73f469a6b18308c0f95a696dd1a099420025804dfc1fbf2"
+        },
+        {
+          "path": "assets/case-study-protocol-template.md",
+          "disposition": "preserved",
+          "source_sha256": "4c5596689bff46d802320124008399ae106ff880357338bc1b9b248d75f995d6",
+          "destination_sha256": "4c5596689bff46d802320124008399ae106ff880357338bc1b9b248d75f995d6"
+        },
+        {
+          "path": "references/case-study-checklist.md",
+          "disposition": "preserved",
+          "source_sha256": "f4a75bb6d49669691fa97a09d37af0276075babc9e23809c3656d9fafcf0a54d",
+          "destination_sha256": "f4a75bb6d49669691fa97a09d37af0276075babc9e23809c3656d9fafcf0a54d"
+        },
+        {
+          "path": "references/chain-of-evidence-template.md",
+          "disposition": "preserved",
+          "source_sha256": "5d49654bdbaa19510cd99d58809039128315d473c06f65346e24202281d273b1",
+          "destination_sha256": "5d49654bdbaa19510cd99d58809039128315d473c06f65346e24202281d273b1"
+        },
+        {
+          "path": "references/interview-guide-template.md",
+          "disposition": "preserved",
+          "source_sha256": "b938d4e24bf38c603709c4e90d7d232cc19ccf49ffe16d19caff439d0e875295",
+          "destination_sha256": "b938d4e24bf38c603709c4e90d7d232cc19ccf49ffe16d19caff439d0e875295"
+        }
+      ]
+    },
+    {
+      "name": "scientific-paper",
+      "source_path": "content/skills/scientific-paper",
+      "source_tree_sha256": "f30acfd9a2348a2274a95f74f92afd9d18ef87f5018882d3cf1ea4c596d5ca45",
+      "categories": [
+        "scientific-research"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "filesystem",
+          "research-artifacts"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "fffd7942bf7710c0f3b31b9334eada24ab0c6df83b2f91294dcddfa4a3ef797e",
+          "destination_sha256": "3cf6322e3335b629ee96470c51fd75e7df077d93daec621bc9331264f9ac46a3",
+          "note": "Made companion-skill composition optional and changed script execution to UV."
+        },
+        {
+          "path": "assets/paper-template.tex",
+          "disposition": "preserved",
+          "source_sha256": "439de63bbf3b406173a824870662d0df5472d5d6e4a3dd0a4a6e93c74eb48272",
+          "destination_sha256": "439de63bbf3b406173a824870662d0df5472d5d6e4a3dd0a4a6e93c74eb48272"
+        },
+        {
+          "path": "assets/slr-protocol-template.md",
+          "disposition": "preserved",
+          "source_sha256": "92a17c8f4109aa94920c0a90fcd5cc444657894c1e116f44cc09379857ebd253",
+          "destination_sha256": "92a17c8f4109aa94920c0a90fcd5cc444657894c1e116f44cc09379857ebd253"
+        },
+        {
+          "path": "references/data-presentation.md",
+          "disposition": "preserved",
+          "source_sha256": "ef9f4f065e6030f494188c403ed218e36814a02cc2e937e7e6fbc1580fd74a43",
+          "destination_sha256": "ef9f4f065e6030f494188c403ed218e36814a02cc2e937e7e6fbc1580fd74a43"
+        },
+        {
+          "path": "references/error-catalog.md",
+          "disposition": "preserved",
+          "source_sha256": "4b7e78d2c5e3bc06059c4bf8e6c21626b64c340d32ff606e2ce5a838d3c2ddf9",
+          "destination_sha256": "4b7e78d2c5e3bc06059c4bf8e6c21626b64c340d32ff606e2ce5a838d3c2ddf9"
+        },
+        {
+          "path": "references/latex-conventions.md",
+          "disposition": "preserved",
+          "source_sha256": "af9943c3a8dd8acd7e137bacee7dcc5c6eff52b243d33f480d1db172f7f39c80",
+          "destination_sha256": "af9943c3a8dd8acd7e137bacee7dcc5c6eff52b243d33f480d1db172f7f39c80"
+        },
+        {
+          "path": "references/methodology-checklist.md",
+          "disposition": "preserved",
+          "source_sha256": "c85bb2268ac6d428a65319b2d460559a0e0b3725a25db8f77ef5604eda32ec19",
+          "destination_sha256": "c85bb2268ac6d428a65319b2d460559a0e0b3725a25db8f77ef5604eda32ec19"
+        },
+        {
+          "path": "references/paper-structure.md",
+          "disposition": "preserved",
+          "source_sha256": "b6883b844a5399b55513a87b48ab012f3289f81e2fbb4db151b327ad7ba9438e",
+          "destination_sha256": "b6883b844a5399b55513a87b48ab012f3289f81e2fbb4db151b327ad7ba9438e"
+        },
+        {
+          "path": "references/systematic-review-protocol.md",
+          "disposition": "preserved",
+          "source_sha256": "0f0e99cb85b4ab29edb8e21ec64e822cae1c08e084872bab9c4701b12a294fc9",
+          "destination_sha256": "0f0e99cb85b4ab29edb8e21ec64e822cae1c08e084872bab9c4701b12a294fc9"
+        },
+        {
+          "path": "references/threats-to-validity.md",
+          "disposition": "preserved",
+          "source_sha256": "32588eba2189161587f487df73b442f7e30ff8ecadbfaaa4d8959f9ce5751ce3",
+          "destination_sha256": "32588eba2189161587f487df73b442f7e30ff8ecadbfaaa4d8959f9ce5751ce3"
+        },
+        {
+          "path": "references/venues.md",
+          "disposition": "preserved",
+          "source_sha256": "ea33f8473b419accab563e62a37d9104c6dcaaed2cadc42062ffb3ca2c7d7417",
+          "destination_sha256": "ea33f8473b419accab563e62a37d9104c6dcaaed2cadc42062ffb3ca2c7d7417"
+        },
+        {
+          "path": "scripts/validate-bib.py",
+          "disposition": "adapted",
+          "source_sha256": "0e2db613f2ef0abc5766da4525df0a40e26881466849bbcbf8ff0d147955b13e",
+          "destination_sha256": "1817d42b0b7773abc4f9b321db4f961efc09d40973c70a20807a5e5aeb4215d4",
+          "note": "Adapted for standalone portable use."
+        }
+      ]
+    },
+    {
+      "name": "skill-authoring",
+      "source_path": "content/skills/skill-authoring",
+      "source_tree_sha256": "16312af75399ead44eebe0cc7b6601fae27289e8044479188d9a3e2bbf086148",
+      "categories": [
+        "skill-maintenance"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "37a55eebb89ada9a2f724d6c5e143f5674d062fdad8e0d8894f30652987f2b1b",
+          "destination_sha256": "ef6fdcdead12410c60e30654f20a0c6e61ff67d41acdf77659786a14d9ebb827",
+          "note": "Rewritten around the official Agent Skills format and standalone distribution."
+        }
+      ]
+    },
+    {
+      "name": "supabase-workflow",
+      "source_path": "content/skills/supabase-workflow",
+      "source_tree_sha256": "d3e9a40cf0ab0b99af6899346a44929e14ceb5475d03edbc7edcb6111ed31320",
+      "categories": [
+        "data"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "database",
+          "auth",
+          "storage",
+          "remote-mutation"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "preserved",
+          "source_sha256": "4914a61f7825d667aaf08318c2086e0208e8b28b7878984d50322b1f80000008",
+          "destination_sha256": "4914a61f7825d667aaf08318c2086e0208e8b28b7878984d50322b1f80000008"
+        }
+      ]
+    },
+    {
+      "name": "terraform-change",
+      "source_path": "content/skills/terraform-change",
+      "source_tree_sha256": "0ccae7c7ef872625d7e035b981a563171e3d98d3752677500e6bdc5cd74ec2a4",
+      "categories": [
+        "infrastructure"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "infrastructure",
+          "state",
+          "secrets",
+          "destructive-scope"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "a4d433f29a9d222e47f0d376a620936e615daae2df36294030f4cbeb82c6c641",
+          "destination_sha256": "145f033444d7873dd6b59006f95d8031c1cb23fdefc3eed02c685ef3690b4d00",
+          "note": "Replaced the Geremmyas target marker with portable target evidence."
+        }
+      ]
+    },
+    {
+      "name": "text-review",
+      "source_path": "content/skills/text-review",
+      "source_tree_sha256": "399fef64d3151fbc4491c867dd86d603c215743c93726343dd6ffdb04f0b4c6e",
+      "categories": [
+        "writing"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "in-place-overwrite"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "preserved",
+          "source_sha256": "356449e70aea8e1156635e3b8606db3d935c9c660e005b4adffb26d2277bd745",
+          "destination_sha256": "356449e70aea8e1156635e3b8606db3d935c9c660e005b4adffb26d2277bd745"
+        }
+      ]
+    },
+    {
+      "name": "typescript-ci-setup",
+      "source_path": "content/skills/typescript-ci-setup",
+      "source_tree_sha256": "0a616c39e425e6ea003931b13ccadd3d0b854299df5088ad90dccf30c9bd88d4",
+      "categories": [
+        "typescript"
+      ],
+      "security": {
+        "sensitive": true,
+        "domains": [
+          "ci-authority",
+          "dependency-execution",
+          "supply-chain"
+        ],
+        "rationale": "Additional adversarial coverage is required for the listed sensitive surfaces."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "preserved",
+          "source_sha256": "3c7d48b6c0e2d96b1422ba7a61ba563bf9c0434f8dc9fedfdf45ea97c0d5a53d",
+          "destination_sha256": "3c7d48b6c0e2d96b1422ba7a61ba563bf9c0434f8dc9fedfdf45ea97c0d5a53d"
+        }
+      ]
+    },
+    {
+      "name": "validate-with-zod",
+      "source_path": "content/skills/validate-with-zod",
+      "source_tree_sha256": "95d83fb2bbcd35881172b0b3596412e2e68eb036b0146c7e3c80cbc0c3f1cd89",
+      "categories": [
+        "typescript",
+        "web"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "Ordinary scoped writes remain protected by behavior-eval hashes and sentinels."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": false,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "adapted",
+          "source_sha256": "ad43d797c5b989e39ac6671b6d6a299c881b61b5090dfe67a130c28aae7d07e4",
+          "destination_sha256": "4ce8e06189b57ec999f0f27785fe124651f28876d96260a801c0c57252a3401e",
+          "note": "Removed reliance on Geremmyas-installed auto-loading instruction files."
+        }
+      ]
+    }
+  ]
+}

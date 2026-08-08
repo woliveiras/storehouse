@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/woliveiras/agent-skills/catalog/skills.schema.json",
+  "title": "agent-skills provenance inventory",
+  "type": "object",
+  "required": ["schema_version", "source", "tuxedo_exclusion_source", "skills"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "source": { "type": "object" },
+    "tuxedo_exclusion_source": { "type": "object" },
+    "skills": { "type": "array", "minItems": 33, "maxItems": 33 }
+  }
+}
