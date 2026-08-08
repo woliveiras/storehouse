@@ -23,8 +23,8 @@ nothing.
 ## Install by project
 
 The examples use the official [`skills` CLI](https://github.com/vercel-labs/skills/blob/main/README.md),
-observed at version 1.5.22 for this migration. Project scope is the CLI default.
-Run commands from the project that should receive the skill.
+locked as a development dependency for repository validation. Project scope is
+the CLI default. Run commands from the project that should receive the skill.
 
 List the skills in this repository:
 

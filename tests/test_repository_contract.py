@@ -161,6 +161,33 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertTrue((ROOT / "docs" / "development-dependencies.md").is_file())
         self.assertFalse((ROOT / "docs" / "maintainer-dependencies.md").exists())
 
+    def test_as_027_dependency_versions_have_single_source(self) -> None:
+        package = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))
+        pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+        dependencies = set(package["devDependencies"])
+        for requirement in pyproject["dependency-groups"]["dev"]:
+            name, _version = requirement.split("==", 1)
+            dependencies.add(name)
+
+        documentation = [ROOT / "README.md", ROOT / "AGENTS.md"]
+        documentation.extend(sorted((ROOT / "docs").rglob("*.md")))
+        documentation.extend(sorted((ROOT / "specs").rglob("*.md")))
+        version_pattern = re.compile(r"(?<![-A-Za-z])v?\d+\.\d+(?:\.\d+)?\b")
+        violations: list[str] = []
+        for path in documentation:
+            for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+                lowered = line.lower()
+                for name in dependencies:
+                    offset = lowered.find(name.lower())
+                    while offset >= 0:
+                        context = line[offset : offset + len(name) + 40]
+                        if version_pattern.search(context):
+                            violations.append(
+                                f"{path.relative_to(ROOT)}:{line_number}: {context.strip()}"
+                            )
+                        offset = lowered.find(name.lower(), offset + len(name))
+        self.assertEqual([], violations)
+
     def test_as_001_exact_inventory_equation(self) -> None:
         self.assertEqual(33, len(MIGRATED))
         self.assertEqual(16, len(EXCLUDED))

@@ -26,7 +26,7 @@ change_surfaces:
   - repository development configuration
 contracts:
   - Agent Skills specification
-  - skills CLI 1.5.22 documentation
+  - skills CLI documentation
   - Geremmyas source inventory at the recorded commit
   - Tuxedo successor inventory at the recorded commit
 review_policy: independent spec, test, and code contexts when available
