@@ -1,4 +1,4 @@
-# Maintainer-only dependency policy. No Node package is shipped in a skill.
+# Development dependency policy. No Node package is shipped in a skill.
 minimumReleaseAge: 0
 
 allowBuilds:

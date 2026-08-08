@@ -39,6 +39,6 @@ fail-closed checks proportional to the available local runtimes.
 ## Risk
 
 No material findings remain in the static test review. The reviewer did not run
-project code; the maintainer evidence records the fresh 45-test execution.
+project code; the task evidence records the fresh 45-test execution.
 
 **Final verdict: approved.**

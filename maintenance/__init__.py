@@ -1,1 +1,1 @@
-"""Maintainer-only repository tooling."""
+"""Repository validation and evaluation tooling."""

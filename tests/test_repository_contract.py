@@ -5,6 +5,7 @@ import json
 import os
 import re
 import subprocess
+import tomllib
 import unittest
 from pathlib import Path
 from urllib.parse import unquote
@@ -149,6 +150,17 @@ def expand_collections(catalog: dict[str, object]) -> dict[str, list[str]]:
 
 
 class RepositoryContractTests(unittest.TestCase):
+    def test_as_027_public_project_identity_is_canonical(self) -> None:
+        package = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))
+        pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+
+        self.assertEqual("agent-skills", package["name"])
+        self.assertEqual("agent-skills", pyproject["project"]["name"])
+        self.assertNotIn("agent-skills-maintainer", json.dumps(package))
+        self.assertNotIn("agent-skills-maintainer", json.dumps(pyproject))
+        self.assertTrue((ROOT / "docs" / "development-dependencies.md").is_file())
+        self.assertFalse((ROOT / "docs" / "maintainer-dependencies.md").exists())
+
     def test_as_001_exact_inventory_equation(self) -> None:
         self.assertEqual(33, len(MIGRATED))
         self.assertEqual(16, len(EXCLUDED))

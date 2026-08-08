@@ -10,7 +10,7 @@ generator, or consumer runtime.
 - Canonical skills live only at `skills/<name>/` and must work independently.
 - Collections are declarative documentation in `catalog/collections.json`.
 - Tuxedo is optional horizontal workflow composition and is never a dependency.
-- Maintainer tests, generators, and evaluations stay outside `skills/`.
+- Repository tests, generators, and evaluations stay outside `skills/`.
 - Geremmyas and Tuxedo are historical/read-only inputs; never modify them from
   this repository.
 
@@ -24,7 +24,7 @@ Preserve unrelated work and stop if a source baseline changes.
 
 ## Toolchain and authority
 
-- Use UV for Python and PNPM for Node. Maintainer dependencies must never be
+- Use UV for Python and PNPM for Node. Development dependencies must never be
   required by an installed skill.
 - Model/provider evals require an exact budget, explicit `--execute`, and a
   matching human approval token. They never run from install, ordinary CI,

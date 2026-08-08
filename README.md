@@ -44,7 +44,7 @@ discovery is not appropriate. Review the CLI prompt before accepting writes.
 ## Collections
 
 The following block is rendered deterministically from
-`catalog/collections.json` and checked by the maintainer test suite.
+`catalog/collections.json` and checked by the repository test suite.
 
 <!-- collections:start -->
 ### `game-core`
@@ -291,11 +291,13 @@ DISABLE_TELEMETRY=1 npx skills add woliveiras/agent-skills --list
 DO_NOT_TRACK=1 npx skills add woliveiras/agent-skills --list
 ```
 
-## Maintainers
+## Development
 
 See [`docs/architecture.md`](docs/architecture.md),
 [`docs/catalog.md`](docs/catalog.md), and
 [`docs/validation-and-evaluations.md`](docs/validation-and-evaluations.md).
+Development dependency provenance is recorded in
+[`docs/development-dependencies.md`](docs/development-dependencies.md).
 Python maintenance uses UV; Node maintenance uses PNPM. Nothing under
 `maintenance/`, `tests/`, or `evals/` is needed by an installed skill.
 

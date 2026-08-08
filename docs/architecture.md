@@ -9,7 +9,7 @@ dependencies.
 `catalog/collections.json` is a declarative documentation source. Includes are
 expanded in declared order, reject cycles and duplicates, and never execute an
 install. `catalog/skills.json` records source provenance and migration
-dispositions. `maintenance/`, `tests/`, and `evals/` are maintainer-only
+dispositions. `maintenance/`, `tests/`, and `evals/` are development-tooling
 boundaries.
 
 Tuxedo remains the separate global horizontal workflow. Composition is by an

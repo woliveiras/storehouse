@@ -1,4 +1,4 @@
-# Maintainer-only configuration. Never distributed inside a skill.
+# Repository evaluation configuration. Never distributed inside a skill.
 description: agent-skills isolated evaluation through the local Codex SDK
 prompts:
   - file://prompts.py:create_prompt

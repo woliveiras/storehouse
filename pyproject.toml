@@ -1,7 +1,7 @@
 [project]
-name = "agent-skills-maintainer"
+name = "agent-skills"
 version = "0.0.0"
-description = "Maintainer-only validation for the agent-skills repository"
+description = "Repository validation tooling for agent-skills"
 requires-python = ">=3.12"
 dependencies = []
 

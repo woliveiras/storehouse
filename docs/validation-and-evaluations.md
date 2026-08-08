@@ -48,5 +48,5 @@ failures override semantic review; lack of required trajectory evidence yields
 Executable TypeScript behavior drivers are currently verified on macOS through
 `sandbox-exec`; their profile denies network, process forks, HOME reads, and all
 file writes. The oracle fails closed when Node or this sandbox is unavailable.
-Supporting another maintainer OS requires an equivalently reviewed confinement
+Supporting another host OS requires an equivalently reviewed confinement
 backend before those cases can pass.

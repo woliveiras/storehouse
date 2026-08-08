@@ -35,6 +35,14 @@
 | AS-023-AS-026 | same | `pnpm run promptfoo:validate` and `pnpm run eval:dry-run --suite full` | Configuration valid in disposable state; exact four disjoint shards, 332 target calls, 33 secondary judgments, upper bound 365, serial shard execution and case concurrency 2; concurrency participates in the approval token (`calls-365-f73132cbddfb`); execution additionally requires that matching token and a fresh timestamp | local no-provider run, 2026-08-08 |
 | Dependency maintenance | N/A | `pnpm audit --json` | Zero known vulnerabilities at all severities across the locked development dependency graph | local audit, 2026-08-08 |
 
+## Canonical project identity follow-up
+
+| Criterion | Test-tree digest | Command | Result | Provenance |
+| --- | --- | --- | --- | --- |
+| AS-027 fail-first | `e7cca732e8366aff3f5950b20bef92264a598d507c05c3f1418641f9f3e417a0` | `uv run python -m unittest tests.test_repository_contract.RepositoryContractTests.test_as_027_public_project_identity_is_canonical -v` before manifest edits | Failed on `package.json` identifying the private project as `agent-skills-maintainer` | spec-derived |
+| AS-027 passing | same | same command after implementation | Passed with `agent-skills` in Node, Python, and UV metadata; the obsolete identifier and documentation path are rejected | local deterministic run, 2026-08-08 |
+| AS-027 regression suite | same | `pnpm run validate`, `pnpm run promptfoo:validate`, `pnpm run eval:dry-run --suite full`, and `pnpm run validate:official` | 46 tests pass with four expected live-source skips; Promptfoo config and the unchanged 365-call dry-run pass; official validation accepts all 33 skills | local no-provider run, 2026-08-08 |
+
 ## Local commit evidence
 
 The task-owned implementation was separated into these reviewed candidates
@@ -53,7 +61,7 @@ own final object ID without changing that ID.
 
 - Decision: required.
 - Rationale: distribution, compatibility, provenance, collections, isolation,
-  evaluation cost, and external CLI behavior are public or maintainer contracts.
+  evaluation cost, and external CLI behavior are public or repository development contracts.
 - Intended artifacts: root README, catalog schema/reference, architecture,
   compatibility, migration provenance, validation/evaluation guide, and reviews.
 

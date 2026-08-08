@@ -11,7 +11,7 @@
    compatibility per skill.
 5. Add the declarative collections catalog, README command block, architecture,
    compatibility, migration, and validation documentation.
-6. Add the maintainer-only evaluation catalog, fixtures, mocks, provider bridge,
+6. Add the repository evaluation catalog, fixtures, mocks, provider bridge,
    Promptfoo configuration, isolated runner, budget gate, sanitized checkpoints,
    and all requested command aliases.
 7. Run official validators, deterministic suites, clean-room CLI discovery,

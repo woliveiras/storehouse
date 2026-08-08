@@ -21,5 +21,5 @@ CI and migration examples never authorize rolling dependency selection. Skills
 must preserve an existing project pin or propose an exact reviewed version;
 GitHub Actions should use immutable commit SHAs when the project policy supports
 them. Any example version is a reviewed baseline, not a claim that it is
-perpetually current, and maintainers must verify primary release sources before
+perpetually current, and contributors must verify primary release sources before
 updating it.

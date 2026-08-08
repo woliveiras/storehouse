@@ -8,7 +8,7 @@ scope:
   - catalog
   - documentation
   - deterministic validation
-  - maintainer evaluations
+  - repository evaluations
 risk: large/high-risk
 risk_domains:
   - compatibility
@@ -23,7 +23,7 @@ change_surfaces:
   - docs/
   - tests/
   - evals/
-  - maintainer configuration
+  - repository development configuration
 contracts:
   - Agent Skills specification
   - skills CLI 1.5.22 documentation
@@ -59,7 +59,7 @@ authority:
     - model or provider calls without a separately approved budget
     - writes to Geremmyas, Tuxedo, personal Codex/Promptfoo state, or unrelated paths
 dependencies:
-  - Node and Python dependencies may be maintainer-only
+  - Node and Python dependencies may be development-only
   - consumers require no repository runtime
 ---
 
@@ -91,7 +91,7 @@ home selected by `AGENT_SKILLS_EVAL_CODEX_HOME` (default
 create it; deterministic checks, dry-runs, config validation, and auth status do
 not create it. It may retain Codex-managed authentication and the minimal
 operational state enumerated under AS-023. The harness never deletes it
-automatically. Removing it is a separately deliberate maintainer action. This
+automatically. Removing it is a separately deliberate repository action. This
 exception does not authorize any write to the personal `CODEX_HOME`,
 `$HOME/.codex`, Geremmyas, Tuxedo, or unrelated paths.
 
@@ -185,7 +185,7 @@ outside-sentinel controls.
 Implementation must stop with an explicit inventory error if a fresh source
 inspection does not reproduce this baseline. The committed repository must not
 depend on either absolute checkout path; the paths above are evidence from this
-maintainer task, not consumer configuration.
+repository migration task, not consumer configuration.
 
 A later source-repository commit that leaves the complete governed skill tree
 byte-identical does not change the frozen provenance baseline. Such checkout
@@ -198,13 +198,13 @@ substituted as the source commit.
 2. Each skill is independently valid and contains every necessary owned
    resource recursively.
 3. No excluded horizontal Tuxedo successor exists under `skills/`.
-4. No skill requires Geremmyas, Tuxedo, a repository maintainer dependency, or
+4. No skill requires Geremmyas, Tuxedo, a repository development dependency, or
    another skill at runtime. Optional composition may be documented.
 5. Collections are declarative, deterministic sets of existing skill names.
    They install, execute, and resolve nothing by themselves.
 6. The README installation commands are checked against the same collection
    catalog they document.
-7. Maintainer evaluation tooling stays outside every skill and fails closed on
+7. Repository evaluation tooling stays outside every skill and fails closed on
    unsafe homes, ambiguous authentication, provider use without explicit
    execution, contaminated state, and unsanitized evidence.
 8. Geremmyas and Tuxedo remain byte-for-byte untouched by this task.
@@ -271,7 +271,7 @@ substituted as the source commit.
   repository install lists, installs, and discovers a representative single
   skill and multi-skill collection without touching personal configuration.
 - **AS-016 — Official skill validation:** Every one of the 33 skill directories
-  passes the official Agent Skills validator available to the maintainer.
+  passes the official Agent Skills validator used by repository validation.
 - **AS-017 — Deterministic validation:** One explicit command validates the
   inventory, frontmatter, descriptions, links, resources, portability scans,
   catalogs, README commands, eval coverage, isolation policy, forbidden files,
@@ -332,9 +332,11 @@ substituted as the source commit.
   target trials, secondary judgments, shard ranges, and concurrency. Execution
   additionally requires an explicit flag and a human-approved budget token; no
   provider call occurs in this task.
-- **AS-027 — Maintainer-only dependencies:** Python/Node dependencies, Promptfoo,
-  and `@openai/codex-sdk` are outside all skills, use UV/PNPM conventions, and
-  are unnecessary for installed skill use.
+- **AS-027 — Development dependency boundary and project identity:** Python/Node
+  dependencies, Promptfoo, and `@openai/codex-sdk` are outside all skills, use
+  UV/PNPM conventions, and are unnecessary for installed skill use. Top-level
+  Node and Python manifests identify the repository as `agent-skills`; internal
+  tooling labels do not replace the canonical product name.
 - **AS-028 — Documentation and reviews:** Architecture, catalog, compatibility,
   migration, evaluation, and evidence docs are reconciled. Spec, tests, and
   code receive separately reconstructed reviews, with final findings under

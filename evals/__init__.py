@@ -1,1 +1,1 @@
-"""Maintainer-only isolated evaluation harness."""
+"""Isolated evaluation harness for the repository."""
