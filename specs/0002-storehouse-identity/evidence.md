@@ -32,7 +32,13 @@ a sibling checkout path.
 | SH-004 | `pnpm run eval:dry-run --suite full` | 332 target trials plus 33 secondary judgments; upper bound 365; no provider invocation |
 | SH-002-SH-004 | `pnpm run validate:official` | 33/33 skills accepted by the official validator |
 | SH-004 | AST parsing for repository Python plus shell-file discovery | 23 Python files parse; no shell files require syntax checking |
-| SH-005-SH-006 | `git diff --check` and final Git/GitHub/source inspection | Diff check passes; target changes are task-owned; Storehouse remote/URL are canonical; Geremmyas and Tuxedo statuses remain clean |
+| SH-005-SH-006 | `git diff --check` and final Git/GitHub/source inspection | Diff check passes; target changes are task-owned; Storehouse remote/URL are canonical; Geremmyas remains clean; final Tuxedo inspection finds unrelated concurrent work described below |
+
+Tuxedo was clean at baseline and throughout the Storehouse implementation and
+validation runs. The post-commit inspection found concurrent, uncommitted
+release-versioning work in `tests/test_toolkit.py` and
+`specs/0008-release-versioning/`. This task did not create, edit, stage, remove,
+or commit those paths. They remain untouched in the Tuxedo checkout.
 
 Two preliminary dry-run invocations exited before execution because the suite
 argument was absent or separated by an extra literal `--`. The documented PNPM
