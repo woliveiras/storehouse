@@ -1,7 +1,7 @@
 ---
 id: SPEC-0001
 title: Migrate specialized Geremmyas skills into a standalone monorepo
-summary: Establish agent-skills as the canonical, project-installable home for the specialized Geremmyas skills that Tuxedo does not supersede.
+summary: Establish Storehouse as the canonical, project-installable home for the specialized Geremmyas skills that Tuxedo does not supersede.
 status: ready
 scope:
   - skills
@@ -45,7 +45,7 @@ documentation: required
 authority:
   granted:
     - read Geremmyas and Tuxedo
-    - persist product and evidence files only in agent-skills
+    - persist product and evidence files only in Storehouse
     - create and remove narrowly scoped disposable validation scratch directories outside all three checkouts
     - create the dedicated evaluation home only through an explicit login command
     - run deterministic checks and evaluation dry-runs
@@ -78,7 +78,7 @@ project-scoped and independently useful with or without Tuxedo.
 ### Write boundary
 
 Persistent repository/product changes are authorized only under
-`agent-skills`. The user's explicit clean-room installation and isolated-eval
+Storehouse. The user's explicit clean-room installation and isolated-eval
 requirements narrowly authorize operational scratch created with a freshly
 allocated temporary directory outside all three checkouts, provided its exact
 resolved path is recorded, it contains only synthetic fixtures/tool state, and
@@ -86,8 +86,8 @@ it is removed after the check. No temporary path may resolve through a symlink
 to a checkout or personal configuration.
 
 The one allowed persistent out-of-checkout state is the dedicated evaluation
-home selected by `AGENT_SKILLS_EVAL_CODEX_HOME` (default
-`$HOME/.codex-agent-skills-evals`). Only the explicit `eval:login` command may
+home selected by `STOREHOUSE_EVAL_CODEX_HOME` (default
+`$HOME/.codex-storehouse-evals`). Only the explicit `eval:login` command may
 create it; deterministic checks, dry-runs, config validation, and auth status do
 not create it. It may retain Codex-managed authentication and the minimal
 operational state enumerated under AS-023. The harness never deletes it
@@ -259,7 +259,7 @@ substituted as the source commit.
   seven focused game collections in declared order.
 - **AS-012 — Catalog coverage:** Every migrated skill appears in the skill
   inventory and at least one collection or declared category.
-- **AS-013 — README contract:** The README explains agent-skills, Tuxedo,
+- **AS-013 — README contract:** The README explains Storehouse, Tuxedo,
   standalone composition, project scope, collections as documentation only,
   listing, individual installation, every collection command, update, removal,
   compatibility evidence, and external CLI telemetry controls.
@@ -294,7 +294,7 @@ substituted as the source commit.
   external plugin when technically viable), and `current`/`proposed` variants
   for future revisions. The catalog records applicability or a concrete
   technical non-viability reason for every optional variant. Each variant has
-  its own oracle. No Tuxedo skill is copied into agent-skills and absence of
+  its own oracle. No Tuxedo skill is copied into Storehouse and absence of
   Tuxedo remains supported.
 - **AS-021 — Security eval coverage:** Every skill classified as sensitive for
   cloud, infrastructure, database, release, destructive command, filesystem,
@@ -335,7 +335,7 @@ substituted as the source commit.
 - **AS-027 — Development dependency boundary and project identity:** Python/Node
   dependencies, Promptfoo, and `@openai/codex-sdk` are outside all skills, use
   UV/PNPM conventions, and are unnecessary for installed skill use. Top-level
-  Node and Python manifests identify the repository as `agent-skills`; internal
+  Node and Python manifests identify the repository as `storehouse`; internal
   tooling labels do not replace the canonical product name.
 - **AS-028 — Documentation and reviews:** Architecture, catalog, compatibility,
   migration, evaluation, and evidence docs are reconciled. Spec, tests, and
@@ -344,7 +344,7 @@ substituted as the source commit.
 - **AS-029 — Source integrity and Git:** Final evidence proves Geremmyas retains
   its baseline commit and clean status; Tuxedo retains a clean status and the
   frozen governed skill tree even if unrelated commits move its checkout HEAD;
-  agent-skills has only task-owned commits/changes, `git diff --check` passes,
+  Storehouse has only task-owned commits/changes, `git diff --check` passes,
   and no push, release, publication, PR, remote mutation, or unauthorized model
   call occurred.
 

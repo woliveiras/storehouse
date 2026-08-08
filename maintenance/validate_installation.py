@@ -43,10 +43,10 @@ def installation_commands(collection: list[str]) -> dict[str, list[str]]:
 def main() -> int:
     if not CLI.is_file():
         raise SystemExit("pinned skills CLI is unavailable; run pnpm install --frozen-lockfile")
-    with tempfile.TemporaryDirectory(prefix="agent-skills-install-", dir=safe_temp_parent()) as raw:
+    with tempfile.TemporaryDirectory(prefix="storehouse-install-", dir=safe_temp_parent()) as raw:
         scratch = Path(raw).resolve()
         protected = [ROOT.resolve(), Path.home().resolve() / ".codex"]
-        for name in ("AGENT_SKILLS_GEREMMYAS_SOURCE", "AGENT_SKILLS_TUXEDO_SOURCE"):
+        for name in ("STOREHOUSE_GEREMMYAS_SOURCE", "STOREHOUSE_TUXEDO_SOURCE"):
             if os.environ.get(name):
                 protected.append(Path(os.environ[name]).expanduser().resolve())
         if any(scratch == root or root in scratch.parents for root in protected):

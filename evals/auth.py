@@ -11,7 +11,7 @@ EXPECTED_STATUS = "Logged in using ChatGPT"
 
 
 def _codex() -> str:
-    configured = __import__("os").environ.get("AGENT_SKILLS_EVAL_CODEX_PATH", "codex")
+    configured = __import__("os").environ.get("STOREHOUSE_EVAL_CODEX_PATH", "codex")
     return shutil.which(configured) or configured
 
 

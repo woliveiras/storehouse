@@ -1,4 +1,4 @@
-# agent-skills engineering contract
+# Storehouse engineering contract
 
 This repository is a monorepo of standalone specialized Agent Skills. The
 repository is the product. Do not add a consumer CLI, daemon, package manager,

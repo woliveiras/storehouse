@@ -94,7 +94,7 @@ def _is_bounded_write(action: dict[str, Any], required_path: str) -> bool:
 
 
 def _workspace_assert(output: str, variables: dict[str, Any], context: dict[str, Any]) -> dict[str, Any]:
-    manifest_path = os.environ.get("AGENT_SKILLS_EVAL_MANIFEST")
+    manifest_path = os.environ.get("STOREHOUSE_EVAL_MANIFEST")
     if not manifest_path:
         return {"pass": False, "score": 0, "reason": "missing evaluation manifest"}
     manifest = json.loads(Path(manifest_path).read_text(encoding="utf-8"))

@@ -153,13 +153,53 @@ class RepositoryContractTests(unittest.TestCase):
     def test_as_027_public_project_identity_is_canonical(self) -> None:
         package = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))
         pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+        collections_schema = json.loads(
+            (ROOT / "catalog" / "collections.schema.json").read_text(encoding="utf-8")
+        )
+        skills_schema = json.loads(
+            (ROOT / "catalog" / "skills.schema.json").read_text(encoding="utf-8")
+        )
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
-        self.assertEqual("agent-skills", package["name"])
-        self.assertEqual("agent-skills", pyproject["project"]["name"])
-        self.assertNotIn("agent-skills-maintainer", json.dumps(package))
-        self.assertNotIn("agent-skills-maintainer", json.dumps(pyproject))
+        self.assertEqual("storehouse", package["name"])
+        self.assertEqual("storehouse", pyproject["project"]["name"])
+        self.assertIn("Storehouse", package["description"])
+        self.assertIn("Storehouse", pyproject["project"]["description"])
+        self.assertEqual(
+            "https://github.com/woliveiras/storehouse/catalog/collections.schema.json",
+            collections_schema["$id"],
+        )
+        self.assertEqual(
+            "https://github.com/woliveiras/storehouse/catalog/skills.schema.json",
+            skills_schema["$id"],
+        )
+        self.assertTrue(readme.startswith("# Storehouse\n"))
+        self.assertIn("## Storehouse and Tuxedo", readme)
         self.assertTrue((ROOT / "docs" / "development-dependencies.md").is_file())
         self.assertFalse((ROOT / "docs" / "maintainer-dependencies.md").exists())
+
+    def test_sh_002_through_005_storehouse_identity_is_canonical(self) -> None:
+        legacy_name = "agent" + "-skills"
+        legacy_env = "AGENT" + "_SKILLS_"
+        failures: list[str] = []
+        tracked = subprocess.run(
+            ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+        ).stdout.split(b"\0")
+        for raw_path in tracked:
+            if not raw_path:
+                continue
+            path = ROOT / raw_path.decode("utf-8")
+            try:
+                text = path.read_text(encoding="utf-8")
+            except UnicodeDecodeError:
+                continue
+            for forbidden in (legacy_name, legacy_env):
+                if forbidden in text:
+                    failures.append(f"{path.relative_to(ROOT)} contains {forbidden}")
+        self.assertEqual([], failures)
 
     def test_as_027_dependency_versions_have_single_source(self) -> None:
         package = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))
@@ -195,8 +235,8 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertEqual(49, len(MIGRATED | EXCLUDED))
 
     def test_as_002_optional_live_source_baseline(self) -> None:
-        geremmyas = os.environ.get("AGENT_SKILLS_GEREMMYAS_SOURCE")
-        tuxedo = os.environ.get("AGENT_SKILLS_TUXEDO_SOURCE")
+        geremmyas = os.environ.get("STOREHOUSE_GEREMMYAS_SOURCE")
+        tuxedo = os.environ.get("STOREHOUSE_TUXEDO_SOURCE")
         if not geremmyas or not tuxedo:
             self.skipTest("set both source environment variables for live read-only reconciliation")
 
@@ -464,7 +504,7 @@ class RepositoryContractTests(unittest.TestCase):
             "project",
             "independent",
             "collection",
-            "npx skills add woliveiras/agent-skills --list",
+            "npx skills add woliveiras/storehouse --list",
             "npx skills update",
             "npx skills remove",
             "DISABLE_TELEMETRY=1",

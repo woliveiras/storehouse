@@ -1,9 +1,9 @@
 {
-  "name": "agent-skills",
+  "name": "storehouse",
   "version": "0.0.0",
   "private": true,
   "packageManager": "pnpm@11.13.1",
-  "description": "Repository validation and evaluation tooling for agent-skills",
+  "description": "Repository validation and evaluation tooling for Storehouse",
   "engines": {
     "node": ">=22.20.0"
   },

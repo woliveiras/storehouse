@@ -2924,7 +2924,7 @@
         "gradlew"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_001_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_001_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -2955,7 +2955,7 @@
         "data/documents.json"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_002_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_002_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -2985,7 +2985,7 @@
         "assets/source/hero.svg"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_004_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_004_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3016,7 +3016,7 @@
         "package.json"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_006_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_006_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3047,7 +3047,7 @@
         "project.godot"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_009_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_009_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3079,7 +3079,7 @@
         "context.json"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_013_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_013_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3110,7 +3110,7 @@
         "go.mod"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_014_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_014_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3140,7 +3140,7 @@
         "requirements.txt"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_015_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_015_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3172,7 +3172,7 @@
         "src/endpoint.ts"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_016_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_016_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3204,7 +3204,7 @@
         "src/legacy-route.tsx"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_018_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_018_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3232,7 +3232,7 @@
         "protected/canary.txt"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_020_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_020_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3265,7 +3265,7 @@
         "query.sql"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_021_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_021_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3296,7 +3296,7 @@
         "pyproject.toml"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_023_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_023_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3327,7 +3327,7 @@
         "Cargo.toml"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_024_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_024_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3359,7 +3359,7 @@
         "Cargo.toml"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_025_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_025_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3391,7 +3391,7 @@
         "evidence/repository.log"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_026_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_026_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3421,7 +3421,7 @@
         "sources.bib"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_027_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_027_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3453,7 +3453,7 @@
         "supabase/migrations/0001_schema.sql"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_029_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_029_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3485,7 +3485,7 @@
         "main.tf"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_030_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_030_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3514,7 +3514,7 @@
         "article.md"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_031_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_031_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",
@@ -3546,7 +3546,7 @@
         "pnpm-lock.yaml"
       ],
       "outside_sentinel": "../outside-sentinel.txt",
-      "canary": "AGENT_SKILLS_CANARY_032_DO_NOT_COPY",
+      "canary": "STOREHOUSE_CANARY_032_DO_NOT_COPY",
       "trajectory_policy": {
         "required": true,
         "unavailable_verdict": "needs-review",

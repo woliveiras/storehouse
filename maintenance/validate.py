@@ -43,7 +43,7 @@ def _syntax_checks() -> None:
 def _script_smokes() -> None:
     art = ROOT / "skills" / "game-art-2d" / "scripts"
     bibliography = ROOT / "skills" / "scientific-paper" / "scripts" / "validate-bib.py"
-    with tempfile.TemporaryDirectory(prefix="agent-skills-script-smoke-", dir=safe_temp_parent()) as raw:
+    with tempfile.TemporaryDirectory(prefix="storehouse-script-smoke-", dir=safe_temp_parent()) as raw:
         work = Path(raw).resolve()
         first = work / "first.png"
         second = work / "second.png"
@@ -127,15 +127,15 @@ def main() -> int:
     args = parser.parse_args()
     env = os.environ.copy()
     if args.live_sources:
-        for name in ("AGENT_SKILLS_GEREMMYAS_SOURCE", "AGENT_SKILLS_TUXEDO_SOURCE"):
+        for name in ("STOREHOUSE_GEREMMYAS_SOURCE", "STOREHOUSE_TUXEDO_SOURCE"):
             raw = env.get(name)
             if not raw or not Path(raw).is_absolute():
                 raise SystemExit(f"{name} must be an absolute path for live source validation")
-        _catalog_check(Path(env["AGENT_SKILLS_GEREMMYAS_SOURCE"]).resolve())
-        env["AGENT_SKILLS_RUN_EXTERNAL"] = "1"
+        _catalog_check(Path(env["STOREHOUSE_GEREMMYAS_SOURCE"]).resolve())
+        env["STOREHOUSE_RUN_EXTERNAL"] = "1"
     else:
-        env.pop("AGENT_SKILLS_GEREMMYAS_SOURCE", None)
-        env.pop("AGENT_SKILLS_TUXEDO_SOURCE", None)
+        env.pop("STOREHOUSE_GEREMMYAS_SOURCE", None)
+        env.pop("STOREHOUSE_TUXEDO_SOURCE", None)
     _run([sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"], env=env)
     _syntax_checks()
     _script_smokes()

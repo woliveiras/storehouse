@@ -17,8 +17,8 @@ from maintenance.catalog_data import TUXEDO_COMMIT
 
 
 ROOT = Path(__file__).resolve().parents[1]
-APPROVAL_ENV = "AGENT_SKILLS_EVAL_APPROVAL"
-APPROVAL_TIME_ENV = "AGENT_SKILLS_EVAL_APPROVED_AT"
+APPROVAL_ENV = "STOREHOUSE_EVAL_APPROVAL"
+APPROVAL_TIME_ENV = "STOREHOUSE_EVAL_APPROVED_AT"
 
 
 def _cases(catalog: dict[str, object], suite: str) -> dict[str, list[str]]:
@@ -199,9 +199,9 @@ def _git_tree_manifest(repository: Path, commit: str, tree: Path) -> dict[str, s
 def _validate_proposed(source: Path, name: str) -> dict[str, str]:
     if any(source == root or root in source.parents for root in protected_roots()):
         raise RuntimeError("proposed skill source overlaps a protected checkout or Codex home")
-    raw_manifest = os.environ.get("AGENT_SKILLS_EVAL_PROPOSED_MANIFEST")
+    raw_manifest = os.environ.get("STOREHOUSE_EVAL_PROPOSED_MANIFEST")
     if not raw_manifest or not Path(raw_manifest).is_absolute():
-        raise RuntimeError("compare execution requires absolute AGENT_SKILLS_EVAL_PROPOSED_MANIFEST")
+        raise RuntimeError("compare execution requires absolute STOREHOUSE_EVAL_PROPOSED_MANIFEST")
     manifest_path = Path(raw_manifest).resolve()
     if any(manifest_path == root or root in manifest_path.parents for root in protected_roots()):
         raise RuntimeError("proposed manifest overlaps a protected checkout or Codex home")
@@ -212,9 +212,9 @@ def _validate_proposed(source: Path, name: str) -> dict[str, str]:
 
 
 def _tuxedo_skill(workspace: Path, name: str = "verify") -> None:
-    raw = os.environ.get("AGENT_SKILLS_TUXEDO_SOURCE")
+    raw = os.environ.get("STOREHOUSE_TUXEDO_SOURCE")
     if not raw or not Path(raw).is_absolute():
-        raise RuntimeError("Tuxedo composition execution requires absolute AGENT_SKILLS_TUXEDO_SOURCE")
+        raise RuntimeError("Tuxedo composition execution requires absolute STOREHOUSE_TUXEDO_SOURCE")
     repository = Path(raw).resolve()
     for command in (
         ["git", "-C", str(repository), "cat-file", "-e", f"{TUXEDO_COMMIT}^{{commit}}"],
@@ -263,9 +263,9 @@ def _prepare(record: dict[str, Any], workspace_root: Path, manifest: dict[str, A
     elif variant != "baseline" and record["skill"]:
         skill_source = ROOT / "skills"
         if record["kind"] == "compare" and variant == "proposed":
-            raw = os.environ.get("AGENT_SKILLS_EVAL_PROPOSED_SKILLS")
+            raw = os.environ.get("STOREHOUSE_EVAL_PROPOSED_SKILLS")
             if not raw or not Path(raw).is_absolute():
-                raise RuntimeError("compare execution requires absolute AGENT_SKILLS_EVAL_PROPOSED_SKILLS")
+                raise RuntimeError("compare execution requires absolute STOREHOUSE_EVAL_PROPOSED_SKILLS")
             skill_source = Path(raw).resolve()
             proposed_manifest = _validate_proposed(skill_source, record["skill"])
             _copy_skill(skill_source, record["skill"], workspace, expected_manifest=proposed_manifest)
@@ -278,7 +278,7 @@ def _prepare(record: dict[str, Any], workspace_root: Path, manifest: dict[str, A
             _tuxedo_skill(workspace)
     subprocess.run(["git", "init", "--quiet"], cwd=workspace, check=True)
     subprocess.run(["git", "add", "."], cwd=workspace, check=True)
-    subprocess.run(["git", "-c", "user.name=Agent Skills Eval", "-c", "user.email=eval@example.invalid", "commit", "--quiet", "-m", "fixture"], cwd=workspace, check=True)
+    subprocess.run(["git", "-c", "user.name=Storehouse Eval", "-c", "user.email=eval@example.invalid", "commit", "--quiet", "-m", "fixture"], cwd=workspace, check=True)
     protected = ["protected/unchanged.txt", ".git/config"]
     if record.get("skill"):
         oracle = ORACLES[record["skill"]]
@@ -361,8 +361,8 @@ def _execute(catalog: dict[str, object], budget: dict[str, object]) -> None:
         grader.mkdir()
         subprocess.run(["git", "init", "--quiet"], cwd=grader, check=True)
         env = child_environment(home)
-        env["AGENT_SKILLS_EVAL_WORKSPACE_ROOT"] = str(workspace)
-        env["AGENT_SKILLS_EVAL_GRADER_ROOT"] = str(grader)
+        env["STOREHOUSE_EVAL_WORKSPACE_ROOT"] = str(workspace)
+        env["STOREHOUSE_EVAL_GRADER_ROOT"] = str(grader)
         reports = ROOT / "evals" / "promptfoo" / "results"
         reports.mkdir(parents=True, exist_ok=True)
         failed_shards: list[str] = []
@@ -377,8 +377,8 @@ def _execute(catalog: dict[str, object], budget: dict[str, object]) -> None:
             case_path.write_text(json.dumps(records), encoding="utf-8")
             manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
             shard_env = env.copy()
-            shard_env["AGENT_SKILLS_EVAL_CASES"] = str(case_path)
-            shard_env["AGENT_SKILLS_EVAL_MANIFEST"] = str(manifest_path)
+            shard_env["STOREHOUSE_EVAL_CASES"] = str(case_path)
+            shard_env["STOREHOUSE_EVAL_MANIFEST"] = str(manifest_path)
             shard_env["PROMPTFOO_CONFIG_DIR"] = str(shard_state)
             completed = subprocess.run(
                 ["pnpm", "exec", "promptfoo", "eval", "-c", "evals/promptfoo/promptfooconfig.yaml", "--no-cache", "--no-share", "--max-concurrency", str(budget["case_concurrency"]), "--no-progress-bar", "-o", str(raw_path)],

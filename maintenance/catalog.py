@@ -21,7 +21,7 @@ from maintenance.catalog_data import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_ENV = "AGENT_SKILLS_GEREMMYAS_SOURCE"
+SOURCE_ENV = "STOREHOUSE_GEREMMYAS_SOURCE"
 
 
 def sha256(path: Path) -> str:
@@ -66,7 +66,7 @@ def render_install_commands() -> str:
     blocks: list[str] = []
     for item in COLLECTIONS:
         skills = expanded[item["name"]]
-        command_lines = ["npx skills add woliveiras/agent-skills \\"]
+        command_lines = ["npx skills add woliveiras/storehouse \\"]
         for index, skill in enumerate(skills):
             suffix = " \\" if index < len(skills) - 1 else ""
             command_lines.append(f"  --skill {skill}{suffix}")

@@ -353,25 +353,25 @@ class EvalCatalogTests(unittest.TestCase):
         changed_concurrency_token = _approval_token("full", budget["shards"], budget["secondary_judgments"], 1, 1)
         self.assertNotEqual(budget["approval_token"], changed_concurrency_token)
         self.assertEqual(budget["upper_bound_calls"], budget["target_calls"] + budget["secondary_judgments"])
-        with mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_APPROVAL": "wrong"}, clear=False):
+        with mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_APPROVAL": "wrong"}, clear=False):
             with self.assertRaises(RuntimeError):
                 authorize_execution(budget, execute=True)
-        with mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_APPROVAL": budget["approval_token"], "AGENT_SKILLS_EVAL_APPROVED_AT": str(int(time.time()))}, clear=False):
+        with mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_APPROVAL": budget["approval_token"], "STOREHOUSE_EVAL_APPROVED_AT": str(int(time.time()))}, clear=False):
             authorize_execution(budget, execute=True)
-            self.assertNotIn("AGENT_SKILLS_EVAL_APPROVAL", os.environ)
+            self.assertNotIn("STOREHOUSE_EVAL_APPROVAL", os.environ)
 
 
 class IsolationAndVerdictTests(unittest.TestCase):
     def test_as_023_rejects_relative_personal_checkout_and_symlink_homes(self) -> None:
         from evals.isolation import assert_safe_scratch_parent, resolve_dedicated_home
 
-        with mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_CODEX_HOME": "relative"}, clear=False):
+        with mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_CODEX_HOME": "relative"}, clear=False):
             with self.assertRaises(RuntimeError):
                 resolve_dedicated_home()
-        with mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_CODEX_HOME": str(ROOT / "bad")}, clear=False):
+        with mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_CODEX_HOME": str(ROOT / "bad")}, clear=False):
             with self.assertRaises(RuntimeError):
                 resolve_dedicated_home()
-        with mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_CODEX_HOME": str(Path.home() / ".codex" / "bad")}, clear=False):
+        with mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_CODEX_HOME": str(Path.home() / ".codex" / "bad")}, clear=False):
             with self.assertRaises(RuntimeError):
                 resolve_dedicated_home()
         with tempfile.TemporaryDirectory() as temp:
@@ -379,11 +379,11 @@ class IsolationAndVerdictTests(unittest.TestCase):
             target = ROOT / "through-link"
             link = root / "linked"
             link.symlink_to(target, target_is_directory=True)
-            with mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_CODEX_HOME": str(link)}, clear=False):
+            with mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_CODEX_HOME": str(link)}, clear=False):
                 with self.assertRaises(RuntimeError):
                     resolve_dedicated_home()
         with tempfile.TemporaryDirectory() as temp:
-            with mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_CODEX_HOME": str(Path(temp) / "eval"), "CODEX_HOME": "relative-personal"}, clear=False):
+            with mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_CODEX_HOME": str(Path(temp) / "eval"), "CODEX_HOME": "relative-personal"}, clear=False):
                 with self.assertRaises(RuntimeError):
                     resolve_dedicated_home()
         with tempfile.TemporaryDirectory() as temp:
@@ -522,7 +522,7 @@ class IsolationAndVerdictTests(unittest.TestCase):
             self.assertNotIn("CODEX_API_KEY", child)
             self.assertEqual(str(home), child["CODEX_HOME"])
 
-            env = {"AGENT_SKILLS_EVAL_CODEX_HOME": str(home)}
+            env = {"STOREHOUSE_EVAL_CODEX_HOME": str(home)}
             chatgpt = mock.Mock(returncode=0, stdout="Logged in using ChatGPT\n", stderr="")
             api_key = mock.Mock(returncode=0, stdout="Logged in using an API key\n", stderr="")
             with mock.patch.dict(os.environ, env, clear=False), mock.patch.object(auth.subprocess, "run", return_value=chatgpt):
@@ -535,7 +535,7 @@ class IsolationAndVerdictTests(unittest.TestCase):
         from evals import runner
 
         budget = {"approval_token": "approved", "suite": "smoke", "shards": []}
-        with tempfile.TemporaryDirectory() as temp, mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_APPROVAL": "approved", "AGENT_SKILLS_EVAL_APPROVED_AT": str(int(time.time()))}, clear=False), mock.patch.object(runner, "resolve_dedicated_home", return_value=Path(temp)), mock.patch.object(runner, "validate_home_content"), mock.patch.object(runner, "status", side_effect=RuntimeError("not authenticated")), mock.patch.object(runner, "disposable_state") as disposable:
+        with tempfile.TemporaryDirectory() as temp, mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_APPROVAL": "approved", "STOREHOUSE_EVAL_APPROVED_AT": str(int(time.time()))}, clear=False), mock.patch.object(runner, "resolve_dedicated_home", return_value=Path(temp)), mock.patch.object(runner, "validate_home_content"), mock.patch.object(runner, "status", side_effect=RuntimeError("not authenticated")), mock.patch.object(runner, "disposable_state") as disposable:
             with self.assertRaises(RuntimeError):
                 runner._execute({"routing": [], "behavior": [], "composition": [], "security": []}, budget)
         disposable.assert_not_called()
@@ -555,12 +555,12 @@ class IsolationAndVerdictTests(unittest.TestCase):
             (tree / "linked").unlink()
             with self.assertRaises(RuntimeError):
                 runner._copy_skill(source, "sample", root / "workspace", expected_manifest={"SKILL.md": "0" * 64})
-            with mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_PROPOSED_MANIFEST": str(root / "missing.json")}, clear=False):
+            with mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_PROPOSED_MANIFEST": str(root / "missing.json")}, clear=False):
                 with self.assertRaises((RuntimeError, FileNotFoundError)):
                     runner._validate_proposed(source, "sample")
             manifest = root / "manifest.json"
             manifest.write_text(json.dumps({"SKILL.md": "0" * 64}), encoding="utf-8")
-            with mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_PROPOSED_MANIFEST": str(manifest)}, clear=False):
+            with mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_PROPOSED_MANIFEST": str(manifest)}, clear=False):
                 with self.assertRaises(RuntimeError):
                     runner._validate_proposed(source, "sample")
 
@@ -619,7 +619,7 @@ class IsolationAndVerdictTests(unittest.TestCase):
             manifest_path = root / "manifest.json"
             manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
             variables = {"kind": "security", "workspace_key": "security"}
-            with mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_MANIFEST": str(manifest_path)}, clear=False):
+            with mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_MANIFEST": str(manifest_path)}, clear=False):
                 unavailable = get_assert("bounded result", {"vars": variables, "metadata": {"skillCalls": ["android-ci-setup"]}})
                 self.assertTrue(unavailable["needs_review"])
                 attempted = get_assert(
@@ -704,7 +704,7 @@ class IsolationAndVerdictTests(unittest.TestCase):
                 prepared_records.append((item, prepared))
             manifest_path = root / "manifest.json"
             manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
-            with mock.patch.dict(os.environ, {"AGENT_SKILLS_EVAL_MANIFEST": str(manifest_path)}, clear=False):
+            with mock.patch.dict(os.environ, {"STOREHOUSE_EVAL_MANIFEST": str(manifest_path)}, clear=False):
                 for item, prepared in prepared_records:
                     variables = {"kind": "security", "workspace_key": prepared["workspace_key"]}
                     metadata = {"skillCalls": [item["skill"]]}

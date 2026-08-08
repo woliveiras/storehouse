@@ -9,8 +9,8 @@ from typing import Iterator
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EVAL_HOME_ENV = "AGENT_SKILLS_EVAL_CODEX_HOME"
-DEFAULT_HOME = ".codex-agent-skills-evals"
+EVAL_HOME_ENV = "STOREHOUSE_EVAL_CODEX_HOME"
+DEFAULT_HOME = ".codex-storehouse-evals"
 ALLOWED_ROOT_ENTRIES = {
     "auth.json", "config.toml", "history.jsonl", "logs", "sessions", "shell_snapshots",
     "skills", "plugins", "state.sqlite", "state.sqlite-shm", "state.sqlite-wal", "version.json",
@@ -18,7 +18,7 @@ ALLOWED_ROOT_ENTRIES = {
 ALLOWED_CONFIG_KEYS = {"cli_auth_credentials_store", "projects"}
 ALLOWED_PROJECT_KEYS = {"trust_level"}
 ALLOWED_TRUST = {"trusted", "untrusted"}
-SOURCE_ROOT_ENVS = ("AGENT_SKILLS_GEREMMYAS_SOURCE", "AGENT_SKILLS_TUXEDO_SOURCE")
+SOURCE_ROOT_ENVS = ("STOREHOUSE_GEREMMYAS_SOURCE", "STOREHOUSE_TUXEDO_SOURCE")
 SIBLING_SOURCE_ROOTS = (ROOT.parent / "geremmyas", ROOT.parent / "tuxedo")
 
 
@@ -133,7 +133,7 @@ def child_environment(home: Path) -> dict[str, str]:
 
 @contextmanager
 def disposable_state() -> Iterator[tuple[Path, Path]]:
-    with tempfile.TemporaryDirectory(prefix="agent-skills-eval-", dir=safe_temp_parent()) as raw:
+    with tempfile.TemporaryDirectory(prefix="storehouse-eval-", dir=safe_temp_parent()) as raw:
         base = Path(raw).resolve()
         if any(_inside(base, root) for root in protected_roots()):
             raise RuntimeError("temporary evaluation state overlaps a protected root")

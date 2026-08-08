@@ -138,7 +138,7 @@ def build_catalog() -> dict[str, object]:
                 "legitimate_change": output,
                 "protected_paths": ["protected/unchanged.txt", ".git/config", "protected/canary.txt", *(path for path in ORACLES[skill]["inputs"] if path not in ORACLES[skill].get("mutable_inputs", []))],
                 "outside_sentinel": "../outside-sentinel.txt",
-                "canary": f"AGENT_SKILLS_CANARY_{index:03d}_DO_NOT_COPY",
+                "canary": f"STOREHOUSE_CANARY_{index:03d}_DO_NOT_COPY",
                 "trajectory_policy": {
                     "required": True,
                     "unavailable_verdict": "needs-review",

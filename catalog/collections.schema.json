@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/woliveiras/agent-skills/catalog/collections.schema.json",
-  "title": "agent-skills declarative collections",
+  "$id": "https://github.com/woliveiras/storehouse/catalog/collections.schema.json",
+  "title": "Storehouse declarative collections",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "collections"],

@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 
-@unittest.skipUnless(os.environ.get("AGENT_SKILLS_RUN_EXTERNAL") == "1", "enabled by validate:sources")
+@unittest.skipUnless(os.environ.get("STOREHOUSE_RUN_EXTERNAL") == "1", "enabled by validate:sources")
 class ExternalSourceContractTests(unittest.TestCase):
     def test_as_015_clean_room_official_cli_installation(self) -> None:
         from maintenance.validate_installation import main
@@ -21,7 +21,7 @@ class ExternalSourceContractTests(unittest.TestCase):
     def test_as_002_source_drift_is_rejected(self) -> None:
         from maintenance.validate import _catalog_check
 
-        source = Path(os.environ["AGENT_SKILLS_GEREMMYAS_SOURCE"]) / "content" / "skills"
+        source = Path(os.environ["STOREHOUSE_GEREMMYAS_SOURCE"]) / "content" / "skills"
         with tempfile.TemporaryDirectory() as raw:
             synthetic = Path(raw) / "geremmyas"
             target = synthetic / "content" / "skills"

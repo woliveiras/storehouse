@@ -1,12 +1,13 @@
-# Agent Skills
+# Storehouse
 
-Specialized, project-installable [Agent Skills](https://agentskills.io/specification)
-for Phaser and Godot 2D, Android, languages and frameworks, data and cloud
+Storehouse is William Oliveira's curated source of specialized,
+project-installable [Agent Skills](https://agentskills.io/specification) for
+Phaser and Godot 2D, Android, languages and frameworks, data and cloud
 infrastructure, AI/RAG, scientific research, and technical writing. Each folder
-under `skills/` is an independent skill and requires no runtime from this
-repository.
+under `skills/` is an independent capability that coding agents can use without
+any runtime from this repository.
 
-## Agent Skills and Tuxedo
+## Storehouse and Tuxedo
 
 [Tuxedo](https://github.com/woliveiras/tuxedo) is the recommended global Codex
 plugin for horizontal engineering workflows such as specification, TDD,
@@ -29,13 +30,13 @@ the CLI default. Run commands from the project that should receive the skill.
 List the skills in this repository:
 
 ```bash
-npx skills add woliveiras/agent-skills --list
+npx skills add woliveiras/storehouse --list
 ```
 
 Install one skill:
 
 ```bash
-npx skills add woliveiras/agent-skills --skill gameplay-programming-2d
+npx skills add woliveiras/storehouse --skill gameplay-programming-2d
 ```
 
 Choose target agents or copy mode with the official CLI flags when the default
@@ -52,7 +53,7 @@ The following block is rendered deterministically from
 Core 2D gameplay programming and deterministic game testing.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill gameplay-programming-2d \
   --skill game-testing-2d
 ```
@@ -62,7 +63,7 @@ npx skills add woliveiras/agent-skills \
 Accessible 2D game interfaces and moment-to-moment feel.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill game-ui-accessibility \
   --skill game-feel-2d
 ```
@@ -72,7 +73,7 @@ npx skills add woliveiras/agent-skills \
 AI, procedural generation, saves, and progression for Phaser and Godot 2D.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill game-ai-2d \
   --skill procedural-generation-2d \
   --skill game-save-n-progress
@@ -83,7 +84,7 @@ npx skills add woliveiras/agent-skills \
 Measured 2D game performance work.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill game-performance-2d
 ```
 
@@ -92,7 +93,7 @@ npx skills add woliveiras/agent-skills \
 2D game audio systems and lifecycle.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill game-audio-2d
 ```
 
@@ -101,7 +102,7 @@ npx skills add woliveiras/agent-skills \
 2D runtime art production, processing, and integration.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill game-art-2d
 ```
 
@@ -110,7 +111,7 @@ npx skills add woliveiras/agent-skills \
 Reproducible Phaser and Godot build and release evidence.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill game-build-and-release
 ```
 
@@ -119,7 +120,7 @@ npx skills add woliveiras/agent-skills \
 Complete aggregate of the seven focused Phaser and Godot 2D collections.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill gameplay-programming-2d \
   --skill game-testing-2d \
   --skill game-ui-accessibility \
@@ -138,7 +139,7 @@ npx skills add woliveiras/agent-skills \
 Android CI and delivery checks.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill android-ci-setup
 ```
 
@@ -147,7 +148,7 @@ npx skills add woliveiras/agent-skills \
 Go CI and supply-chain checks.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill go-ci-setup
 ```
 
@@ -156,7 +157,7 @@ npx skills add woliveiras/agent-skills \
 Python CI, validation, and publishing preparation.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill python-ci-setup
 ```
 
@@ -165,7 +166,7 @@ npx skills add woliveiras/agent-skills \
 Rust CI and release engineering.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill rust-ci-setup \
   --skill rust-release
 ```
@@ -175,7 +176,7 @@ npx skills add woliveiras/agent-skills \
 TypeScript CI and boundary validation.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill typescript-ci-setup \
   --skill validate-with-zod
 ```
@@ -185,7 +186,7 @@ npx skills add woliveiras/agent-skills \
 React Router migration plus Zustand, XState, and Zod recipes.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill migrate-react-router \
   --skill manage-state-with-zustand \
   --skill model-state-with-xstate \
@@ -197,7 +198,7 @@ npx skills add woliveiras/agent-skills \
 PostgreSQL, ChromaDB/RAG, and Supabase workflows.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill postgres-query-review \
   --skill chromadb-rag-workflow \
   --skill supabase-workflow
@@ -208,7 +209,7 @@ npx skills add woliveiras/agent-skills \
 Google Cloud and Terraform operations.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill gcloud-operation \
   --skill terraform-change
 ```
@@ -218,7 +219,7 @@ npx skills add woliveiras/agent-skills \
 LangGraph, LLM service, and RAG design and review.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill langgraph-agent-design \
   --skill llm-integration-review \
   --skill chromadb-rag-workflow
@@ -229,7 +230,7 @@ npx skills add woliveiras/agent-skills \
 Scientific papers, empirical case studies, and academic draft review.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill scientific-paper \
   --skill scientific-case-study-research \
   --skill paper-review
@@ -240,7 +241,7 @@ npx skills add woliveiras/agent-skills \
 Evidence-preserving technical blog review.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill text-review
 ```
 
@@ -249,7 +250,7 @@ npx skills add woliveiras/agent-skills \
 Portable Agent Skill authoring and review.
 
 ```bash
-npx skills add woliveiras/agent-skills \
+npx skills add woliveiras/storehouse \
   --skill skill-authoring
 ```
 <!-- collections:end -->
@@ -287,8 +288,8 @@ The external `skills` CLI reports anonymous aggregate telemetry by default.
 Its documentation says to disable it with either environment variable:
 
 ```bash
-DISABLE_TELEMETRY=1 npx skills add woliveiras/agent-skills --list
-DO_NOT_TRACK=1 npx skills add woliveiras/agent-skills --list
+DISABLE_TELEMETRY=1 npx skills add woliveiras/storehouse --list
+DO_NOT_TRACK=1 npx skills add woliveiras/storehouse --list
 ```
 
 ## Development

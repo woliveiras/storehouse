@@ -20,7 +20,7 @@ class MaintenanceContractTests(unittest.TestCase):
         from maintenance.validate_installation import clean_environment, installation_commands
 
         with mock.patch.dict(os.environ, {"CODEX_HOME": "/personal", "OPENAI_API_KEY": "secret", "CODEX_API_KEY": "secret"}, clear=False):
-            env = clean_environment(Path("/tmp/synthetic-agent-skills-home"))
+            env = clean_environment(Path("/tmp/synthetic-storehouse-home"))
         self.assertEqual("1", env["DISABLE_TELEMETRY"])
         self.assertEqual("1", env["DO_NOT_TRACK"])
         self.assertNotIn("CODEX_HOME", env)

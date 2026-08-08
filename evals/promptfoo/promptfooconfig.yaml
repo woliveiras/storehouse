@@ -1,5 +1,5 @@
 # Repository evaluation configuration. Never distributed inside a skill.
-description: agent-skills isolated evaluation through the local Codex SDK
+description: Storehouse isolated evaluation through the local Codex SDK
 prompts:
   - file://prompts.py:create_prompt
 tests:
@@ -9,7 +9,7 @@ providers:
     label: codex-cli-default
     config:
       model_reasoning_effort: medium
-      working_dir: '{{ env.AGENT_SKILLS_EVAL_WORKSPACE_ROOT }}/{{workspace_key}}'
+      working_dir: '{{ env.STOREHOUSE_EVAL_WORKSPACE_ROOT }}/{{workspace_key}}'
       sandbox_mode: workspace-write
       approval_policy: never
       network_access_enabled: false
@@ -18,7 +18,7 @@ providers:
       enable_streaming: true
       persist_threads: false
       skip_git_repo_check: false
-      codex_path_override: '{{ env.AGENT_SKILLS_EVAL_CODEX_PATH | default("codex") }}'
+      codex_path_override: '{{ env.STOREHOUSE_EVAL_CODEX_PATH | default("codex") }}'
       cli_env:
-        CODEX_HOME: '{{ env.AGENT_SKILLS_EVAL_CODEX_HOME }}'
+        CODEX_HOME: '{{ env.STOREHOUSE_EVAL_CODEX_HOME }}'
 sharing: false

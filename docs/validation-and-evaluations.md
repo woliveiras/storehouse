@@ -8,11 +8,11 @@ pnpm run validate:sources
 pnpm run validate:official
 pnpm run validate:installation
 pnpm run promptfoo:validate
-pnpm run eval:dry-run -- --suite full
+pnpm run eval:dry-run --suite full
 ```
 
 `validate:sources` additionally requires absolute
-`AGENT_SKILLS_GEREMMYAS_SOURCE` and `AGENT_SKILLS_TUXEDO_SOURCE` paths. The
+`STOREHOUSE_GEREMMYAS_SOURCE` and `STOREHOUSE_TUXEDO_SOURCE` paths. The
 frozen commits remain the provenance baseline; a clean later checkout is
 accepted only when its governed tree is byte-identical. Installation validation
 uses disposable homes and workspaces, disables external CLI telemetry, and
@@ -21,10 +21,10 @@ removes the scratch tree.
 Provider suites are deliberately separate: `eval:smoke`, `eval:routing`,
 `eval:behavior`, `eval:composition`, `eval:security`, `eval:compare`, and
 `eval:full`. Before any one can execute, run the matching suite-selectable dry
-run, for example `pnpm run eval:dry-run -- --suite routing`, report its exact
+run, for example `pnpm run eval:dry-run --suite routing`, report its exact
 target-call and secondary-judgment budget, obtain explicit human authorization,
 and set the matching approval token described by the dry-run together with
-`AGENT_SKILLS_EVAL_APPROVED_AT=$(date +%s)`. The runner rejects timestamps more
+`STOREHOUSE_EVAL_APPROVED_AT=$(date +%s)`. The runner rejects timestamps more
 than ten minutes old and removes both variables from its own process before
 authentication or provider startup. Use one-shot environment assignments on
 the execution command; do not export reusable approval variables. Login is

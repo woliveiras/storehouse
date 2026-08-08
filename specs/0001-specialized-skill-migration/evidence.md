@@ -26,7 +26,7 @@
 
 | Criterion | Test-tree digest | Command | Result | Run identifier |
 | --- | --- | --- | --- | --- |
-| AS-001-AS-017, AS-027-AS-029 | `ffba41dafe10b9d7fb40e7a75f117f80e26244030cd18b50c076f76ae740bfc4` | `AGENT_SKILLS_GEREMMYAS_SOURCE=... AGENT_SKILLS_TUXEDO_SOURCE=... pnpm run validate:sources` | Complete live-source reconciliation, negative source-drift fixture, 33 official validations, six functional script smokes with overwrite/symlink collision probes, and pinned CLI clean-room list/install/discovery pass | local deterministic run, 2026-08-08 |
+| AS-001-AS-017, AS-027-AS-029 | `ffba41dafe10b9d7fb40e7a75f117f80e26244030cd18b50c076f76ae740bfc4` | `pnpm run validate:sources` with the source variables named by the then-current repository contract | Complete live-source reconciliation, negative source-drift fixture, 33 official validations, six functional script smokes with overwrite/symlink collision probes, and pinned CLI clean-room list/install/discovery pass | local deterministic run, 2026-08-08 |
 | AS-015 | same | `pnpm run validate:installation` (also exercised inside `validate:sources`) | Locked skills CLI found 33 skills; one Codex skill and the two-skill `game-core` collection were discovered after copied project installs for the requested clients; disposable HOME/project removed | local clean-room run, 2026-08-08 |
 | AS-016 | same | `pnpm run validate:official` (also exercised inside `validate:sources`) | Official Agent Skills validator accepted all 33 skills | local official-validator run, 2026-08-08 |
 | AS-018-AS-026 | same | `pnpm run test` | 45 tests pass; four external/live-source tests skip only in ordinary source-free unit mode and run under `validate:sources` | local unit run, 2026-08-08 |
@@ -39,8 +39,8 @@
 
 | Criterion | Test-tree digest | Command | Result | Provenance |
 | --- | --- | --- | --- | --- |
-| AS-027 fail-first | `e7cca732e8366aff3f5950b20bef92264a598d507c05c3f1418641f9f3e417a0` | `uv run python -m unittest tests.test_repository_contract.RepositoryContractTests.test_as_027_public_project_identity_is_canonical -v` before manifest edits | Failed on `package.json` identifying the private project as `agent-skills-maintainer` | spec-derived |
-| AS-027 passing | same | same command after implementation | Passed with `agent-skills` in Node, Python, and UV metadata; the obsolete identifier and documentation path are rejected | local deterministic run, 2026-08-08 |
+| AS-027 fail-first | `e7cca732e8366aff3f5950b20bef92264a598d507c05c3f1418641f9f3e417a0` | `uv run python -m unittest tests.test_repository_contract.RepositoryContractTests.test_as_027_public_project_identity_is_canonical -v` before manifest edits | Failed because `package.json` used the former maintainer-only package identifier | spec-derived |
+| AS-027 passing | same | same command after implementation | Passed with the canonical project identifier used at that time; the obsolete maintainer-only identifier and documentation path were rejected | local deterministic run, 2026-08-08 |
 | AS-027 regression suite | `e10aa9f2ac4547271e721e6e617cfd63de02f02793b578c2fd256398dd083b9a` | `pnpm run validate`, `pnpm run promptfoo:validate`, `pnpm run eval:dry-run --suite full`, and `pnpm run validate:official` | 47 tests pass with four expected live-source skips; dependency versions remain confined to manifests/lockfiles; Promptfoo config and the unchanged 365-call dry-run pass; official validation accepts all 33 skills | local no-provider run, 2026-08-08 |
 
 ## Local commit evidence
@@ -68,7 +68,7 @@ own final object ID without changing that ID.
 ## Residual limitations
 
 - No model/provider evaluation is authorized in this task.
-- Live GitHub installation from `woliveiras/agent-skills` is unavailable until
+- Live GitHub installation from `woliveiras/storehouse` is unavailable until
   a separately authorized push/publication; validation must use the same
   official CLI against a clean local Git source.
 - No behavioral claim is based on a real provider run. The executable harness,

@@ -16,7 +16,7 @@ def _rubric() -> dict[str, object]:
             "id": "openai:codex-sdk",
             "config": {
                 "model_reasoning_effort": "medium",
-                "working_dir": "{{ env.AGENT_SKILLS_EVAL_GRADER_ROOT }}",
+                "working_dir": "{{ env.STOREHOUSE_EVAL_GRADER_ROOT }}",
                 "sandbox_mode": "read-only",
                 "approval_policy": "never",
                 "network_access_enabled": False,
@@ -24,15 +24,15 @@ def _rubric() -> dict[str, object]:
                 "web_search_mode": "disabled",
                 "persist_threads": False,
                 "skip_git_repo_check": True,
-                "codex_path_override": "{{ env.AGENT_SKILLS_EVAL_CODEX_PATH | default(\"codex\") }}",
-                "cli_env": {"CODEX_HOME": "{{ env.AGENT_SKILLS_EVAL_CODEX_HOME }}"},
+                "codex_path_override": "{{ env.STOREHOUSE_EVAL_CODEX_PATH | default(\"codex\") }}",
+                "cli_env": {"CODEX_HOME": "{{ env.STOREHOUSE_EVAL_CODEX_HOME }}"},
             },
         },
     }
 
 
 def generate_tests() -> list[dict[str, object]]:
-    raw = os.environ.get("AGENT_SKILLS_EVAL_CASES")
+    raw = os.environ.get("STOREHOUSE_EVAL_CASES")
     if not raw:
         # Config validation must remain provider-free and independent of prepared workspaces.
         return [{
