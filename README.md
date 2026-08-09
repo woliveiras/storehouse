@@ -1,12 +1,6 @@
 # Storehouse
 
-Storehouse is William Oliveira's curated source of specialized,
-project-installable [Agent Skills](https://agentskills.io/specification) for
-Phaser and Godot 2D, Android, languages and frameworks, data and cloud
-infrastructure, AI/RAG, scientific research, technical writing, and optional
-software methodologies such as SDD. Each folder
-under `skills/` is an independent capability that coding agents can use without
-any runtime from this repository.
+A curated set of skills for Phaser, Godot, Android Native, TypeScript, Python, Golang, Rust, Terraform, Data Modeling, Cloud Infrastructure and AI Engineering
 
 ## Storehouse and Baseline
 
