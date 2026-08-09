@@ -5,6 +5,7 @@ __pycache__/
 .venv/
 node_modules/
 .DS_Store
+.gradle/
 
 # Generated provider inputs and append-only local sanitized results.
 evals/promptfoo/generated/*
