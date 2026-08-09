@@ -1,0 +1,1 @@
+Approved behavior: audit records are retained for 30 days, then deleted. Deletion failures must be retried without extending visibility to ordinary users. No implementation, release, or production mutation is authorized.

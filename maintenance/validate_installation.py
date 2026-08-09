@@ -58,10 +58,12 @@ def main() -> int:
         env = clean_environment(home)
         _run(["git", "init", "--quiet"], project, env)
         collection = expand_collections()["game-core"]
+        sdd_collection = expand_collections()["sdd"]
         commands = installation_commands(collection)
         listed = _run(commands["list"], project, env)
-        if "gameplay-programming-2d" not in listed.stdout + listed.stderr:
-            raise RuntimeError("official CLI did not discover the representative skill")
+        listing = listed.stdout + listed.stderr
+        if not {"gameplay-programming-2d", "spec"} <= set(listing.split()):
+            raise RuntimeError("official CLI did not discover representative and SDD skills")
         _run(commands["single"], project, env)
         single_path = project / ".agents/skills/gameplay-programming-2d/SKILL.md"
         if not single_path.is_file():
@@ -71,11 +73,17 @@ def main() -> int:
         claude = {skill for skill in collection if (project / f".claude/skills/{skill}/SKILL.md").is_file()}
         if universal != set(collection) or claude != set(collection):
             raise RuntimeError(f"multi-skill installation discovery incomplete: universal={sorted(universal)} claude={sorted(claude)}")
+        sdd = installation_commands(sdd_collection)
+        _run(sdd["collection"], project, env)
+        for relative in (".agents/skills/spec/SKILL.md", ".claude/skills/spec/SKILL.md"):
+            if not (project / relative).is_file():
+                raise RuntimeError(f"SDD collection installation missing {relative}")
         report = {
             "cli_version": _run([str(CLI), "--version"], project, env).stdout.strip(),
             "single": "gameplay-programming-2d",
             "collection": "game-core",
             "collection_skills": collection,
+            "sdd_collection_skills": sdd_collection,
             "targets_requested": ["codex", "claude-code", "opencode", "github-copilot"],
             "discovery_paths_observed": [".agents/skills", ".claude/skills"],
             "personal_configuration_touched": False,

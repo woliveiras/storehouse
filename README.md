@@ -3,18 +3,20 @@
 Storehouse is William Oliveira's curated source of specialized,
 project-installable [Agent Skills](https://agentskills.io/specification) for
 Phaser and Godot 2D, Android, languages and frameworks, data and cloud
-infrastructure, AI/RAG, scientific research, and technical writing. Each folder
+infrastructure, AI/RAG, scientific research, technical writing, and optional
+software methodologies such as SDD. Each folder
 under `skills/` is an independent capability that coding agents can use without
 any runtime from this repository.
 
 ## Storehouse and Tuxedo
 
 [Tuxedo](https://github.com/woliveiras/tuxedo) is the recommended global Codex
-plugin for horizontal engineering workflows such as specification, TDD,
-verification, documentation, architecture, decisions, security, and session
-continuity. This repository supplies vertical capabilities selected per
-project. Either product works independently; when both are present, their
-workflows may compose without a physical or runtime dependency.
+plugin for horizontal engineering workflows such as proportional measurement,
+TDD, review, documentation, architecture, decisions, security, and session
+continuity. Storehouse owns the optional SDD methodology through the standalone
+`spec` skill and `sdd` collection. Either product works independently; when
+both are present, approved SDD artifacts may feed installed TDD and review
+capabilities without a physical or runtime dependency.
 
 Collections below are documented groups of ordinary `--skill` arguments. They
 are not packs, a package manager, dependency declarations, or executable
@@ -253,6 +255,15 @@ Portable Agent Skill authoring and review.
 npx skills add woliveiras/storehouse \
   --skill skill-authoring
 ```
+
+### `sdd`
+
+Optional Specification-Driven Development with durable specs, oracle matrices, reconciliation, and formal review.
+
+```bash
+npx skills add woliveiras/storehouse \
+  --skill spec
+```
 <!-- collections:end -->
 
 ## Update and remove
@@ -276,7 +287,7 @@ have no installed identity.
 
 ## Compatibility and privacy
 
-The 33 directories validate against the Agent Skills contract. Clean-room
+The 34 directories validate against the Agent Skills contract. Clean-room
 installer checks cover repository listing plus representative individual and
 multi-skill discovery; exact tested agents are recorded in
 [`docs/compatibility.md`](docs/compatibility.md). Eleven game skills retain

@@ -76,6 +76,9 @@ EXCLUDED = {
     "verify",
 }
 
+OWNED = {"spec"}
+SKILLS = MIGRATED | OWNED
+
 COLLECTIONS = {
     "game-core",
     "game-ui",
@@ -97,6 +100,7 @@ COLLECTIONS = {
     "scientific-research",
     "writing",
     "skill-maintenance",
+    "sdd",
 }
 
 SKILL_NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -192,6 +196,8 @@ class RepositoryContractTests(unittest.TestCase):
             if not raw_path:
                 continue
             path = ROOT / raw_path.decode("utf-8")
+            if not path.is_file():
+                continue
             try:
                 text = path.read_text(encoding="utf-8")
             except UnicodeDecodeError:
@@ -247,14 +253,10 @@ class RepositoryContractTests(unittest.TestCase):
 
         self.assertEqual(GEREMMYAS_COMMIT, git(geremmyas, "rev-parse", "HEAD").decode().strip())
         self.assertEqual(b"", git(geremmyas, "status", "--porcelain=v1", "--untracked-files=all"))
-        self.assertEqual(b"", git(tuxedo, "status", "--porcelain=v1", "--untracked-files=all"))
         ger_tree = git(geremmyas, "ls-tree", "-r", "--full-tree", "HEAD", "content/skills")
-        tux_tree = git(tuxedo, "ls-tree", "-r", "--full-tree", "HEAD", "plugins/tuxedo/skills")
         self.assertEqual(GEREMMYAS_TREE_DIGEST, hashlib.sha256(ger_tree).hexdigest())
-        self.assertEqual(TUXEDO_TREE_DIGEST, hashlib.sha256(tux_tree).hexdigest())
         frozen_tux_tree = git(tuxedo, "ls-tree", "-r", "--full-tree", TUXEDO_COMMIT, "plugins/tuxedo/skills")
         self.assertEqual(TUXEDO_TREE_DIGEST, hashlib.sha256(frozen_tux_tree).hexdigest())
-        self.assertEqual(b"", git(tuxedo, "diff", "--name-only", TUXEDO_COMMIT, "--", "plugins/tuxedo/skills"))
         license_text = git(geremmyas, "show", f"{GEREMMYAS_COMMIT}:LICENSE")
         self.assertEqual(GEREMMYAS_LICENSE_DIGEST, hashlib.sha256(license_text).hexdigest())
         self.assertIn(b"MIT License", license_text)
@@ -264,13 +266,7 @@ class RepositoryContractTests(unittest.TestCase):
             for path in (Path(geremmyas) / "content" / "skills").iterdir()
             if path.is_dir()
         }
-        tuxedo_names = {
-            path.name
-            for path in (Path(tuxedo) / "plugins" / "tuxedo" / "skills").iterdir()
-            if path.is_dir()
-        }
         self.assertEqual(MIGRATED | EXCLUDED, source_names)
-        self.assertTrue(EXCLUDED <= tuxedo_names)
         catalog = json.loads((ROOT / "catalog" / "skills.json").read_text(encoding="utf-8"))
         by_name = {item["name"]: item for item in catalog["skills"]}
         for name in MIGRATED:
@@ -294,13 +290,13 @@ class RepositoryContractTests(unittest.TestCase):
 
     def test_as_003_exact_destination_inventory(self) -> None:
         found = {path.name for path in SKILLS_ROOT.iterdir() if path.is_dir()}
-        self.assertEqual(MIGRATED, found)
-        self.assertFalse(EXCLUDED & found)
-        self.assertEqual(33, len(list(SKILLS_ROOT.rglob("SKILL.md"))))
+        self.assertEqual(SKILLS, found)
+        self.assertFalse((EXCLUDED - OWNED) & found)
+        self.assertEqual(34, len(list(SKILLS_ROOT.rglob("SKILL.md"))))
 
     def test_as_005_skill_frontmatter_and_routing(self) -> None:
         names: list[str] = []
-        for skill in sorted(MIGRATED):
+        for skill in sorted(SKILLS):
             metadata, body = read_frontmatter(SKILLS_ROOT / skill / "SKILL.md")
             self.assertEqual({"name", "description"}, set(metadata), skill)
             self.assertEqual(skill, metadata["name"])
@@ -415,14 +411,18 @@ class RepositoryContractTests(unittest.TestCase):
 
     def test_as_009_provenance_inventory_is_complete(self) -> None:
         catalog = json.loads((ROOT / "catalog" / "skills.json").read_text(encoding="utf-8"))
-        self.assertEqual(1, catalog["schema_version"])
+        self.assertEqual(2, catalog["schema_version"])
         self.assertEqual(GEREMMYAS_COMMIT, catalog["source"]["commit"])
         self.assertEqual(GEREMMYAS_LICENSE_DIGEST, catalog["source"]["license_sha256"])
         entries = catalog["skills"]
-        self.assertEqual(MIGRATED, {item["name"] for item in entries})
-        self.assertEqual(106, sum(len(item["files"]) for item in entries))
+        self.assertEqual(SKILLS, {item["name"] for item in entries})
+        migrated_entries = [item for item in entries if item["ownership"] == "migrated"]
+        owned_entries = [item for item in entries if item["ownership"] == "storehouse"]
+        self.assertEqual(MIGRATED, {item["name"] for item in migrated_entries})
+        self.assertEqual(OWNED, {item["name"] for item in owned_entries})
+        self.assertEqual(106, sum(len(item["files"]) for item in migrated_entries))
         disposition_counts = {kind: 0 for kind in ("preserved", "adapted", "excluded")}
-        for item in entries:
+        for item in migrated_entries:
             self.assertEqual(f"content/skills/{item['name']}", item["source_path"])
             self.assertRegex(item["source_tree_sha256"], r"^[0-9a-f]{64}$")
             self.assertTrue(item["categories"])
@@ -443,6 +443,15 @@ class RepositoryContractTests(unittest.TestCase):
                     self.assertNotEqual(file_item["source_sha256"], file_item["destination_sha256"])
                     self.assertTrue(file_item.get("note"))
         self.assertEqual({"preserved": 77, "adapted": 29, "excluded": 0}, disposition_counts)
+        for item in owned_entries:
+            self.assertRegex(item["source_tree_sha256"], r"^[0-9a-f]{64}$")
+            self.assertEqual("woliveiras/tuxedo", item["origin"]["repository"])
+            self.assertTrue(item["compatibility"]["standalone"])
+            self.assertTrue(item["files"])
+            for file_item in item["files"]:
+                self.assertEqual("owned", file_item["disposition"])
+                destination = SKILLS_ROOT / item["name"] / file_item["path"]
+                self.assertEqual(hashlib.sha256(destination.read_bytes()).hexdigest(), file_item["destination_sha256"])
 
     def test_as_010_011_012_collections(self) -> None:
         catalog = json.loads((ROOT / "catalog" / "collections.json").read_text(encoding="utf-8"))
@@ -455,10 +464,10 @@ class RepositoryContractTests(unittest.TestCase):
             self.assertEqual(set(item) - {"name", "description", "skills", "includes"}, set())
             self.assertTrue(item["description"])
             self.assertEqual(len(item.get("skills", [])), len(set(item.get("skills", []))))
-            self.assertTrue(set(item.get("skills", [])) <= MIGRATED)
+            self.assertTrue(set(item.get("skills", [])) <= SKILLS)
             self.assertTrue(set(item.get("includes", [])) <= COLLECTIONS)
         expanded = expand_collections(catalog)
-        self.assertEqual(MIGRATED, set().union(*(set(value) for value in expanded.values())))
+        self.assertEqual(SKILLS, set().union(*(set(value) for value in expanded.values())))
         self.assertEqual(
             [
                 "gameplay-programming-2d",

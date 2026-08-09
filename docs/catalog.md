@@ -13,6 +13,8 @@ preserves declaration order. Aggregate collections such as `game-dev` have no
 runtime meaning. The README command block is a deterministic rendering of the
 expanded catalog.
 
-`skills.json` conforms to `skills.schema.json` and freezes the Geremmyas source
-commit, Tuxedo exclusion commit, license evidence, per-skill hashes, security
-classification, compatibility, and every source file's migration disposition.
+`skills.json` schema version 2 distinguishes frozen Geremmyas migrations from
+Storehouse-owned skills. It preserves the Geremmyas source commit, historical
+Tuxedo exclusion commit, license evidence, per-skill hashes, security
+classification, compatibility, migration dispositions, and the origin of the
+Storehouse-owned SDD skill.

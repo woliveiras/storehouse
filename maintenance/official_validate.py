@@ -4,7 +4,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
-from maintenance.catalog_data import MIGRATED
+from maintenance.catalog_data import SKILLS
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,7 +15,7 @@ def main() -> int:
     if not validator:
         raise SystemExit("official agentskills validator is unavailable; run through UV with the locked dev group")
     failures: list[str] = []
-    for skill in MIGRATED:
+    for skill in SKILLS:
         result = subprocess.run(
             [validator, "validate", str(ROOT / "skills" / skill)],
             cwd=ROOT, text=True, capture_output=True, check=False,
@@ -24,7 +24,7 @@ def main() -> int:
             failures.append(f"{skill}: {(result.stdout + result.stderr).strip()}")
     if failures:
         raise SystemExit("official skill validation failed:\n" + "\n".join(failures))
-    print(f"Official Agent Skills validation passed for {len(MIGRATED)} skills.")
+    print(f"Official Agent Skills validation passed for {len(SKILLS)} skills.")
     return 0
 
 

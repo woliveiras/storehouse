@@ -33,15 +33,15 @@ class MaintenanceContractTests(unittest.TestCase):
         self.assertEqual(2, commands["collection"].count("--skill"))
         self.assertIn("github-copilot", commands["collection"])
 
-    def test_as_016_official_validator_invokes_exactly_33_skills(self) -> None:
+    def test_as_016_official_validator_invokes_exactly_34_skills(self) -> None:
         from maintenance import official_validate
-        from maintenance.catalog_data import MIGRATED
+        from maintenance.catalog_data import SKILLS
 
         completed = mock.Mock(returncode=0, stdout="Valid skill", stderr="")
         with mock.patch.object(official_validate.shutil, "which", return_value="/validator"), mock.patch.object(official_validate.subprocess, "run", return_value=completed) as run:
             self.assertEqual(0, official_validate.main())
-        self.assertEqual(33, run.call_count)
-        self.assertEqual(set(MIGRATED), {Path(call.args[0][-1]).name for call in run.call_args_list})
+        self.assertEqual(34, run.call_count)
+        self.assertEqual(set(SKILLS), {Path(call.args[0][-1]).name for call in run.call_args_list})
         self.assertTrue(all(call.args[0][:2] == ["/validator", "validate"] for call in run.call_args_list))
 
     def test_as_017_single_validation_command_routes_every_gate(self) -> None:

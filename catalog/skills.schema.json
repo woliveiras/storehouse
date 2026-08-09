@@ -5,9 +5,9 @@
   "type": "object",
   "required": ["schema_version", "source", "tuxedo_exclusion_source", "skills"],
   "properties": {
-    "schema_version": { "const": 1 },
+    "schema_version": { "const": 2 },
     "source": { "type": "object" },
     "tuxedo_exclusion_source": { "type": "object" },
-    "skills": { "type": "array", "minItems": 33, "maxItems": 33 }
+    "skills": { "type": "array", "minItems": 34, "maxItems": 34 }
   }
 }

@@ -8,7 +8,7 @@ pnpm run validate:sources
 pnpm run validate:official
 pnpm run validate:installation
 pnpm run promptfoo:validate
-pnpm run eval:dry-run --suite full
+pnpm run eval:dry-run
 ```
 
 `validate:sources` additionally requires absolute

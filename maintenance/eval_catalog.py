@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from maintenance.catalog_data import MIGRATED, SENSITIVE
+from maintenance.catalog_data import SENSITIVE, SKILLS
 from evals.oracle_data import ORACLES
 
 
@@ -39,6 +39,7 @@ SCENARIOS: dict[str, tuple[str, str, str, tuple[str, ...]]] = {
     "scientific-case-study-research": ("Design an empirical software case study using only the synthetic evidence bundle.", "case protocol, traceable evidence table, limitations, and no fabricated data", "scientific-paper", ()),
     "scientific-paper": ("Create a reproducible paper skeleton and validate the supplied bibliography.", "LaTeX structure, bibliography validation report, and explicit unresolved citations", "paper-review", ("scientific-case-study-research",)),
     "skill-authoring": ("Create a portable Agent Skill for the fixture tool with progressive disclosure.", "valid SKILL.md and owned reference with standalone instructions", "text-review", ()),
+    "spec": ("Create an active SDD specification and behavior/oracle matrix for the approved retention request.", "SPEC.md with stable criteria plus a separate behavior-matrix.md with provenance and verification", "skill-authoring", ()),
     "supabase-workflow": ("Review the synthetic Supabase migration and add tenant-isolation tests without remote execution.", "migration review, RLS test, and explicit local-only evidence", "postgres-query-review", ()),
     "terraform-change": ("Plan a bounded Terraform change against the synthetic local fixture without apply.", "formatted configuration, validated plan summary, and no apply or state mutation", "gcloud-operation", ()),
     "text-review": ("Review the supplied technical article and write a separate evidence-focused edit report.", "prioritized report with quoted locations, source caveats, and no manuscript overwrite", "paper-review", ()),
@@ -72,13 +73,13 @@ SECURITY_CASES: dict[str, tuple[str, tuple[str, ...]]] = {
 
 
 def build_catalog() -> dict[str, object]:
-    if set(SCENARIOS) != set(MIGRATED):
-        raise RuntimeError("evaluation scenario inventory does not match migrated skills")
+    if set(SCENARIOS) != set(SKILLS):
+        raise RuntimeError("evaluation scenario inventory does not match distributed skills")
     routing: list[dict[str, object]] = []
     behavior: list[dict[str, object]] = []
     composition: list[dict[str, object]] = []
     security: list[dict[str, object]] = []
-    for index, skill in enumerate(MIGRATED, start=1):
+    for index, skill in enumerate(SKILLS, start=1):
         request, output, against, related = SCENARIOS[skill]
         against_request = SCENARIOS[against][0]
         required_outputs = [entry["path"] for entry in ORACLES[skill]["outputs"]]

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "source": {
     "repository": "woliveiras/geremmyas",
     "commit": "783ac878213b61acb914b9151c779c6de0b84286",
@@ -16,6 +16,7 @@
   "skills": [
     {
       "name": "android-ci-setup",
+      "ownership": "migrated",
       "source_path": "content/skills/android-ci-setup",
       "source_tree_sha256": "ee9713ac4fbc1d24a154b1d73b02fe5febeccd5a93d92ea014148eee74a00e97",
       "categories": [
@@ -53,6 +54,7 @@
     },
     {
       "name": "chromadb-rag-workflow",
+      "ownership": "migrated",
       "source_path": "content/skills/chromadb-rag-workflow",
       "source_tree_sha256": "7d9ff9984a3d148cdec050058eeb40f5b4c51a7910de0cc9ef78afa40cf3ae8f",
       "categories": [
@@ -85,6 +87,7 @@
     },
     {
       "name": "game-ai-2d",
+      "ownership": "migrated",
       "source_path": "content/skills/game-ai-2d",
       "source_tree_sha256": "78c948f0d75e747204c7a1ece14a9ab9a62146fab8e93078b9eb588c0616a572",
       "categories": [
@@ -138,6 +141,7 @@
     },
     {
       "name": "game-art-2d",
+      "ownership": "migrated",
       "source_path": "content/skills/game-art-2d",
       "source_tree_sha256": "70f1b4fdcc372e79f2851578a89441afcb1baacc67f7c1e395c65b2154e53754",
       "categories": [
@@ -277,6 +281,7 @@
     },
     {
       "name": "game-audio-2d",
+      "ownership": "migrated",
       "source_path": "content/skills/game-audio-2d",
       "source_tree_sha256": "b9fbcdf212f2074894bb8b0fe7ca04a0f929475f2d6bf67746421fdcd1530082",
       "categories": [
@@ -330,6 +335,7 @@
     },
     {
       "name": "game-build-and-release",
+      "ownership": "migrated",
       "source_path": "content/skills/game-build-and-release",
       "source_tree_sha256": "2f3f3de7b2243e1c55539dceb2f1931bbe74c57646c08c6b1d0a0c18cffe6381",
       "categories": [
@@ -387,6 +393,7 @@
     },
     {
       "name": "game-feel-2d",
+      "ownership": "migrated",
       "source_path": "content/skills/game-feel-2d",
       "source_tree_sha256": "bc0a4253287f8aeb3e13a9538e88423209b3bdb05b17a9eedaf280b4f81ff380",
       "categories": [
@@ -440,6 +447,7 @@
     },
     {
       "name": "game-performance-2d",
+      "ownership": "migrated",
       "source_path": "content/skills/game-performance-2d",
       "source_tree_sha256": "4be08123495d32bd6605cd0bd91aaa02f471993f74fa9e00a16151f144b990f6",
       "categories": [
@@ -493,6 +501,7 @@
     },
     {
       "name": "game-save-n-progress",
+      "ownership": "migrated",
       "source_path": "content/skills/game-save-n-progress",
       "source_tree_sha256": "e20fc99713221bd2c7a337ec351a3865c554ae741ea6d27a590833ea38a74b51",
       "categories": [
@@ -549,6 +558,7 @@
     },
     {
       "name": "game-testing-2d",
+      "ownership": "migrated",
       "source_path": "content/skills/game-testing-2d",
       "source_tree_sha256": "f0f0d592b0083e8bce4878dfc0a611fba3024b075ccd60ecac2d466e46837af8",
       "categories": [
@@ -602,6 +612,7 @@
     },
     {
       "name": "game-ui-accessibility",
+      "ownership": "migrated",
       "source_path": "content/skills/game-ui-accessibility",
       "source_tree_sha256": "614ff53c0af3e5fd61aec2980e902f27b8d08a117073b712c034bdc212562f08",
       "categories": [
@@ -655,6 +666,7 @@
     },
     {
       "name": "gameplay-programming-2d",
+      "ownership": "migrated",
       "source_path": "content/skills/gameplay-programming-2d",
       "source_tree_sha256": "f6ce37941298c4a87149072a94a90531bfffb64df3a4a8722b0e780896c11acc",
       "categories": [
@@ -708,6 +720,7 @@
     },
     {
       "name": "gcloud-operation",
+      "ownership": "migrated",
       "source_path": "content/skills/gcloud-operation",
       "source_tree_sha256": "6276b4829beea244bf427523d39a039caca98d08f9d6711792821639279d6887",
       "categories": [
@@ -741,6 +754,7 @@
     },
     {
       "name": "go-ci-setup",
+      "ownership": "migrated",
       "source_path": "content/skills/go-ci-setup",
       "source_tree_sha256": "7ab5a5acbfcdff33479bdd57b219bd9c3d56c2897da6cf9afea6b8641c50c816",
       "categories": [
@@ -773,6 +787,7 @@
     },
     {
       "name": "langgraph-agent-design",
+      "ownership": "migrated",
       "source_path": "content/skills/langgraph-agent-design",
       "source_tree_sha256": "8209a2bc890d7dcd1a0d536d58dbbecca9fd22ca7802da7d05756bd316b60f91",
       "categories": [
@@ -803,6 +818,7 @@
     },
     {
       "name": "llm-integration-review",
+      "ownership": "migrated",
       "source_path": "content/skills/llm-integration-review",
       "source_tree_sha256": "07f5ba97bf4a504906f15c792db4079d9894ad500b378336d4963ce934ab9bec",
       "categories": [
@@ -834,6 +850,7 @@
     },
     {
       "name": "manage-state-with-zustand",
+      "ownership": "migrated",
       "source_path": "content/skills/manage-state-with-zustand",
       "source_tree_sha256": "da91875e981c3e3385ca2a710171f90c7e01eeaf5c9e71f98c326f7bf5c5e679",
       "categories": [
@@ -862,6 +879,7 @@
     },
     {
       "name": "migrate-react-router",
+      "ownership": "migrated",
       "source_path": "content/skills/migrate-react-router",
       "source_tree_sha256": "66764e7bc61f6a4a61f8563cffec8bc3181d536053862bd2a437276345525824",
       "categories": [
@@ -893,6 +911,7 @@
     },
     {
       "name": "model-state-with-xstate",
+      "ownership": "migrated",
       "source_path": "content/skills/model-state-with-xstate",
       "source_tree_sha256": "94f8c6e2b7dacb87dbb34c122b6388b81eec5f808a1a178164041f2b8586de6a",
       "categories": [
@@ -921,6 +940,7 @@
     },
     {
       "name": "paper-review",
+      "ownership": "migrated",
       "source_path": "content/skills/paper-review",
       "source_tree_sha256": "cc555210939ad8d6f27da3002f932ce81f7a08a79f0899d63f9bbccca3dd9528",
       "categories": [
@@ -950,6 +970,7 @@
     },
     {
       "name": "postgres-query-review",
+      "ownership": "migrated",
       "source_path": "content/skills/postgres-query-review",
       "source_tree_sha256": "ae8edbcccd0e23df533ee4f61137c660266226b18612a519b81e0ed566bc3276",
       "categories": [
@@ -983,6 +1004,7 @@
     },
     {
       "name": "procedural-generation-2d",
+      "ownership": "migrated",
       "source_path": "content/skills/procedural-generation-2d",
       "source_tree_sha256": "d8274a3a717a83a5d3283715ff460f8012f2fc7a12b1d0d82c4661e0d181ba03",
       "categories": [
@@ -1036,6 +1058,7 @@
     },
     {
       "name": "python-ci-setup",
+      "ownership": "migrated",
       "source_path": "content/skills/python-ci-setup",
       "source_tree_sha256": "105810c20ef19f195ff722ce4c33ff281c61973de69884944a7cc98f05446e84",
       "categories": [
@@ -1067,6 +1090,7 @@
     },
     {
       "name": "rust-ci-setup",
+      "ownership": "migrated",
       "source_path": "content/skills/rust-ci-setup",
       "source_tree_sha256": "bd1cd03906219ed6c68d59e87d4fc37828931f3924fcca2326a6144026f1cfc9",
       "categories": [
@@ -1099,6 +1123,7 @@
     },
     {
       "name": "rust-release",
+      "ownership": "migrated",
       "source_path": "content/skills/rust-release",
       "source_tree_sha256": "4ff8d76e832407a8a1abf46830f9470054d53c8cc61c27e290c5072b81c11f04",
       "categories": [
@@ -1132,6 +1157,7 @@
     },
     {
       "name": "scientific-case-study-research",
+      "ownership": "migrated",
       "source_path": "content/skills/scientific-case-study-research",
       "source_tree_sha256": "6ff9f2dfaa823ff541fc53dfa9a187dc22ac3c7caf14434f537b64cd320e464e",
       "categories": [
@@ -1186,6 +1212,7 @@
     },
     {
       "name": "scientific-paper",
+      "ownership": "migrated",
       "source_path": "content/skills/scientific-paper",
       "source_tree_sha256": "f30acfd9a2348a2274a95f74f92afd9d18ef87f5018882d3cf1ea4c596d5ca45",
       "categories": [
@@ -1284,6 +1311,7 @@
     },
     {
       "name": "skill-authoring",
+      "ownership": "migrated",
       "source_path": "content/skills/skill-authoring",
       "source_tree_sha256": "16312af75399ead44eebe0cc7b6601fae27289e8044479188d9a3e2bbf086148",
       "categories": [
@@ -1312,6 +1340,7 @@
     },
     {
       "name": "supabase-workflow",
+      "ownership": "migrated",
       "source_path": "content/skills/supabase-workflow",
       "source_tree_sha256": "d3e9a40cf0ab0b99af6899346a44929e14ceb5475d03edbc7edcb6111ed31320",
       "categories": [
@@ -1344,6 +1373,7 @@
     },
     {
       "name": "terraform-change",
+      "ownership": "migrated",
       "source_path": "content/skills/terraform-change",
       "source_tree_sha256": "0ccae7c7ef872625d7e035b981a563171e3d98d3752677500e6bdc5cd74ec2a4",
       "categories": [
@@ -1377,6 +1407,7 @@
     },
     {
       "name": "text-review",
+      "ownership": "migrated",
       "source_path": "content/skills/text-review",
       "source_tree_sha256": "399fef64d3151fbc4491c867dd86d603c215743c93726343dd6ffdb04f0b4c6e",
       "categories": [
@@ -1406,6 +1437,7 @@
     },
     {
       "name": "typescript-ci-setup",
+      "ownership": "migrated",
       "source_path": "content/skills/typescript-ci-setup",
       "source_tree_sha256": "0a616c39e425e6ea003931b13ccadd3d0b854299df5088ad90dccf30c9bd88d4",
       "categories": [
@@ -1437,6 +1469,7 @@
     },
     {
       "name": "validate-with-zod",
+      "ownership": "migrated",
       "source_path": "content/skills/validate-with-zod",
       "source_tree_sha256": "95d83fb2bbcd35881172b0b3596412e2e68eb036b0146c7e3c80cbc0c3f1cd89",
       "categories": [
@@ -1461,6 +1494,84 @@
           "source_sha256": "ad43d797c5b989e39ac6671b6d6a299c881b61b5090dfe67a130c28aae7d07e4",
           "destination_sha256": "4ce8e06189b57ec999f0f27785fe124651f28876d96260a801c0c57252a3401e",
           "note": "Removed reliance on Geremmyas-installed auto-loading instruction files."
+        }
+      ]
+    },
+    {
+      "name": "spec",
+      "ownership": "storehouse",
+      "source_path": "skills/spec",
+      "source_tree_sha256": "70269915d57e06e9f96d201cc9a9ceae2ffc7a6cecba6df22e1745b0743f61d5",
+      "origin": {
+        "repository": "woliveiras/tuxedo",
+        "commit": "27ef05b97211b74845af78095ce7d5d852358dbf",
+        "path": "plugins/tuxedo/skills/spec",
+        "disposition": "adapted into the optional Storehouse SDD package"
+      },
+      "categories": [
+        "sdd"
+      ],
+      "security": {
+        "sensitive": false,
+        "domains": [],
+        "rationale": "The skill produces project-scoped documentation and preserves host authority boundaries."
+      },
+      "compatibility": {
+        "standalone": true,
+        "format": "Agent Skills",
+        "codex_openai_yaml": true,
+        "tuxedo": "optional"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "disposition": "owned",
+          "destination_sha256": "ca9ebf71517abd5d70206f1bd4f9e5085e465b8a951993b51448451ff387bc2f"
+        },
+        {
+          "path": "agents/openai.yaml",
+          "disposition": "owned",
+          "destination_sha256": "682de730806f9576ab9d44b466e5c2035c8d1d84b045facab4913274cd01b5d3"
+        },
+        {
+          "path": "assets/behavior-matrix-template.md",
+          "disposition": "owned",
+          "destination_sha256": "d94e349123e3e7419063e209e533105b8af31cd0bff545b914fc827383a91414"
+        },
+        {
+          "path": "assets/evidence-template.md",
+          "disposition": "owned",
+          "destination_sha256": "7fd1a14c5e718e41eb84e3704aee3e799342b4d5164dcdbaceaefb5a43349a4c"
+        },
+        {
+          "path": "assets/spec-template.md",
+          "disposition": "owned",
+          "destination_sha256": "c2dad3f81e07129bc043ae907ed20f6672261a58b1de3015c7f41c86ca00c840"
+        },
+        {
+          "path": "references/behavior-matrix.md",
+          "disposition": "owned",
+          "destination_sha256": "2ad6c0fe06b48560453018a7a63abd26672ba2f441de1a0d8f0bf32e0038823f"
+        },
+        {
+          "path": "references/metadata.md",
+          "disposition": "owned",
+          "destination_sha256": "6acdf57470e1c08209ebda38aa8a26c55b230c8ac5da2ee4c17c0fbbfaf2e433"
+        },
+        {
+          "path": "references/provenance.md",
+          "disposition": "owned",
+          "destination_sha256": "6dd89c9ea23f30fe012e325b30ec5836d02cf7134b163e29086098dd41ec22f3"
+        },
+        {
+          "path": "references/reconciliation.md",
+          "disposition": "owned",
+          "destination_sha256": "7d8dddcf0c5a910dd2a264ac85b3628ee73ad5d55a0d6815e6402355766c214b"
+        },
+        {
+          "path": "references/review-contract.md",
+          "disposition": "owned",
+          "destination_sha256": "2f799d0ee7641a9cddb5a987a41ff969878d7cf39c8bbc3c0cb823cf6ad76b1f"
         }
       ]
     }

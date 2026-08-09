@@ -12,7 +12,10 @@ from maintenance.catalog_data import (
     COLLECTIONS,
     LICENSE_SHA256,
     MIGRATED,
+    OWNED,
+    SDD_ORIGIN_COMMIT,
     SENSITIVE,
+    SKILLS,
     SOURCE_COMMIT,
     SOURCE_TREE_SHA256,
     TUXEDO_COMMIT,
@@ -115,7 +118,7 @@ def build_skills_catalog(source: Path) -> dict[str, object]:
     expanded = expand_collections()
     categories = {
         skill: [name for name, names in expanded.items() if skill in names]
-        for skill in MIGRATED
+        for skill in SKILLS
     }
     skills: list[dict[str, object]] = []
     for name in MIGRATED:
@@ -157,6 +160,7 @@ def build_skills_catalog(source: Path) -> dict[str, object]:
         skills.append(
             {
                 "name": name,
+                "ownership": "migrated",
                 "source_path": f"content/skills/{name}",
                 "source_tree_sha256": tree_sha256(source_root),
                 "categories": categories[name],
@@ -178,8 +182,50 @@ def build_skills_catalog(source: Path) -> dict[str, object]:
                 "files": files,
             }
         )
+    for name in OWNED:
+        destination_root = ROOT / "skills" / name
+        destination_files = sorted(item for item in destination_root.rglob("*") if item.is_file())
+        domains = SENSITIVE.get(name, [])
+        skills.append(
+            {
+                "name": name,
+                "ownership": "storehouse",
+                "source_path": f"skills/{name}",
+                "source_tree_sha256": tree_sha256(destination_root),
+                "origin": {
+                    "repository": "woliveiras/tuxedo",
+                    "commit": SDD_ORIGIN_COMMIT,
+                    "path": "plugins/tuxedo/skills/spec",
+                    "disposition": "adapted into the optional Storehouse SDD package",
+                },
+                "categories": categories[name],
+                "security": {
+                    "sensitive": bool(domains),
+                    "domains": domains,
+                    "rationale": (
+                        "Additional adversarial coverage is required for the listed sensitive surfaces."
+                        if domains
+                        else "The skill produces project-scoped documentation and preserves host authority boundaries."
+                    ),
+                },
+                "compatibility": {
+                    "standalone": True,
+                    "format": "Agent Skills",
+                    "codex_openai_yaml": name in CODEX_METADATA,
+                    "tuxedo": "optional",
+                },
+                "files": [
+                    {
+                        "path": item.relative_to(destination_root).as_posix(),
+                        "disposition": "owned",
+                        "destination_sha256": sha256(item),
+                    }
+                    for item in destination_files
+                ],
+            }
+        )
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "source": {
             "repository": "woliveiras/geremmyas",
             "commit": SOURCE_COMMIT,

@@ -5,6 +5,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 import unittest
@@ -13,7 +14,7 @@ from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MIGRATED = {
+EXPECTED_SKILLS = {
     "android-ci-setup", "chromadb-rag-workflow", "game-ai-2d", "game-art-2d",
     "game-audio-2d", "game-build-and-release", "game-feel-2d", "game-performance-2d",
     "game-save-n-progress", "game-testing-2d", "game-ui-accessibility",
@@ -23,7 +24,7 @@ MIGRATED = {
     "postgres-query-review", "procedural-generation-2d", "python-ci-setup",
     "rust-ci-setup", "rust-release", "scientific-case-study-research", "scientific-paper",
     "skill-authoring", "supabase-workflow", "terraform-change", "text-review",
-    "typescript-ci-setup", "validate-with-zod",
+    "typescript-ci-setup", "validate-with-zod", "spec",
 }
 SENSITIVE = {
     "android-ci-setup", "chromadb-rag-workflow", "game-art-2d",
@@ -72,14 +73,14 @@ class EvalCatalogTests(unittest.TestCase):
 
     def test_as_018_routing_coverage(self) -> None:
         routing = self.catalog["routing"]
-        self.assertEqual(MIGRATED, {item["skill"] for item in routing})
+        self.assertEqual(EXPECTED_SKILLS, {item["skill"] for item in routing})
         for item in routing:
             self.assertTrue(item["criterion"].startswith("RT-"))
             self.assertTrue(item["explicit_prompt"])
             implicit = item["implicit"]
             self.assertIn(implicit["applicable"], {True, False})
             self.assertTrue(implicit.get("prompt") if implicit["applicable"] else implicit.get("rationale"))
-            self.assertIn(item["negative"]["against"], MIGRATED - {item["skill"]})
+            self.assertIn(item["negative"]["against"], EXPECTED_SKILLS - {item["skill"]})
             self.assertTrue(item["negative"]["prompt"])
             self.assertNotIn("do not select", item["negative"]["prompt"].casefold())
             self.assertNotIn(f"${item['negative']['against']}", item["negative"]["prompt"])
@@ -91,8 +92,8 @@ class EvalCatalogTests(unittest.TestCase):
         from evals.oracle_data import ORACLES
 
         behavior = self.catalog["behavior"]
-        self.assertEqual(MIGRATED, {item["skill"] for item in behavior})
-        self.assertEqual(MIGRATED, set(ORACLES))
+        self.assertEqual(EXPECTED_SKILLS, {item["skill"] for item in behavior})
+        self.assertEqual(EXPECTED_SKILLS, set(ORACLES))
         for item in behavior:
             self.assertTrue(item["criterion"].startswith("BH-"))
             self.assertTrue((ROOT / item["fixture"]).is_dir())
@@ -255,7 +256,7 @@ class EvalCatalogTests(unittest.TestCase):
 
     def test_as_020_composition_variants(self) -> None:
         composition = self.catalog["composition"]
-        self.assertEqual(MIGRATED, {item["skill"] for item in composition})
+        self.assertEqual(EXPECTED_SKILLS, {item["skill"] for item in composition})
         required = {"baseline", "focal", "composed-specialized", "tuxedo-minimal", "tuxedo-full-plugin", "current", "proposed"}
         for item in composition:
             self.assertFalse(item["network_required"])
@@ -326,15 +327,25 @@ class EvalCatalogTests(unittest.TestCase):
         self.assertNotIn("eval:full", package.get("prepare", ""))
         self.assertFalse(set(package) & {"preinstall", "install", "postinstall", "prepare", "precommit", "prepush"})
 
+    def test_as_025_default_dry_run_is_full_but_execution_requires_a_suite(self) -> None:
+        from evals import runner
+
+        with mock.patch.object(sys, "argv", ["evals.runner", "--dry-run"]), mock.patch("builtins.print") as output:
+            self.assertEqual(0, runner.main())
+        budget = output.call_args.args[0]
+        self.assertIn('"suite": "full"', budget)
+        with mock.patch.object(sys, "argv", ["evals.runner", "--execute"]), mock.patch.object(sys, "stderr"), self.assertRaises(SystemExit):
+            runner.main()
+
     def test_as_026_budget_is_exact_and_sharded(self) -> None:
         from evals.runner import _approval_token, _cases, authorize_execution, build_budget
 
         budget = build_budget(self.catalog, "full")
-        self.assertEqual(332, budget["target_calls"])
-        self.assertEqual(33, budget["secondary_judgments"])
-        self.assertEqual(365, budget["upper_bound_calls"])
+        self.assertEqual(341, budget["target_calls"])
+        self.assertEqual(34, budget["secondary_judgments"])
+        self.assertEqual(375, budget["upper_bound_calls"])
         self.assertEqual(
-            {"routing": 132, "behavior": 66, "composition": 113, "security": 21},
+            {"routing": 136, "behavior": 68, "composition": 116, "security": 21},
             {shard["name"]: shard["count"] for shard in budget["shards"]},
         )
         self.assertEqual(

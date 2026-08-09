@@ -13,7 +13,7 @@ from PIL import Image
 from evals.isolation import safe_temp_parent
 
 from maintenance.catalog import rendered_files
-from maintenance.catalog_data import MIGRATED
+from maintenance.catalog_data import SKILLS
 from maintenance.official_validate import main as official_validate
 
 
@@ -141,7 +141,7 @@ def main() -> int:
     _script_smokes()
     _schema_checks()
     official_validate()
-    if set(MIGRATED) != {path.name for path in (ROOT / "skills").iterdir() if path.is_dir()}:
+    if set(SKILLS) != {path.name for path in (ROOT / "skills").iterdir() if path.is_dir()}:
         raise RuntimeError("destination inventory changed after validation")
     print("Deterministic repository validation passed.")
     return 0

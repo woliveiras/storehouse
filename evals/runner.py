@@ -402,12 +402,16 @@ def _execute(catalog: dict[str, object], budget: dict[str, object]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--suite", choices=("smoke", "routing", "behavior", "composition", "security", "compare", "full"), required=True)
+    parser.add_argument("--suite", choices=("smoke", "routing", "behavior", "composition", "security", "compare", "full"))
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--execute", action="store_true")
     args = parser.parse_args()
     if args.dry_run == args.execute:
         parser.error("choose exactly one of --dry-run or --execute")
+    if args.suite is None:
+        if args.execute:
+            parser.error("--suite is required with --execute")
+        args.suite = "full"
     catalog = json.loads((ROOT / "evals" / "catalog.json").read_text(encoding="utf-8"))
     budget = build_budget(catalog, args.suite)
     print(json.dumps(budget, indent=2))

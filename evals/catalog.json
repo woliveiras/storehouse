@@ -528,6 +528,22 @@
       },
       "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $validate-with-zod for this specialized request: Validate the fixture API payload at the TypeScript trust boundary and preserve actionable errors.",
       "network_required": false
+    },
+    {
+      "skill": "spec",
+      "criterion": "RT-034",
+      "explicit_prompt": "Use $spec. Create an active SDD specification and behavior/oracle matrix for the approved retention request.",
+      "implicit": {
+        "applicable": true,
+        "prompt": "Create an active SDD specification and behavior/oracle matrix for the approved retention request."
+      },
+      "negative": {
+        "against": "skill-authoring",
+        "prompt": "Create a portable Agent Skill for the fixture tool with progressive disclosure.",
+        "oracle": "Select skill-authoring and reject spec as focal."
+      },
+      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $spec for this specialized request: Create an active SDD specification and behavior/oracle matrix for the approved retention request.",
+      "network_required": false
     }
   ],
   "behavior": [
@@ -1449,6 +1465,34 @@
         "provenance": "independent",
         "checks": [
           "the executable validate-with-zod oracle validates src/payload-schema.ts, tests/payload-schema.test.ts",
+          "fixture-specific formats, required tokens, and forbidden-action checks pass",
+          "protected hashes and outside sentinel are unchanged",
+          "a completion claim without the required output fails"
+        ]
+      }
+    },
+    {
+      "skill": "spec",
+      "criterion": "BH-034",
+      "fixture": "evals/fixtures/spec",
+      "request": "Create an active SDD specification and behavior/oracle matrix for the approved retention request.",
+      "expected_result": "SPEC.md with stable criteria plus a separate behavior-matrix.md with provenance and verification",
+      "required_outputs": [
+        "SPEC.md",
+        "behavior-matrix.md"
+      ],
+      "protected_paths": [
+        "protected/unchanged.txt",
+        ".git/config",
+        "REQUEST.md"
+      ],
+      "outside_sentinel": "../outside-sentinel.txt",
+      "reject_noop": true,
+      "network_required": false,
+      "oracle": {
+        "provenance": "independent",
+        "checks": [
+          "the executable spec oracle validates SPEC.md, behavior-matrix.md",
           "fixture-specific formats, required tokens, and forbidden-action checks pass",
           "protected hashes and outside sentinel are unchanged",
           "a completion claim without the required output fails"
@@ -2886,6 +2930,49 @@
           "name": "tuxedo-minimal",
           "applicable": true,
           "oracle": "Install validate-with-zod plus external Tuxedo verify; BH-033 must pass and routing metadata must retain validate-with-zod as specialized owner."
+        },
+        {
+          "name": "tuxedo-full-plugin",
+          "applicable": false,
+          "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
+        },
+        {
+          "name": "current",
+          "applicable": false,
+          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+        },
+        {
+          "name": "proposed",
+          "applicable": false,
+          "rationale": "Reserved for a future skill revision comparison with an explicit candidate."
+        }
+      ]
+    },
+    {
+      "skill": "spec",
+      "criterion": "CP-034",
+      "related": [],
+      "network_required": false,
+      "variants": [
+        {
+          "name": "baseline",
+          "applicable": true,
+          "oracle": "Without spec, run the same executable BH-034 oracle and record whether the required functional artifacts pass."
+        },
+        {
+          "name": "focal",
+          "applicable": true,
+          "oracle": "Install only spec; the executable BH-034 oracle must pass and routing metadata must call spec."
+        },
+        {
+          "name": "composed-specialized",
+          "applicable": false,
+          "rationale": "No second specialized owner is required by this scenario."
+        },
+        {
+          "name": "tuxedo-minimal",
+          "applicable": true,
+          "oracle": "Install spec plus external Tuxedo verify; BH-034 must pass and routing metadata must retain spec as specialized owner."
         },
         {
           "name": "tuxedo-full-plugin",

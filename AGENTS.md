@@ -10,9 +10,14 @@ generator, or consumer runtime.
 - Canonical skills live only at `skills/<name>/` and must work independently.
 - Collections are declarative documentation in `catalog/collections.json`.
 - Tuxedo is optional horizontal workflow composition and is never a dependency.
+- SDD is an optional Storehouse capability under `skills/spec`; installing any
+  other skill or collection does not install or require it.
 - Repository tests, generators, and evaluations stay outside `skills/`.
 - Geremmyas and Tuxedo are historical/read-only inputs; never modify them from
   this repository.
+- Git is the default archive. Remove reconstructible documents that no longer
+  guide a current decision, operation, contract, risk, or behavior; do not keep
+  archive directories or completed task bundles in the current tree.
 
 ## Change workflow
 

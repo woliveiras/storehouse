@@ -6,6 +6,7 @@ SOURCE_TREE_SHA256 = "7de30d71108e8c4e73641a70aaa2d9541ce97f6b826cca528f6eeed0bb
 TUXEDO_COMMIT = "168922a54b695fd2446295c58157981079d2d5d6"
 TUXEDO_TREE_SHA256 = "3ed55c2bcd4614cd7074a6ff4ff01199a81b4dd9f31d9912fa25f191c85a967f"
 LICENSE_SHA256 = "24923e703cfafa4e2c5098f4d5b0442ab43f9405dbdbb9fd961707c32e5e4702"
+SDD_ORIGIN_COMMIT = "27ef05b97211b74845af78095ce7d5d852358dbf"
 
 MIGRATED = (
     "android-ci-setup", "chromadb-rag-workflow", "game-ai-2d", "game-art-2d",
@@ -27,6 +28,11 @@ EXCLUDED = (
     "premortem", "refine", "session-bridge", "shape-domain", "spec", "tdd",
     "technical-research", "verify",
 )
+
+# The bootstrap migration remains a frozen 33 + 16 inventory. `spec` was
+# subsequently adapted into a Storehouse-owned optional methodology.
+OWNED = ("spec",)
+SKILLS = (*MIGRATED, *OWNED)
 
 COLLECTIONS = (
     {
@@ -73,6 +79,7 @@ COLLECTIONS = (
     },
     {"name": "writing", "description": "Evidence-preserving technical blog review.", "skills": ["text-review"]},
     {"name": "skill-maintenance", "description": "Portable Agent Skill authoring and review.", "skills": ["skill-authoring"]},
+    {"name": "sdd", "description": "Optional Specification-Driven Development with durable specs, oracle matrices, reconciliation, and formal review.", "skills": ["spec"]},
 )
 
 SENSITIVE = {
@@ -103,5 +110,5 @@ CODEX_METADATA = {
     "game-ai-2d", "game-art-2d", "game-audio-2d", "game-build-and-release",
     "game-feel-2d", "game-performance-2d", "game-save-n-progress",
     "game-testing-2d", "game-ui-accessibility", "gameplay-programming-2d",
-    "procedural-generation-2d",
+    "procedural-generation-2d", "spec",
 }

@@ -162,6 +162,13 @@
       "skills": [
         "skill-authoring"
       ]
+    },
+    {
+      "name": "sdd",
+      "description": "Optional Specification-Driven Development with durable specs, oracle matrices, reconciliation, and formal review.",
+      "skills": [
+        "spec"
+      ]
     }
   ]
 }
