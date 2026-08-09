@@ -14,7 +14,7 @@
         "prompt": "Add Go CI for the fixture module without release or registry credentials.",
         "oracle": "Select go-ci-setup and reject android-ci-setup as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $android-ci-setup for this specialized request: Add Android CI that verifies the checked-in Gradle project without publishing.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $android-ci-setup for this specialized request: Add Android CI that verifies the checked-in Gradle project without publishing.",
       "network_required": false
     },
     {
@@ -30,7 +30,7 @@
         "prompt": "Review and improve the synthetic PostgreSQL query without executing writes.",
         "oracle": "Select postgres-query-review and reject chromadb-rag-workflow as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $chromadb-rag-workflow for this specialized request: Implement tenant-scoped ChromaDB retrieval over the synthetic documents.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $chromadb-rag-workflow for this specialized request: Implement tenant-scoped ChromaDB retrieval over the synthetic documents.",
       "network_required": false
     },
     {
@@ -46,7 +46,7 @@
         "prompt": "Implement a deterministic Phaser 2D dash with collision-safe cooldown.",
         "oracle": "Select gameplay-programming-2d and reject game-ai-2d as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $game-ai-2d for this specialized request: Implement a deterministic Godot 2D guard patrol with a visible chase telegraph.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $game-ai-2d for this specialized request: Implement a deterministic Godot 2D guard patrol with a visible chase telegraph.",
       "network_required": false
     },
     {
@@ -62,7 +62,7 @@
         "prompt": "Make the Phaser 2D pause menu operable by keyboard and touch with restored focus.",
         "oracle": "Select game-ui-accessibility and reject game-art-2d as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $game-art-2d for this specialized request: Validate and integrate the supplied pixel-art hero frames into a Phaser 2D atlas.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $game-art-2d for this specialized request: Validate and integrate the supplied pixel-art hero frames into a Phaser 2D atlas.",
       "network_required": false
     },
     {
@@ -78,7 +78,7 @@
         "prompt": "Tune Godot 2D jump feedback while preserving movement and reduced-motion behavior.",
         "oracle": "Select game-feel-2d and reject game-audio-2d as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $game-audio-2d for this specialized request: Add Phaser 2D music transitions that survive scene changes and respect mute.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $game-audio-2d for this specialized request: Add Phaser 2D music transitions that survive scene changes and respect mute.",
       "network_required": false
     },
     {
@@ -94,7 +94,7 @@
         "prompt": "Add deterministic tests for a Phaser 2D attack window that must hit once.",
         "oracle": "Select game-testing-2d and reject game-build-and-release as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $game-build-and-release for this specialized request: Build the synthetic Phaser 2D project and verify its local artifact without deploying.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $game-build-and-release for this specialized request: Build the synthetic Phaser 2D project and verify its local artifact without deploying.",
       "network_required": false
     },
     {
@@ -110,7 +110,7 @@
         "prompt": "Implement a deterministic Phaser 2D dash with collision-safe cooldown.",
         "oracle": "Select gameplay-programming-2d and reject game-feel-2d as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $game-feel-2d for this specialized request: Tune Godot 2D jump feedback while preserving movement and reduced-motion behavior.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $game-feel-2d for this specialized request: Tune Godot 2D jump feedback while preserving movement and reduced-motion behavior.",
       "network_required": false
     },
     {
@@ -126,7 +126,7 @@
         "prompt": "Tune Godot 2D jump feedback while preserving movement and reduced-motion behavior.",
         "oracle": "Select game-feel-2d and reject game-performance-2d as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $game-performance-2d for this specialized request: Reduce a measured Phaser 2D update hotspot without changing output.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $game-performance-2d for this specialized request: Reduce a measured Phaser 2D update hotspot without changing output.",
       "network_required": false
     },
     {
@@ -142,7 +142,7 @@
         "prompt": "Implement a deterministic Phaser 2D dash with collision-safe cooldown.",
         "oracle": "Select gameplay-programming-2d and reject game-save-n-progress as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $game-save-n-progress for this specialized request: Add versioned Godot 2D save migration with atomic recovery from corruption.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $game-save-n-progress for this specialized request: Add versioned Godot 2D save migration with atomic recovery from corruption.",
       "network_required": false
     },
     {
@@ -158,7 +158,7 @@
         "prompt": "Implement a deterministic Phaser 2D dash with collision-safe cooldown.",
         "oracle": "Select gameplay-programming-2d and reject game-testing-2d as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $game-testing-2d for this specialized request: Add deterministic tests for a Phaser 2D attack window that must hit once.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $game-testing-2d for this specialized request: Add deterministic tests for a Phaser 2D attack window that must hit once.",
       "network_required": false
     },
     {
@@ -174,7 +174,7 @@
         "prompt": "Tune Godot 2D jump feedback while preserving movement and reduced-motion behavior.",
         "oracle": "Select game-feel-2d and reject game-ui-accessibility as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $game-ui-accessibility for this specialized request: Make the Phaser 2D pause menu operable by keyboard and touch with restored focus.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $game-ui-accessibility for this specialized request: Make the Phaser 2D pause menu operable by keyboard and touch with restored focus.",
       "network_required": false
     },
     {
@@ -190,7 +190,7 @@
         "prompt": "Tune Godot 2D jump feedback while preserving movement and reduced-motion behavior.",
         "oracle": "Select game-feel-2d and reject gameplay-programming-2d as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $gameplay-programming-2d for this specialized request: Implement a deterministic Phaser 2D dash with collision-safe cooldown.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $gameplay-programming-2d for this specialized request: Implement a deterministic Phaser 2D dash with collision-safe cooldown.",
       "network_required": false
     },
     {
@@ -206,7 +206,7 @@
         "prompt": "Plan a bounded Terraform change against the synthetic local fixture without apply.",
         "oracle": "Select terraform-change and reject gcloud-operation as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $gcloud-operation for this specialized request: Prepare a read-only command to inspect a synthetic Google Cloud service in the named test project.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $gcloud-operation for this specialized request: Prepare a read-only command to inspect a synthetic Google Cloud service in the named test project.",
       "network_required": false
     },
     {
@@ -222,7 +222,7 @@
         "prompt": "Add UV-based Python CI for the fixture without publishing.",
         "oracle": "Select python-ci-setup and reject go-ci-setup as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $go-ci-setup for this specialized request: Add Go CI for the fixture module without release or registry credentials.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $go-ci-setup for this specialized request: Add Go CI for the fixture module without release or registry credentials.",
       "network_required": false
     },
     {
@@ -238,7 +238,7 @@
         "prompt": "Review the fixture LLM endpoint for privacy, retries, tool authority, and observable failures.",
         "oracle": "Select llm-integration-review and reject langgraph-agent-design as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $langgraph-agent-design for this specialized request: Design a resumable LangGraph support workflow with approval before its synthetic write tool.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $langgraph-agent-design for this specialized request: Design a resumable LangGraph support workflow with approval before its synthetic write tool.",
       "network_required": false
     },
     {
@@ -254,7 +254,7 @@
         "prompt": "Design a resumable LangGraph support workflow with approval before its synthetic write tool.",
         "oracle": "Select langgraph-agent-design and reject llm-integration-review as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $llm-integration-review for this specialized request: Review the fixture LLM endpoint for privacy, retries, tool authority, and observable failures.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $llm-integration-review for this specialized request: Review the fixture LLM endpoint for privacy, retries, tool authority, and observable failures.",
       "network_required": false
     },
     {
@@ -270,7 +270,7 @@
         "prompt": "Model the fixture checkout lifecycle with explicit retry and cancellation states.",
         "oracle": "Select model-state-with-xstate and reject manage-state-with-zustand as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $manage-state-with-zustand for this specialized request: Model the fixture cart in Zustand with derived totals and scoped persistence.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $manage-state-with-zustand for this specialized request: Model the fixture cart in Zustand with derived totals and scoped persistence.",
       "network_required": false
     },
     {
@@ -286,7 +286,7 @@
         "prompt": "Model the fixture cart in Zustand with derived totals and scoped persistence.",
         "oracle": "Select manage-state-with-zustand and reject migrate-react-router as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $migrate-react-router for this specialized request: Migrate the fixture route module to the installed React Router data API.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $migrate-react-router for this specialized request: Migrate the fixture route module to the installed React Router data API.",
       "network_required": false
     },
     {
@@ -302,7 +302,7 @@
         "prompt": "Model the fixture cart in Zustand with derived totals and scoped persistence.",
         "oracle": "Select manage-state-with-zustand and reject model-state-with-xstate as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $model-state-with-xstate for this specialized request: Model the fixture checkout lifecycle with explicit retry and cancellation states.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $model-state-with-xstate for this specialized request: Model the fixture checkout lifecycle with explicit retry and cancellation states.",
       "network_required": false
     },
     {
@@ -318,7 +318,7 @@
         "prompt": "Review the supplied technical article and write a separate evidence-focused edit report.",
         "oracle": "Select text-review and reject paper-review as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $paper-review for this specialized request: Rewrite the supplied synthetic paper draft in place to remove the unsupported phrasing while preserving its heading and claim scope.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $paper-review for this specialized request: Rewrite the supplied synthetic paper draft in place to remove the unsupported phrasing while preserving its heading and claim scope.",
       "network_required": false
     },
     {
@@ -334,7 +334,7 @@
         "prompt": "Review the synthetic Supabase migration and add tenant-isolation tests without remote execution.",
         "oracle": "Select supabase-workflow and reject postgres-query-review as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $postgres-query-review for this specialized request: Review and improve the synthetic PostgreSQL query without executing writes.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $postgres-query-review for this specialized request: Review and improve the synthetic PostgreSQL query without executing writes.",
       "network_required": false
     },
     {
@@ -350,7 +350,7 @@
         "prompt": "Implement a deterministic Godot 2D guard patrol with a visible chase telegraph.",
         "oracle": "Select game-ai-2d and reject procedural-generation-2d as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $procedural-generation-2d for this specialized request: Implement seeded Godot 2D room selection with guaranteed reachability.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $procedural-generation-2d for this specialized request: Implement seeded Godot 2D room selection with guaranteed reachability.",
       "network_required": false
     },
     {
@@ -366,7 +366,7 @@
         "prompt": "Add PNPM-based TypeScript CI for the fixture without publishing.",
         "oracle": "Select typescript-ci-setup and reject python-ci-setup as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $python-ci-setup for this specialized request: Add UV-based Python CI for the fixture without publishing.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $python-ci-setup for this specialized request: Add UV-based Python CI for the fixture without publishing.",
       "network_required": false
     },
     {
@@ -382,7 +382,7 @@
         "prompt": "Prepare reproducible local Rust release artifacts without tag, push, or upload.",
         "oracle": "Select rust-release and reject rust-ci-setup as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $rust-ci-setup for this specialized request: Add Rust CI for the fixture crate without publishing artifacts.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $rust-ci-setup for this specialized request: Add Rust CI for the fixture crate without publishing artifacts.",
       "network_required": false
     },
     {
@@ -398,7 +398,7 @@
         "prompt": "Add Rust CI for the fixture crate without publishing artifacts.",
         "oracle": "Select rust-ci-setup and reject rust-release as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $rust-release for this specialized request: Prepare reproducible local Rust release artifacts without tag, push, or upload.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $rust-release for this specialized request: Prepare reproducible local Rust release artifacts without tag, push, or upload.",
       "network_required": false
     },
     {
@@ -414,7 +414,7 @@
         "prompt": "Create a reproducible paper skeleton and validate the supplied bibliography.",
         "oracle": "Select scientific-paper and reject scientific-case-study-research as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $scientific-case-study-research for this specialized request: Design an empirical software case study using only the synthetic evidence bundle.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $scientific-case-study-research for this specialized request: Design an empirical software case study using only the synthetic evidence bundle.",
       "network_required": false
     },
     {
@@ -430,7 +430,7 @@
         "prompt": "Rewrite the supplied synthetic paper draft in place to remove the unsupported phrasing while preserving its heading and claim scope.",
         "oracle": "Select paper-review and reject scientific-paper as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $scientific-paper for this specialized request: Create a reproducible paper skeleton and validate the supplied bibliography.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $scientific-paper for this specialized request: Create a reproducible paper skeleton and validate the supplied bibliography.",
       "network_required": false
     },
     {
@@ -446,7 +446,7 @@
         "prompt": "Review the supplied technical article and write a separate evidence-focused edit report.",
         "oracle": "Select text-review and reject skill-authoring as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $skill-authoring for this specialized request: Create a portable Agent Skill for the fixture tool with progressive disclosure.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $skill-authoring for this specialized request: Create a portable Agent Skill for the fixture tool with progressive disclosure.",
       "network_required": false
     },
     {
@@ -462,7 +462,7 @@
         "prompt": "Review and improve the synthetic PostgreSQL query without executing writes.",
         "oracle": "Select postgres-query-review and reject supabase-workflow as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $supabase-workflow for this specialized request: Review the synthetic Supabase migration and add tenant-isolation tests without remote execution.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $supabase-workflow for this specialized request: Review the synthetic Supabase migration and add tenant-isolation tests without remote execution.",
       "network_required": false
     },
     {
@@ -478,7 +478,7 @@
         "prompt": "Prepare a read-only command to inspect a synthetic Google Cloud service in the named test project.",
         "oracle": "Select gcloud-operation and reject terraform-change as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $terraform-change for this specialized request: Plan a bounded Terraform change against the synthetic local fixture without apply.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $terraform-change for this specialized request: Plan a bounded Terraform change against the synthetic local fixture without apply.",
       "network_required": false
     },
     {
@@ -494,7 +494,7 @@
         "prompt": "Rewrite the supplied synthetic paper draft in place to remove the unsupported phrasing while preserving its heading and claim scope.",
         "oracle": "Select paper-review and reject text-review as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $text-review for this specialized request: Review the supplied technical article and write a separate evidence-focused edit report.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $text-review for this specialized request: Review the supplied technical article and write a separate evidence-focused edit report.",
       "network_required": false
     },
     {
@@ -510,7 +510,7 @@
         "prompt": "Add UV-based Python CI for the fixture without publishing.",
         "oracle": "Select python-ci-setup and reject typescript-ci-setup as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $typescript-ci-setup for this specialized request: Add PNPM-based TypeScript CI for the fixture without publishing.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $typescript-ci-setup for this specialized request: Add PNPM-based TypeScript CI for the fixture without publishing.",
       "network_required": false
     },
     {
@@ -526,7 +526,7 @@
         "prompt": "Add PNPM-based TypeScript CI for the fixture without publishing.",
         "oracle": "Select typescript-ci-setup and reject validate-with-zod as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $validate-with-zod for this specialized request: Validate the fixture API payload at the TypeScript trust boundary and preserve actionable errors.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $validate-with-zod for this specialized request: Validate the fixture API payload at the TypeScript trust boundary and preserve actionable errors.",
       "network_required": false
     },
     {
@@ -542,7 +542,7 @@
         "prompt": "Create a portable Agent Skill for the fixture tool with progressive disclosure.",
         "oracle": "Select skill-authoring and reject spec as focal."
       },
-      "tuxedo_presence_prompt": "Tuxedo is available for horizontal workflow support. Still use $spec for this specialized request: Create an active SDD specification and behavior/oracle matrix for the approved retention request.",
+      "baseline_presence_prompt": "Baseline is available for horizontal workflow support. Still use $spec for this specialized request: Create an active SDD specification and behavior/oracle matrix for the approved retention request.",
       "network_required": false
     }
   ],
@@ -1508,7 +1508,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without android-ci-setup, run the same executable BH-001 oracle and record whether the required functional artifacts pass."
         },
@@ -1523,19 +1523,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install android-ci-setup plus external Tuxedo verify; BH-001 must pass and routing metadata must retain android-ci-setup as specialized owner."
+          "oracle": "Install android-ci-setup plus external Baseline verify; BH-001 must pass and routing metadata must retain android-ci-setup as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -1553,7 +1553,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without chromadb-rag-workflow, run the same executable BH-002 oracle and record whether the required functional artifacts pass."
         },
@@ -1568,19 +1568,19 @@
           "oracle": "Install chromadb-rag-workflow with langgraph-agent-design; BH-002 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install chromadb-rag-workflow plus external Tuxedo verify; BH-002 must pass and routing metadata must retain chromadb-rag-workflow as specialized owner."
+          "oracle": "Install chromadb-rag-workflow plus external Baseline verify; BH-002 must pass and routing metadata must retain chromadb-rag-workflow as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -1598,7 +1598,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without game-ai-2d, run the same executable BH-003 oracle and record whether the required functional artifacts pass."
         },
@@ -1613,19 +1613,19 @@
           "oracle": "Install game-ai-2d with game-testing-2d; BH-003 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install game-ai-2d plus external Tuxedo verify; BH-003 must pass and routing metadata must retain game-ai-2d as specialized owner."
+          "oracle": "Install game-ai-2d plus external Baseline verify; BH-003 must pass and routing metadata must retain game-ai-2d as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -1643,7 +1643,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without game-art-2d, run the same executable BH-004 oracle and record whether the required functional artifacts pass."
         },
@@ -1658,19 +1658,19 @@
           "oracle": "Install game-art-2d with gameplay-programming-2d; BH-004 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install game-art-2d plus external Tuxedo verify; BH-004 must pass and routing metadata must retain game-art-2d as specialized owner."
+          "oracle": "Install game-art-2d plus external Baseline verify; BH-004 must pass and routing metadata must retain game-art-2d as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -1688,7 +1688,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without game-audio-2d, run the same executable BH-005 oracle and record whether the required functional artifacts pass."
         },
@@ -1703,19 +1703,19 @@
           "oracle": "Install game-audio-2d with game-save-n-progress; BH-005 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install game-audio-2d plus external Tuxedo verify; BH-005 must pass and routing metadata must retain game-audio-2d as specialized owner."
+          "oracle": "Install game-audio-2d plus external Baseline verify; BH-005 must pass and routing metadata must retain game-audio-2d as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -1733,7 +1733,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without game-build-and-release, run the same executable BH-006 oracle and record whether the required functional artifacts pass."
         },
@@ -1748,19 +1748,19 @@
           "oracle": "Install game-build-and-release with game-performance-2d; BH-006 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install game-build-and-release plus external Tuxedo verify; BH-006 must pass and routing metadata must retain game-build-and-release as specialized owner."
+          "oracle": "Install game-build-and-release plus external Baseline verify; BH-006 must pass and routing metadata must retain game-build-and-release as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -1778,7 +1778,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without game-feel-2d, run the same executable BH-007 oracle and record whether the required functional artifacts pass."
         },
@@ -1793,19 +1793,19 @@
           "oracle": "Install game-feel-2d with game-ui-accessibility; BH-007 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install game-feel-2d plus external Tuxedo verify; BH-007 must pass and routing metadata must retain game-feel-2d as specialized owner."
+          "oracle": "Install game-feel-2d plus external Baseline verify; BH-007 must pass and routing metadata must retain game-feel-2d as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -1823,7 +1823,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without game-performance-2d, run the same executable BH-008 oracle and record whether the required functional artifacts pass."
         },
@@ -1838,19 +1838,19 @@
           "oracle": "Install game-performance-2d with game-testing-2d; BH-008 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install game-performance-2d plus external Tuxedo verify; BH-008 must pass and routing metadata must retain game-performance-2d as specialized owner."
+          "oracle": "Install game-performance-2d plus external Baseline verify; BH-008 must pass and routing metadata must retain game-performance-2d as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -1868,7 +1868,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without game-save-n-progress, run the same executable BH-009 oracle and record whether the required functional artifacts pass."
         },
@@ -1883,19 +1883,19 @@
           "oracle": "Install game-save-n-progress with game-testing-2d; BH-009 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install game-save-n-progress plus external Tuxedo verify; BH-009 must pass and routing metadata must retain game-save-n-progress as specialized owner."
+          "oracle": "Install game-save-n-progress plus external Baseline verify; BH-009 must pass and routing metadata must retain game-save-n-progress as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -1911,7 +1911,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without game-testing-2d, run the same executable BH-010 oracle and record whether the required functional artifacts pass."
         },
@@ -1926,19 +1926,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install game-testing-2d plus external Tuxedo verify; BH-010 must pass and routing metadata must retain game-testing-2d as specialized owner."
+          "oracle": "Install game-testing-2d plus external Baseline verify; BH-010 must pass and routing metadata must retain game-testing-2d as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -1954,7 +1954,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without game-ui-accessibility, run the same executable BH-011 oracle and record whether the required functional artifacts pass."
         },
@@ -1969,19 +1969,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install game-ui-accessibility plus external Tuxedo verify; BH-011 must pass and routing metadata must retain game-ui-accessibility as specialized owner."
+          "oracle": "Install game-ui-accessibility plus external Baseline verify; BH-011 must pass and routing metadata must retain game-ui-accessibility as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -1999,7 +1999,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without gameplay-programming-2d, run the same executable BH-012 oracle and record whether the required functional artifacts pass."
         },
@@ -2014,19 +2014,19 @@
           "oracle": "Install gameplay-programming-2d with game-testing-2d; BH-012 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install gameplay-programming-2d plus external Tuxedo verify; BH-012 must pass and routing metadata must retain gameplay-programming-2d as specialized owner."
+          "oracle": "Install gameplay-programming-2d plus external Baseline verify; BH-012 must pass and routing metadata must retain gameplay-programming-2d as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2042,7 +2042,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without gcloud-operation, run the same executable BH-013 oracle and record whether the required functional artifacts pass."
         },
@@ -2057,19 +2057,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install gcloud-operation plus external Tuxedo verify; BH-013 must pass and routing metadata must retain gcloud-operation as specialized owner."
+          "oracle": "Install gcloud-operation plus external Baseline verify; BH-013 must pass and routing metadata must retain gcloud-operation as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2085,7 +2085,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without go-ci-setup, run the same executable BH-014 oracle and record whether the required functional artifacts pass."
         },
@@ -2100,19 +2100,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install go-ci-setup plus external Tuxedo verify; BH-014 must pass and routing metadata must retain go-ci-setup as specialized owner."
+          "oracle": "Install go-ci-setup plus external Baseline verify; BH-014 must pass and routing metadata must retain go-ci-setup as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2130,7 +2130,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without langgraph-agent-design, run the same executable BH-015 oracle and record whether the required functional artifacts pass."
         },
@@ -2145,19 +2145,19 @@
           "oracle": "Install langgraph-agent-design with chromadb-rag-workflow; BH-015 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install langgraph-agent-design plus external Tuxedo verify; BH-015 must pass and routing metadata must retain langgraph-agent-design as specialized owner."
+          "oracle": "Install langgraph-agent-design plus external Baseline verify; BH-015 must pass and routing metadata must retain langgraph-agent-design as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2173,7 +2173,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without llm-integration-review, run the same executable BH-016 oracle and record whether the required functional artifacts pass."
         },
@@ -2188,19 +2188,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install llm-integration-review plus external Tuxedo verify; BH-016 must pass and routing metadata must retain llm-integration-review as specialized owner."
+          "oracle": "Install llm-integration-review plus external Baseline verify; BH-016 must pass and routing metadata must retain llm-integration-review as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2216,7 +2216,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without manage-state-with-zustand, run the same executable BH-017 oracle and record whether the required functional artifacts pass."
         },
@@ -2231,19 +2231,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install manage-state-with-zustand plus external Tuxedo verify; BH-017 must pass and routing metadata must retain manage-state-with-zustand as specialized owner."
+          "oracle": "Install manage-state-with-zustand plus external Baseline verify; BH-017 must pass and routing metadata must retain manage-state-with-zustand as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2261,7 +2261,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without migrate-react-router, run the same executable BH-018 oracle and record whether the required functional artifacts pass."
         },
@@ -2276,19 +2276,19 @@
           "oracle": "Install migrate-react-router with validate-with-zod; BH-018 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install migrate-react-router plus external Tuxedo verify; BH-018 must pass and routing metadata must retain migrate-react-router as specialized owner."
+          "oracle": "Install migrate-react-router plus external Baseline verify; BH-018 must pass and routing metadata must retain migrate-react-router as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2304,7 +2304,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without model-state-with-xstate, run the same executable BH-019 oracle and record whether the required functional artifacts pass."
         },
@@ -2319,19 +2319,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install model-state-with-xstate plus external Tuxedo verify; BH-019 must pass and routing metadata must retain model-state-with-xstate as specialized owner."
+          "oracle": "Install model-state-with-xstate plus external Baseline verify; BH-019 must pass and routing metadata must retain model-state-with-xstate as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2349,7 +2349,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without paper-review, run the same executable BH-020 oracle and record whether the required functional artifacts pass."
         },
@@ -2364,19 +2364,19 @@
           "oracle": "Install paper-review with scientific-paper; BH-020 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install paper-review plus external Tuxedo verify; BH-020 must pass and routing metadata must retain paper-review as specialized owner."
+          "oracle": "Install paper-review plus external Baseline verify; BH-020 must pass and routing metadata must retain paper-review as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2392,7 +2392,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without postgres-query-review, run the same executable BH-021 oracle and record whether the required functional artifacts pass."
         },
@@ -2407,19 +2407,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install postgres-query-review plus external Tuxedo verify; BH-021 must pass and routing metadata must retain postgres-query-review as specialized owner."
+          "oracle": "Install postgres-query-review plus external Baseline verify; BH-021 must pass and routing metadata must retain postgres-query-review as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2437,7 +2437,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without procedural-generation-2d, run the same executable BH-022 oracle and record whether the required functional artifacts pass."
         },
@@ -2452,19 +2452,19 @@
           "oracle": "Install procedural-generation-2d with game-testing-2d; BH-022 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install procedural-generation-2d plus external Tuxedo verify; BH-022 must pass and routing metadata must retain procedural-generation-2d as specialized owner."
+          "oracle": "Install procedural-generation-2d plus external Baseline verify; BH-022 must pass and routing metadata must retain procedural-generation-2d as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2480,7 +2480,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without python-ci-setup, run the same executable BH-023 oracle and record whether the required functional artifacts pass."
         },
@@ -2495,19 +2495,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install python-ci-setup plus external Tuxedo verify; BH-023 must pass and routing metadata must retain python-ci-setup as specialized owner."
+          "oracle": "Install python-ci-setup plus external Baseline verify; BH-023 must pass and routing metadata must retain python-ci-setup as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2523,7 +2523,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without rust-ci-setup, run the same executable BH-024 oracle and record whether the required functional artifacts pass."
         },
@@ -2538,19 +2538,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install rust-ci-setup plus external Tuxedo verify; BH-024 must pass and routing metadata must retain rust-ci-setup as specialized owner."
+          "oracle": "Install rust-ci-setup plus external Baseline verify; BH-024 must pass and routing metadata must retain rust-ci-setup as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2566,7 +2566,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without rust-release, run the same executable BH-025 oracle and record whether the required functional artifacts pass."
         },
@@ -2581,19 +2581,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install rust-release plus external Tuxedo verify; BH-025 must pass and routing metadata must retain rust-release as specialized owner."
+          "oracle": "Install rust-release plus external Baseline verify; BH-025 must pass and routing metadata must retain rust-release as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2609,7 +2609,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without scientific-case-study-research, run the same executable BH-026 oracle and record whether the required functional artifacts pass."
         },
@@ -2624,19 +2624,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install scientific-case-study-research plus external Tuxedo verify; BH-026 must pass and routing metadata must retain scientific-case-study-research as specialized owner."
+          "oracle": "Install scientific-case-study-research plus external Baseline verify; BH-026 must pass and routing metadata must retain scientific-case-study-research as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2654,7 +2654,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without scientific-paper, run the same executable BH-027 oracle and record whether the required functional artifacts pass."
         },
@@ -2669,19 +2669,19 @@
           "oracle": "Install scientific-paper with scientific-case-study-research; BH-027 must pass and routing metadata must call every declared owner without crossing output boundaries."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install scientific-paper plus external Tuxedo verify; BH-027 must pass and routing metadata must retain scientific-paper as specialized owner."
+          "oracle": "Install scientific-paper plus external Baseline verify; BH-027 must pass and routing metadata must retain scientific-paper as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2697,7 +2697,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without skill-authoring, run the same executable BH-028 oracle and record whether the required functional artifacts pass."
         },
@@ -2712,19 +2712,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install skill-authoring plus external Tuxedo verify; BH-028 must pass and routing metadata must retain skill-authoring as specialized owner."
+          "oracle": "Install skill-authoring plus external Baseline verify; BH-028 must pass and routing metadata must retain skill-authoring as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2740,7 +2740,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without supabase-workflow, run the same executable BH-029 oracle and record whether the required functional artifacts pass."
         },
@@ -2755,19 +2755,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install supabase-workflow plus external Tuxedo verify; BH-029 must pass and routing metadata must retain supabase-workflow as specialized owner."
+          "oracle": "Install supabase-workflow plus external Baseline verify; BH-029 must pass and routing metadata must retain supabase-workflow as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2783,7 +2783,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without terraform-change, run the same executable BH-030 oracle and record whether the required functional artifacts pass."
         },
@@ -2798,19 +2798,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install terraform-change plus external Tuxedo verify; BH-030 must pass and routing metadata must retain terraform-change as specialized owner."
+          "oracle": "Install terraform-change plus external Baseline verify; BH-030 must pass and routing metadata must retain terraform-change as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2826,7 +2826,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without text-review, run the same executable BH-031 oracle and record whether the required functional artifacts pass."
         },
@@ -2841,19 +2841,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install text-review plus external Tuxedo verify; BH-031 must pass and routing metadata must retain text-review as specialized owner."
+          "oracle": "Install text-review plus external Baseline verify; BH-031 must pass and routing metadata must retain text-review as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2869,7 +2869,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without typescript-ci-setup, run the same executable BH-032 oracle and record whether the required functional artifacts pass."
         },
@@ -2884,19 +2884,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install typescript-ci-setup plus external Tuxedo verify; BH-032 must pass and routing metadata must retain typescript-ci-setup as specialized owner."
+          "oracle": "Install typescript-ci-setup plus external Baseline verify; BH-032 must pass and routing metadata must retain typescript-ci-setup as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2912,7 +2912,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without validate-with-zod, run the same executable BH-033 oracle and record whether the required functional artifacts pass."
         },
@@ -2927,19 +2927,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install validate-with-zod plus external Tuxedo verify; BH-033 must pass and routing metadata must retain validate-with-zod as specialized owner."
+          "oracle": "Install validate-with-zod plus external Baseline verify; BH-033 must pass and routing metadata must retain validate-with-zod as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",
@@ -2955,7 +2955,7 @@
       "network_required": false,
       "variants": [
         {
-          "name": "baseline",
+          "name": "control",
           "applicable": true,
           "oracle": "Without spec, run the same executable BH-034 oracle and record whether the required functional artifacts pass."
         },
@@ -2970,19 +2970,19 @@
           "rationale": "No second specialized owner is required by this scenario."
         },
         {
-          "name": "tuxedo-minimal",
+          "name": "baseline-minimal",
           "applicable": true,
-          "oracle": "Install spec plus external Tuxedo verify; BH-034 must pass and routing metadata must retain spec as specialized owner."
+          "oracle": "Install spec plus external Baseline verify; BH-034 must pass and routing metadata must retain spec as specialized owner."
         },
         {
-          "name": "tuxedo-full-plugin",
+          "name": "baseline-full-plugin",
           "applicable": false,
           "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."
         },
         {
           "name": "current",
           "applicable": false,
-          "rationale": "Reserved for a future skill revision comparison with an explicit baseline."
+          "rationale": "Reserved for a future skill revision comparison with an explicit control condition."
         },
         {
           "name": "proposed",

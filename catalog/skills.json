@@ -8,11 +8,6 @@
     "license_sha256": "24923e703cfafa4e2c5098f4d5b0442ab43f9405dbdbb9fd961707c32e5e4702",
     "license_scope": "Geremmyas repository files at the frozen source commit; no skill-local exception was found."
   },
-  "tuxedo_exclusion_source": {
-    "repository": "woliveiras/tuxedo",
-    "commit": "168922a54b695fd2446295c58157981079d2d5d6",
-    "skills_tree_listing_sha256": "3ed55c2bcd4614cd7074a6ff4ff01199a81b4dd9f31d9912fa25f191c85a967f"
-  },
   "skills": [
     {
       "name": "android-ci-setup",
@@ -35,7 +30,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -74,7 +69,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -103,7 +98,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -160,7 +155,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -297,7 +292,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -355,7 +350,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -409,7 +404,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -463,7 +458,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -520,7 +515,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -574,7 +569,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -628,7 +623,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -682,7 +677,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -740,7 +735,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -773,7 +768,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -805,7 +800,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -837,7 +832,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -865,7 +860,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -897,7 +892,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -926,7 +921,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -957,7 +952,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -990,7 +985,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1020,7 +1015,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1077,7 +1072,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1109,7 +1104,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1143,7 +1138,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1175,7 +1170,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1230,7 +1225,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1326,7 +1321,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1360,7 +1355,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1393,7 +1388,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1424,7 +1419,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1456,7 +1451,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1485,7 +1480,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": false,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {
@@ -1502,12 +1497,6 @@
       "ownership": "storehouse",
       "source_path": "skills/spec",
       "source_tree_sha256": "70269915d57e06e9f96d201cc9a9ceae2ffc7a6cecba6df22e1745b0743f61d5",
-      "origin": {
-        "repository": "woliveiras/tuxedo",
-        "commit": "27ef05b97211b74845af78095ce7d5d852358dbf",
-        "path": "plugins/tuxedo/skills/spec",
-        "disposition": "adapted into the optional Storehouse SDD package"
-      },
       "categories": [
         "sdd"
       ],
@@ -1520,7 +1509,7 @@
         "standalone": true,
         "format": "Agent Skills",
         "codex_openai_yaml": true,
-        "tuxedo": "optional"
+        "baseline": "optional"
       },
       "files": [
         {

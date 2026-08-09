@@ -93,7 +93,7 @@ def build_catalog() -> dict[str, object]:
                 "prompt": against_request,
                 "oracle": f"Select {against} and reject {skill} as focal.",
             },
-            "tuxedo_presence_prompt": f"Tuxedo is available for horizontal workflow support. Still use ${skill} for this specialized request: {request}",
+            "baseline_presence_prompt": f"Baseline is available for horizontal workflow support. Still use ${skill} for this specialized request: {request}",
             "network_required": False,
         })
         behavior.append({
@@ -118,14 +118,14 @@ def build_catalog() -> dict[str, object]:
             },
         })
         variants: list[dict[str, object]] = [
-            {"name": "baseline", "applicable": True, "oracle": f"Without {skill}, run the same executable BH-{index:03d} oracle and record whether the required functional artifacts pass."},
+            {"name": "control", "applicable": True, "oracle": f"Without {skill}, run the same executable BH-{index:03d} oracle and record whether the required functional artifacts pass."},
             {"name": "focal", "applicable": True, "oracle": f"Install only {skill}; the executable BH-{index:03d} oracle must pass and routing metadata must call {skill}."},
             ({"name": "composed-specialized", "applicable": True, "oracle": f"Install {skill} with {', '.join(related)}; BH-{index:03d} must pass and routing metadata must call every declared owner without crossing output boundaries."}
              if related else
              {"name": "composed-specialized", "applicable": False, "rationale": "No second specialized owner is required by this scenario."}),
-            {"name": "tuxedo-minimal", "applicable": True, "oracle": f"Install {skill} plus external Tuxedo verify; BH-{index:03d} must pass and routing metadata must retain {skill} as specialized owner."},
-            {"name": "tuxedo-full-plugin", "applicable": False, "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."},
-            {"name": "current", "applicable": False, "rationale": "Reserved for a future skill revision comparison with an explicit baseline."},
+            {"name": "baseline-minimal", "applicable": True, "oracle": f"Install {skill} plus external Baseline verify; BH-{index:03d} must pass and routing metadata must retain {skill} as specialized owner."},
+            {"name": "baseline-full-plugin", "applicable": False, "rationale": "The isolated-home contract rejects local plugin namespaces and current Codex does not expose a per-workspace full-plugin overlay; installing it into the dedicated home would contaminate later conditions."},
+            {"name": "current", "applicable": False, "rationale": "Reserved for a future skill revision comparison with an explicit control condition."},
             {"name": "proposed", "applicable": False, "rationale": "Reserved for a future skill revision comparison with an explicit candidate."},
         ]
         composition.append({"skill": skill, "criterion": f"CP-{index:03d}", "related": list(related), "network_required": False, "variants": variants})

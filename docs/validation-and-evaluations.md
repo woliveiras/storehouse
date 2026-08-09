@@ -12,9 +12,10 @@ pnpm run eval:dry-run
 ```
 
 `validate:sources` additionally requires absolute
-`STOREHOUSE_GEREMMYAS_SOURCE` and `STOREHOUSE_TUXEDO_SOURCE` paths. The
-frozen commits remain the provenance baseline; a clean later checkout is
-accepted only when its governed tree is byte-identical. Installation validation
+`STOREHOUSE_GEREMMYAS_SOURCE` and `STOREHOUSE_BASELINE_SOURCE` paths. The
+Geremmyas commit preserves migration provenance. The Baseline commit identifies
+the current optional composition contract; a clean later checkout is accepted
+only when its governed skill tree is byte-identical. Installation validation
 uses disposable homes and workspaces, disables external CLI telemetry, and
 removes the scratch tree.
 
@@ -31,7 +32,7 @@ the execution command; do not export reusable approval variables. Login is
 also explicit through `eval:login`; inspect it with `eval:auth:status`.
 
 The harness uses a dedicated absolute Codex home outside this checkout,
-personal Codex state, and Geremmyas/Tuxedo. It rejects symlinks and unknown
+personal Codex state, and Geremmyas/Baseline. It rejects symlinks and unknown
 behavior-bearing configuration, constructs child environments from a minimal
 allowlist (rather than inheriting cloud, registry, Git, or provider secrets),
 requires the exact `Logged in using ChatGPT` status, gives each Promptfoo
