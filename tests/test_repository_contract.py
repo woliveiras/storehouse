@@ -16,9 +16,9 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_ROOT = ROOT / "skills"
 GEREMMYAS_COMMIT = "783ac878213b61acb914b9151c779c6de0b84286"
-TUXEDO_COMMIT = "168922a54b695fd2446295c58157981079d2d5d6"
+BASELINE_COMMIT = "86a4224154fef064005b1bbd49f0efc7c5adfa5d"
 GEREMMYAS_TREE_DIGEST = "7de30d71108e8c4e73641a70aaa2d9541ce97f6b826cca528f6eeed0bb73e20d"
-TUXEDO_TREE_DIGEST = "3ed55c2bcd4614cd7074a6ff4ff01199a81b4dd9f31d9912fa25f191c85a967f"
+BASELINE_TREE_DIGEST = "3b0a2de4895921a4dee1996101fffcb28c8419b68a66f92f86a5af41b27b561f"
 GEREMMYAS_LICENSE_DIGEST = "24923e703cfafa4e2c5098f4d5b0442ab43f9405dbdbb9fd961707c32e5e4702"
 
 MIGRATED = {
@@ -178,7 +178,7 @@ class RepositoryContractTests(unittest.TestCase):
             skills_schema["$id"],
         )
         self.assertTrue(readme.startswith("# Storehouse\n"))
-        self.assertIn("## Storehouse and Tuxedo", readme)
+        self.assertIn("## Storehouse and Baseline", readme)
         self.assertTrue((ROOT / "docs" / "development-dependencies.md").is_file())
         self.assertFalse((ROOT / "docs" / "maintainer-dependencies.md").exists())
 
@@ -242,8 +242,8 @@ class RepositoryContractTests(unittest.TestCase):
 
     def test_as_002_optional_live_source_baseline(self) -> None:
         geremmyas = os.environ.get("STOREHOUSE_GEREMMYAS_SOURCE")
-        tuxedo = os.environ.get("STOREHOUSE_TUXEDO_SOURCE")
-        if not geremmyas or not tuxedo:
+        baseline = os.environ.get("STOREHOUSE_BASELINE_SOURCE")
+        if not geremmyas or not baseline:
             self.skipTest("set both source environment variables for live read-only reconciliation")
 
         def git(repo: str, *args: str) -> bytes:
@@ -255,8 +255,8 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertEqual(b"", git(geremmyas, "status", "--porcelain=v1", "--untracked-files=all"))
         ger_tree = git(geremmyas, "ls-tree", "-r", "--full-tree", "HEAD", "content/skills")
         self.assertEqual(GEREMMYAS_TREE_DIGEST, hashlib.sha256(ger_tree).hexdigest())
-        frozen_tux_tree = git(tuxedo, "ls-tree", "-r", "--full-tree", TUXEDO_COMMIT, "plugins/tuxedo/skills")
-        self.assertEqual(TUXEDO_TREE_DIGEST, hashlib.sha256(frozen_tux_tree).hexdigest())
+        baseline_tree = git(baseline, "ls-tree", "-r", "--full-tree", BASELINE_COMMIT, "plugins/baseline/skills")
+        self.assertEqual(BASELINE_TREE_DIGEST, hashlib.sha256(baseline_tree).hexdigest())
         license_text = git(geremmyas, "show", f"{GEREMMYAS_COMMIT}:LICENSE")
         self.assertEqual(GEREMMYAS_LICENSE_DIGEST, hashlib.sha256(license_text).hexdigest())
         self.assertIn(b"MIT License", license_text)
@@ -445,7 +445,7 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertEqual({"preserved": 77, "adapted": 29, "excluded": 0}, disposition_counts)
         for item in owned_entries:
             self.assertRegex(item["source_tree_sha256"], r"^[0-9a-f]{64}$")
-            self.assertEqual("woliveiras/tuxedo", item["origin"]["repository"])
+            self.assertNotIn("origin", item)
             self.assertTrue(item["compatibility"]["standalone"])
             self.assertTrue(item["files"])
             for file_item in item["files"]:
@@ -509,7 +509,7 @@ class RepositoryContractTests(unittest.TestCase):
         expected = render_install_commands().strip()
         self.assertEqual(expected, actual)
         for phrase in (
-            "Tuxedo",
+            "Baseline",
             "project",
             "independent",
             "collection",

@@ -18,6 +18,6 @@ PNPM build policy allows only SWC, esbuild, protobufjs, and Sharp install
 scripts needed by the development tooling. Playwright's browser download and
 ONNX Runtime's native install are disabled because this harness does not use
 those optional Promptfoo surfaces. Reviewed transitive overrides align with the
-isolated Tuxedo evaluation toolchain. Run `pnpm audit --prod` when dependency
+isolated Baseline evaluation toolchain. Run `pnpm audit --prod` when dependency
 resolution changes; report transitive optional peer warnings rather than
 silently patching them with new direct dependencies.

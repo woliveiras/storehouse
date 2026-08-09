@@ -49,10 +49,10 @@ class SddPackageTests(unittest.TestCase):
         self.assertIn("optional", text.lower())
         self.assertIn("TDD capability", text)
         self.assertIn("review capability", text)
-        self.assertNotIn("/Developer/woliveiras/tuxedo", text)
+        self.assertNotIn("/Developer/woliveiras/baseline", text)
         self.assertNotIn("import ", text)
 
-    def test_tuxedo_workflows_are_not_duplicated(self) -> None:
+    def test_baseline_workflows_are_not_duplicated(self) -> None:
         inventory = {path.name for path in SKILLS.iterdir() if path.is_dir()}
         self.assertFalse({"tdd", "bugfix", "verify"} & inventory)
         self.assertIn("spec", inventory)
@@ -63,7 +63,7 @@ class SddPackageTests(unittest.TestCase):
         self.assertEqual("storehouse", spec["ownership"])
         self.assertEqual("sdd", spec["categories"][0])
         self.assertTrue(spec["compatibility"]["standalone"])
-        self.assertEqual("optional", spec["compatibility"]["tuxedo"])
+        self.assertEqual("optional", spec["compatibility"]["baseline"])
 
     def test_reconstructible_history_is_not_in_the_current_tree(self) -> None:
         for relative in ("specs", "docs/migration.md"):

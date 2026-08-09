@@ -13,13 +13,10 @@ from maintenance.catalog_data import (
     LICENSE_SHA256,
     MIGRATED,
     OWNED,
-    SDD_ORIGIN_COMMIT,
     SENSITIVE,
     SKILLS,
     SOURCE_COMMIT,
     SOURCE_TREE_SHA256,
-    TUXEDO_COMMIT,
-    TUXEDO_TREE_SHA256,
 )
 
 
@@ -177,7 +174,7 @@ def build_skills_catalog(source: Path) -> dict[str, object]:
                     "standalone": True,
                     "format": "Agent Skills",
                     "codex_openai_yaml": name in CODEX_METADATA,
-                    "tuxedo": "optional",
+                    "baseline": "optional",
                 },
                 "files": files,
             }
@@ -192,12 +189,6 @@ def build_skills_catalog(source: Path) -> dict[str, object]:
                 "ownership": "storehouse",
                 "source_path": f"skills/{name}",
                 "source_tree_sha256": tree_sha256(destination_root),
-                "origin": {
-                    "repository": "woliveiras/tuxedo",
-                    "commit": SDD_ORIGIN_COMMIT,
-                    "path": "plugins/tuxedo/skills/spec",
-                    "disposition": "adapted into the optional Storehouse SDD package",
-                },
                 "categories": categories[name],
                 "security": {
                     "sensitive": bool(domains),
@@ -212,7 +203,7 @@ def build_skills_catalog(source: Path) -> dict[str, object]:
                     "standalone": True,
                     "format": "Agent Skills",
                     "codex_openai_yaml": name in CODEX_METADATA,
-                    "tuxedo": "optional",
+                    "baseline": "optional",
                 },
                 "files": [
                     {
@@ -233,11 +224,6 @@ def build_skills_catalog(source: Path) -> dict[str, object]:
             "license": "MIT",
             "license_sha256": LICENSE_SHA256,
             "license_scope": "Geremmyas repository files at the frozen source commit; no skill-local exception was found.",
-        },
-        "tuxedo_exclusion_source": {
-            "repository": "woliveiras/tuxedo",
-            "commit": TUXEDO_COMMIT,
-            "skills_tree_listing_sha256": TUXEDO_TREE_SHA256,
         },
         "skills": skills,
     }

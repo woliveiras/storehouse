@@ -1,7 +1,7 @@
 # Compatibility
 
 All skills use the portable Agent Skills directory and frontmatter contract.
-They are standalone: optional companion skills and Tuxedo workflows improve
+They are standalone: optional companion skills and Baseline workflows improve
 composition but are never prerequisites.
 
 Deterministic validation covers valid metadata and resource links. The official

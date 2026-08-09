@@ -85,7 +85,7 @@ class EvalCatalogTests(unittest.TestCase):
             self.assertNotIn("do not select", item["negative"]["prompt"].casefold())
             self.assertNotIn(f"${item['negative']['against']}", item["negative"]["prompt"])
             self.assertNotIn(f"${item['skill']}", item["negative"]["prompt"])
-            self.assertTrue(item["tuxedo_presence_prompt"])
+            self.assertTrue(item["baseline_presence_prompt"])
             self.assertFalse(item["network_required"])
 
     def test_as_019_behavior_coverage(self) -> None:
@@ -257,7 +257,7 @@ class EvalCatalogTests(unittest.TestCase):
     def test_as_020_composition_variants(self) -> None:
         composition = self.catalog["composition"]
         self.assertEqual(EXPECTED_SKILLS, {item["skill"] for item in composition})
-        required = {"baseline", "focal", "composed-specialized", "tuxedo-minimal", "tuxedo-full-plugin", "current", "proposed"}
+        required = {"control", "focal", "composed-specialized", "baseline-minimal", "baseline-full-plugin", "current", "proposed"}
         for item in composition:
             self.assertFalse(item["network_required"])
             variants = {variant["name"]: variant for variant in item["variants"]}
@@ -267,11 +267,11 @@ class EvalCatalogTests(unittest.TestCase):
                 self.assertTrue(variant.get("oracle") if variant["applicable"] else variant.get("rationale"))
             applicable_oracles = [variant["oracle"] for variant in variants.values() if variant["applicable"]]
             self.assertEqual(len(applicable_oracles), len(set(applicable_oracles)))
-            self.assertIn("per-workspace", variants["tuxedo-full-plugin"]["rationale"])
+            self.assertIn("per-workspace", variants["baseline-full-plugin"]["rationale"])
             from evals.runner import _record
-            record = _record(self.catalog, f"{item['criterion']}:tuxedo-minimal")
+            record = _record(self.catalog, f"{item['criterion']}:baseline-minimal")
             self.assertIn("verify", record["expected_skills"])
-            self.assertIn("Tuxedo verify", record["request"])
+            self.assertIn("Baseline verify", record["request"])
 
     def test_as_021_security_coverage_is_derived(self) -> None:
         security = self.catalog["security"]
@@ -580,7 +580,7 @@ class IsolationAndVerdictTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as temp:
             repository = Path(temp) / "repository"
-            tree = repository / "plugins/tuxedo/skills/verify"
+            tree = repository / "plugins/baseline/skills/verify"
             tree.mkdir(parents=True)
             (tree / "SKILL.md").write_text("frozen\n", encoding="utf-8")
             subprocess.run(["git", "init", "--quiet"], cwd=repository, check=True)

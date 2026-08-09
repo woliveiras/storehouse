@@ -127,7 +127,7 @@ def main() -> int:
     args = parser.parse_args()
     env = os.environ.copy()
     if args.live_sources:
-        for name in ("STOREHOUSE_GEREMMYAS_SOURCE", "STOREHOUSE_TUXEDO_SOURCE"):
+        for name in ("STOREHOUSE_GEREMMYAS_SOURCE", "STOREHOUSE_BASELINE_SOURCE"):
             raw = env.get(name)
             if not raw or not Path(raw).is_absolute():
                 raise SystemExit(f"{name} must be an absolute path for live source validation")
@@ -135,7 +135,7 @@ def main() -> int:
         env["STOREHOUSE_RUN_EXTERNAL"] = "1"
     else:
         env.pop("STOREHOUSE_GEREMMYAS_SOURCE", None)
-        env.pop("STOREHOUSE_TUXEDO_SOURCE", None)
+        env.pop("STOREHOUSE_BASELINE_SOURCE", None)
     _run([sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"], env=env)
     _syntax_checks()
     _script_smokes()

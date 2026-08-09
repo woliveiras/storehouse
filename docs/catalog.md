@@ -14,7 +14,7 @@ runtime meaning. The README command block is a deterministic rendering of the
 expanded catalog.
 
 `skills.json` schema version 2 distinguishes frozen Geremmyas migrations from
-Storehouse-owned skills. It preserves the Geremmyas source commit, historical
-Tuxedo exclusion commit, license evidence, per-skill hashes, security
-classification, compatibility, migration dispositions, and the origin of the
-Storehouse-owned SDD skill.
+Storehouse-owned skills. It preserves the Geremmyas source commit, license
+evidence, per-skill hashes, security classification, compatibility, and
+migration dispositions. Storehouse-owned skills have no external origin record:
+their current files and Git history are authoritative.

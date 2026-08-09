@@ -13,7 +13,7 @@ from typing import Any, Iterable
 from evals.auth import status
 from evals.isolation import child_environment, disposable_state, protected_roots, resolve_dedicated_home, validate_home_content
 from evals.oracle_data import ORACLES
-from maintenance.catalog_data import TUXEDO_COMMIT
+from maintenance.catalog_data import BASELINE_COMMIT
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,10 +26,10 @@ def _cases(catalog: dict[str, object], suite: str) -> dict[str, list[str]]:
     if suite in {"routing", "full"}:
         values: list[str] = []
         for item in catalog["routing"]:
-            values.extend(f"{item['criterion']}:{kind}" for kind in ("explicit", "implicit", "negative", "tuxedo-presence"))
+            values.extend(f"{item['criterion']}:{kind}" for kind in ("explicit", "implicit", "negative", "baseline-presence"))
         cases["routing"] = values
     if suite in {"behavior", "full"}:
-        cases["behavior"] = [f"{item['criterion']}:{variant}" for item in catalog["behavior"] for variant in ("baseline", "focal")]
+        cases["behavior"] = [f"{item['criterion']}:{variant}" for item in catalog["behavior"] for variant in ("control", "focal")]
     if suite in {"composition", "full"}:
         cases["composition"] = [
             f"{item['criterion']}:{variant['name']}"
@@ -116,19 +116,19 @@ def _record(catalog: dict[str, object], case_id: str) -> dict[str, Any]:
             request, expected, avoided = item["negative"]["prompt"], item["negative"]["against"], item["skill"]
         elif variant == "implicit":
             request, expected, avoided = item["implicit"]["prompt"], item["skill"], ""
-        elif variant == "tuxedo-presence":
-            request, expected, avoided = item["tuxedo_presence_prompt"], item["skill"], ""
+        elif variant == "baseline-presence":
+            request, expected, avoided = item["baseline_presence_prompt"], item["skill"], ""
         else:
             request, expected, avoided = item["explicit_prompt"], item["skill"], ""
         return {"case_id": case_id, "skill": item["skill"], "kind": "routing", "variant": variant, "request": request, "required_outputs": [], "secondary_review": False, "security": False, "expected_skill": expected, "avoid_skill": avoided}
     if head.startswith("BH-"):
         item = _lookup(catalog, "behavior", head)
         request = f"{item['request']}\n\nRequired observable result: {item['expected_result']}"
-        return {"case_id": case_id, "skill": item["skill"], "kind": "behavior", "variant": parts[0], "request": request, "required_outputs": item["required_outputs"], "secondary_review": parts[0] == "focal", "security": False, "fixture": item["fixture"], "expected_skills": [item["skill"]] if parts[0] == "focal" else [], "avoid_skills": [item["skill"]] if parts[0] == "baseline" else []}
+        return {"case_id": case_id, "skill": item["skill"], "kind": "behavior", "variant": parts[0], "request": request, "required_outputs": item["required_outputs"], "secondary_review": parts[0] == "focal", "security": False, "fixture": item["fixture"], "expected_skills": [item["skill"]] if parts[0] == "focal" else [], "avoid_skills": [item["skill"]] if parts[0] == "control" else []}
     if head.startswith("CP-"):
         item = _lookup(catalog, "composition", head)
         behavior = next(value for value in catalog["behavior"] if value["skill"] == item["skill"])
-        expected = [] if parts[0] == "baseline" else [item["skill"]]
+        expected = [] if parts[0] == "control" else [item["skill"]]
         if parts[0] == "composed-specialized":
             expected.extend(item["related"])
         request = f"{behavior['request']}\n\nRequired observable result: {behavior['expected_result']}"
@@ -138,10 +138,10 @@ def _record(catalog: dict[str, object], case_id: str) -> dict[str, Any]:
                 for name in item["related"]
             ]
             request += "\n\nAlso complete these independently owned related concerns:\n- " + "\n- ".join(related_requests)
-        elif parts[0] == "tuxedo-minimal":
-            request += "\n\nUse the externally installed Tuxedo verify workflow to review the completed specialized result and report its evidence."
+        elif parts[0] == "baseline-minimal":
+            request += "\n\nUse the externally installed Baseline verify workflow to review the completed specialized result and report its evidence."
             expected.append("verify")
-        return {"case_id": case_id, "skill": item["skill"], "kind": "composition", "variant": parts[0], "request": request, "required_outputs": behavior["required_outputs"], "secondary_review": False, "security": False, "fixture": behavior["fixture"], "related": item["related"], "expected_skills": expected, "avoid_skills": [item["skill"]] if parts[0] == "baseline" else []}
+        return {"case_id": case_id, "skill": item["skill"], "kind": "composition", "variant": parts[0], "request": request, "required_outputs": behavior["required_outputs"], "secondary_review": False, "security": False, "fixture": behavior["fixture"], "related": item["related"], "expected_skills": expected, "avoid_skills": [item["skill"]] if parts[0] == "control" else []}
     if head.startswith("SEC-"):
         item = _lookup(catalog, "security", head)
         behavior = next(value for value in catalog["behavior"] if value["skill"] == item["skill"])
@@ -211,28 +211,28 @@ def _validate_proposed(source: Path, name: str) -> dict[str, str]:
     return expected
 
 
-def _tuxedo_skill(workspace: Path, name: str = "verify") -> None:
-    raw = os.environ.get("STOREHOUSE_TUXEDO_SOURCE")
+def _baseline_skill(workspace: Path, name: str = "verify") -> None:
+    raw = os.environ.get("STOREHOUSE_BASELINE_SOURCE")
     if not raw or not Path(raw).is_absolute():
-        raise RuntimeError("Tuxedo composition execution requires absolute STOREHOUSE_TUXEDO_SOURCE")
+        raise RuntimeError("Baseline composition execution requires absolute STOREHOUSE_BASELINE_SOURCE")
     repository = Path(raw).resolve()
     for command in (
-        ["git", "-C", str(repository), "cat-file", "-e", f"{TUXEDO_COMMIT}^{{commit}}"],
-        ["git", "-C", str(repository), "diff", "--quiet", TUXEDO_COMMIT, "--", "plugins/tuxedo/skills"],
+        ["git", "-C", str(repository), "cat-file", "-e", f"{BASELINE_COMMIT}^{{commit}}"],
+        ["git", "-C", str(repository), "diff", "--quiet", BASELINE_COMMIT, "--", "plugins/baseline/skills"],
         ["git", "-C", str(repository), "diff", "--quiet", "--cached"],
     ):
         if subprocess.run(command, check=False).returncode:
-            raise RuntimeError("Tuxedo composition source differs from the frozen skill tree")
+            raise RuntimeError("Baseline composition source differs from the frozen skill tree")
     status_output = subprocess.run(["git", "-C", str(repository), "status", "--porcelain=v1", "--untracked-files=all"], text=True, capture_output=True, check=True).stdout
     if status_output:
-        raise RuntimeError("Tuxedo composition source must have a clean worktree")
-    source = repository / "plugins" / "tuxedo" / "skills"
+        raise RuntimeError("Baseline composition source must have a clean worktree")
+    source = repository / "plugins" / "baseline" / "skills"
     tree = source / name
-    frozen_manifest = _git_tree_manifest(repository, TUXEDO_COMMIT, tree)
+    frozen_manifest = _git_tree_manifest(repository, BASELINE_COMMIT, tree)
     tracked = set(subprocess.run(["git", "-C", str(repository), "ls-files", "--", str(tree.relative_to(repository))], text=True, capture_output=True, check=True).stdout.splitlines())
     actual = {str(path.relative_to(repository)) for path in tree.rglob("*") if path.is_file()}
     if tracked != actual:
-        raise RuntimeError("Tuxedo composition skill contains untracked or missing files")
+        raise RuntimeError("Baseline composition skill contains untracked or missing files")
     _copy_skill(source, name, workspace, expected_manifest=frozen_manifest)
 
 
@@ -258,9 +258,9 @@ def _prepare(record: dict[str, Any], workspace_root: Path, manifest: dict[str, A
     if record["kind"] == "routing":
         for name in sorted(path.name for path in (ROOT / "skills").iterdir() if path.is_dir()):
             _copy_skill(ROOT / "skills", name, workspace)
-        if variant == "tuxedo-presence":
-            _tuxedo_skill(workspace)
-    elif variant != "baseline" and record["skill"]:
+        if variant == "baseline-presence":
+            _baseline_skill(workspace)
+    elif variant != "control" and record["skill"]:
         skill_source = ROOT / "skills"
         if record["kind"] == "compare" and variant == "proposed":
             raw = os.environ.get("STOREHOUSE_EVAL_PROPOSED_SKILLS")
@@ -274,8 +274,8 @@ def _prepare(record: dict[str, Any], workspace_root: Path, manifest: dict[str, A
         if variant == "composed-specialized":
             for name in record.get("related", []):
                 _copy_skill(ROOT / "skills", name, workspace)
-        if variant == "tuxedo-minimal":
-            _tuxedo_skill(workspace)
+        if variant == "baseline-minimal":
+            _baseline_skill(workspace)
     subprocess.run(["git", "init", "--quiet"], cwd=workspace, check=True)
     subprocess.run(["git", "add", "."], cwd=workspace, check=True)
     subprocess.run(["git", "-c", "user.name=Storehouse Eval", "-c", "user.email=eval@example.invalid", "commit", "--quiet", "-m", "fixture"], cwd=workspace, check=True)
