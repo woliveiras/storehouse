@@ -7,8 +7,6 @@ node_modules/
 .DS_Store
 .gradle/
 
-# Generated provider inputs and append-only local sanitized results.
-evals/promptfoo/generated/*
-!evals/promptfoo/generated/.gitkeep
+# Append-only local sanitized results.
 evals/promptfoo/results/*
 !evals/promptfoo/results/.gitkeep

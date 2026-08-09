@@ -62,7 +62,6 @@ class TaxonomyContractTests(unittest.TestCase):
         found = {path.name for path in SKILLS_ROOT.iterdir() if path.is_dir()}
         self.assertEqual(EXPECTED_SKILLS, found)
         self.assertEqual(42, len(found))
-        self.assertFalse({"migrate-react-router", "skill-authoring"} & found)
 
     def test_directory_and_frontmatter_names_match(self) -> None:
         for name in sorted(EXPECTED_SKILLS):

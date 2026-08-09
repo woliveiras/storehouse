@@ -334,13 +334,12 @@ have no installed identity.
 
 ## Compatibility and privacy
 
-The 42 directories validate against the Agent Skills contract. Clean-room
-installer checks cover repository listing plus representative individual and
-multi-skill discovery; exact tested agents are recorded in
-[`docs/compatibility.md`](docs/compatibility.md). Twelve game skills retain
-deliberate Codex `agents/openai.yaml` metadata. `game-dev-2d-art` can use Codex
-image generation when available, but documents a non-generation fallback.
-Support claims do not extend beyond those checks.
+The 42 directories validate against the Agent Skills contract. A clean-room
+official CLI installation smoke is required when distribution, collections, or
+skill layout changes. Twelve game skills retain deliberate Codex
+`agents/openai.yaml` metadata. `game-dev-2d-art` can use Codex image generation
+when available, but documents a non-generation fallback. Support claims do not
+extend beyond fresh recorded checks.
 
 The external `skills` CLI reports anonymous aggregate telemetry by default.
 Its documentation says to disable it with either environment variable:

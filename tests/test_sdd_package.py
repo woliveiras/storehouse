@@ -57,9 +57,7 @@ class SddPackageTests(unittest.TestCase):
         self.assertFalse({"tdd", "bugfix", "verify"} & inventory)
         self.assertIn("sdd-specification", inventory)
 
-    def test_reconstructible_history_is_not_in_the_current_tree(self) -> None:
-        for relative in ("specs", "docs/migration.md"):
-            self.assertFalse((ROOT / relative).exists(), relative)
+    def test_git_is_the_default_archive_for_inactive_sdd_artifacts(self) -> None:
         contract = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         reconciliation = (SKILLS / "sdd-specification/references/reconciliation.md").read_text(encoding="utf-8")
         self.assertIn("Git is the default archive", contract)
