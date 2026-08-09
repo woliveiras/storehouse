@@ -18,8 +18,8 @@ ALLOWED_ROOT_ENTRIES = {
 ALLOWED_CONFIG_KEYS = {"cli_auth_credentials_store", "projects"}
 ALLOWED_PROJECT_KEYS = {"trust_level"}
 ALLOWED_TRUST = {"trusted", "untrusted"}
-SOURCE_ROOT_ENVS = ("STOREHOUSE_GEREMMYAS_SOURCE", "STOREHOUSE_BASELINE_SOURCE")
-SIBLING_SOURCE_ROOTS = (ROOT.parent / "geremmyas", ROOT.parent / "baseline")
+SOURCE_ROOT_ENVS = ("STOREHOUSE_BASELINE_SOURCE",)
+SIBLING_SOURCE_ROOTS = (ROOT.parent / "baseline",)
 
 
 def _inside(path: Path, root: Path) -> bool:

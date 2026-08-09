@@ -13,8 +13,5 @@ preserves declaration order. Aggregate collections such as `game-dev` have no
 runtime meaning. The README command block is a deterministic rendering of the
 expanded catalog.
 
-`skills.json` schema version 2 distinguishes frozen Geremmyas migrations from
-Storehouse-owned skills. It preserves the Geremmyas source commit, license
-evidence, per-skill hashes, security classification, compatibility, and
-migration dispositions. Storehouse-owned skills have no external origin record:
-their current files and Git history are authoritative.
+The skill directories and their Git history are authoritative. Storehouse does
+not maintain a second generated skill inventory or migration ledger.

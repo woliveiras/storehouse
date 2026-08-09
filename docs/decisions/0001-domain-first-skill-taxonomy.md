@@ -27,7 +27,8 @@ permanent duplicate directories.
   when they share a stable workflow and safety boundary.
 - CI validation and release production have different triggers, authority, and
   outputs even when both execute on the same automation platform.
-- Frozen Geremmyas provenance must survive renamed Storehouse identifiers.
+- Git history must preserve the former identifiers without requiring a live
+  migration ledger.
 
 ## Considered Options
 
@@ -69,8 +70,8 @@ authoring skill.
 - Good: CI and release authority boundaries become explicit and testable.
 - Bad: all previous identifiers are breaking changes for installed copies and
   documentation.
-- Bad: routing, behavior, composition, security, fixtures, catalog provenance,
-  and clean-room installation evidence must migrate together.
+- Bad: routing, behavior, composition, security, fixtures, collections, and
+  clean-room installation evidence must migrate together.
 - Neutral: collections remain declarative documentation and may overlap.
 
 ## Pros and Cons of the Options
@@ -96,9 +97,9 @@ authoring skill.
 ## Confirmation
 
 The decision is confirmed when deterministic tests observe exactly 42 valid
-skills, CI/release suffix parity, conditional references, renamed provenance,
-complete routing/behavior/composition/security inventories, official validation,
-and clean-room installation. Provider/model evaluation remains separately
+skills, CI/release suffix parity, conditional references, complete checked-in
+routing/behavior/composition/security inventories, official validation, and
+clean-room installation. Provider/model evaluation remains separately
 authorized and is not required for the local taxonomy migration.
 
 ## More Information

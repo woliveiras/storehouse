@@ -1,7 +1,7 @@
 [project]
 name = "storehouse"
 version = "0.0.0"
-description = "Repository validation tooling for Storehouse"
+description = "Evaluation tooling for Storehouse specialized Agent Skills"
 requires-python = ">=3.12"
 dependencies = []
 

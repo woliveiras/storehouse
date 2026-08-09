@@ -11,9 +11,9 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from evals.auth import status
+from evals.config import BASELINE_COMMIT
 from evals.isolation import child_environment, disposable_state, protected_roots, resolve_dedicated_home, validate_home_content
 from evals.oracle_data import ORACLES
-from maintenance.catalog_data import BASELINE_COMMIT
 
 
 ROOT = Path(__file__).resolve().parents[1]

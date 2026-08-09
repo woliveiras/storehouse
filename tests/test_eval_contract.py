@@ -12,13 +12,10 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from maintenance.catalog_data import SENSITIVE as CATALOG_SENSITIVE
-from maintenance.catalog_data import SKILLS as CATALOG_SKILLS
-
-
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_SKILLS = set(CATALOG_SKILLS)
-SENSITIVE = set(CATALOG_SENSITIVE)
+CATALOG = json.loads((ROOT / "evals" / "catalog.json").read_text(encoding="utf-8"))
+EXPECTED_SKILLS = {item["skill"] for item in CATALOG["routing"]}
+SENSITIVE = {item["skill"] for item in CATALOG["security"]}
 
 IMPLEMENTATION_MUTANTS = {
     "ci-android": (".github/workflows/android.yml", "runs-on: ubuntu-latest", "runner-missing: true"),

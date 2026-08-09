@@ -4,20 +4,17 @@ Run deterministic validation without provider calls:
 
 ```bash
 pnpm run validate
-pnpm run validate:sources
 pnpm run validate:official
-pnpm run validate:installation
 pnpm run promptfoo:validate
 pnpm run eval:dry-run
 ```
 
-`validate:sources` additionally requires absolute
-`STOREHOUSE_GEREMMYAS_SOURCE` and `STOREHOUSE_BASELINE_SOURCE` paths. The
-Geremmyas commit preserves migration provenance. The Baseline commit identifies
-the current optional composition contract; a clean later checkout is accepted
-only when its governed skill tree is byte-identical. Installation validation
-uses disposable homes and workspaces, disables external CLI telemetry, and
-removes the scratch tree.
+`validate` runs deterministic repository and evaluation-harness tests.
+`validate:official` applies the official Agent Skills validator to every
+directory under `skills/`. `promptfoo:validate` checks the configuration in
+disposable local state without making provider calls. The Baseline commit in
+`evals/config.py` freezes the optional composition condition so repeated runs do
+not silently change when the sibling checkout advances.
 
 Provider suites are deliberately separate: `eval:smoke`, `eval:routing`,
 `eval:behavior`, `eval:composition`, `eval:security`, `eval:compare`, and
@@ -32,8 +29,8 @@ the execution command; do not export reusable approval variables. Login is
 also explicit through `eval:login`; inspect it with `eval:auth:status`.
 
 The harness uses a dedicated absolute Codex home outside this checkout,
-personal Codex state, and Geremmyas/Baseline. It rejects symlinks and unknown
-behavior-bearing configuration, constructs child environments from a minimal
+personal Codex state, and the optional Baseline source. It rejects symlinks and
+unknown behavior-bearing configuration, constructs child environments from a minimal
 allowlist (rather than inheriting cloud, registry, Git, or provider secrets),
 requires the exact `Logged in using ChatGPT` status, gives each Promptfoo
 process disposable state, and uses a fresh temporary Git workspace for every

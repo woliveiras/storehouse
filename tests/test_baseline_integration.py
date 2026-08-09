@@ -65,15 +65,14 @@ class BaselineIntegrationTests(unittest.TestCase):
         self.assertIn("Storehouse provides optional depth", readme)
         self.assertIn("woliveiras/baseline", readme)
 
-    def test_generators_and_composition_use_baseline_identity(self):
-        catalog_data = (ROOT / "maintenance/catalog_data.py").read_text(encoding="utf-8")
-        eval_catalog = (ROOT / "maintenance/eval_catalog.py").read_text(encoding="utf-8")
+    def test_catalog_and_composition_use_baseline_identity(self):
+        config = (ROOT / "evals/config.py").read_text(encoding="utf-8")
+        catalog = (ROOT / "evals/catalog.json").read_text(encoding="utf-8")
         runner = (ROOT / "evals/runner.py").read_text(encoding="utf-8")
         isolation = (ROOT / "evals/isolation.py").read_text(encoding="utf-8")
-        combined = "\n".join((catalog_data, eval_catalog, runner, isolation))
+        combined = "\n".join((config, catalog, runner, isolation))
         for marker in (
             "BASELINE_COMMIT",
-            "BASELINE_TREE_SHA256",
             "STOREHOUSE_BASELINE_SOURCE",
             "baseline_presence_prompt",
             "baseline-minimal",
@@ -91,10 +90,7 @@ class BaselineIntegrationTests(unittest.TestCase):
         self.assertNotIn(LEGACY_TOKEN, combined.lower())
 
     def test_control_variants_do_not_reuse_the_product_name(self):
-        generator = (ROOT / "maintenance/eval_catalog.py").read_text(encoding="utf-8")
         catalog = (ROOT / "evals/catalog.json").read_text(encoding="utf-8")
-        self.assertIn('{"name": "control"', generator)
-        self.assertNotIn('{"name": "' + "base" + 'line"', generator)
         self.assertIn('"name": "control"', catalog)
         self.assertNotIn('"name": "' + "base" + 'line"', catalog)
 

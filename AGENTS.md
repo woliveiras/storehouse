@@ -10,11 +10,13 @@ generator, or consumer runtime.
 - Canonical skills live only at `skills/<name>/` and must work independently.
 - Collections are declarative documentation in `catalog/collections.json`.
 - Baseline is optional horizontal workflow composition and is never a dependency.
-- SDD is an optional Storehouse capability under `skills/spec`; installing any
+- SDD is an optional Storehouse capability under `skills/sdd-specification`; installing any
   other skill or collection does not install or require it.
-- Repository tests, generators, and evaluations stay outside `skills/`.
-- Geremmyas is the frozen migration source. Baseline is an optional current
-  composition source. Treat both checkouts as read-only while working here.
+- Repository tests and evaluations stay outside `skills/`. `evals/catalog.json`
+  is the canonical evaluation-case inventory; checked-in fixtures and oracles
+  change with it.
+- Baseline is an optional composition source. Treat its checkout as read-only
+  while working here.
 - Git is the default archive. Remove reconstructible documents that no longer
   guide a current decision, operation, contract, risk, or behavior; do not keep
   archive directories or completed task bundles in the current tree.
@@ -40,7 +42,7 @@ Preserve unrelated work and stop if a source baseline changes.
 
 ## Required checks
 
-Run `pnpm run validate`, `pnpm run promptfoo:validate`,
-`pnpm run eval:dry-run`, official validation for every skill, shell/Python
-syntax checks, `git diff --check`, and `git status --short`. Run clean-room
-installation validation when distribution, catalog, or skill layout changes.
+Run `pnpm run validate`, `pnpm run validate:official`,
+`pnpm run promptfoo:validate`, `pnpm run eval:dry-run`, shell/Python syntax
+checks, `git diff --check`, and `git status --short`. Run a clean-room official
+CLI installation smoke when distribution, collections, or skill layout changes.

@@ -18,7 +18,7 @@ class SddPackageTests(unittest.TestCase):
         self.assertIn("### `sdd`", readme)
         self.assertIn("--skill sdd-specification", readme)
 
-    def test_spec_skill_owns_the_complete_sdd_method(self) -> None:
+    def test_sdd_skill_owns_the_complete_method(self) -> None:
         root = SKILLS / "sdd-specification"
         skill = (root / "SKILL.md").read_text(encoding="utf-8")
         metadata = (root / "agents/openai.yaml").read_text(encoding="utf-8")
@@ -56,14 +56,6 @@ class SddPackageTests(unittest.TestCase):
         inventory = {path.name for path in SKILLS.iterdir() if path.is_dir()}
         self.assertFalse({"tdd", "bugfix", "verify"} & inventory)
         self.assertIn("sdd-specification", inventory)
-
-    def test_catalog_provenance_distinguishes_owned_sdd_from_migration(self) -> None:
-        catalog = json.loads((ROOT / "catalog/skills.json").read_text(encoding="utf-8"))
-        spec = next(item for item in catalog["skills"] if item["name"] == "sdd-specification")
-        self.assertEqual("storehouse", spec["ownership"])
-        self.assertEqual("sdd", spec["categories"][0])
-        self.assertTrue(spec["compatibility"]["standalone"])
-        self.assertEqual("optional", spec["compatibility"]["baseline"])
 
     def test_reconstructible_history_is_not_in_the_current_tree(self) -> None:
         for relative in ("specs", "docs/migration.md"):
