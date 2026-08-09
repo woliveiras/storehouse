@@ -1,0 +1,4 @@
+interface:
+  display_name: "Terraform Release"
+  short_description: "Version Terraform modules and providers"
+  default_prompt: "Use $release-terraform to prepare and verify this Terraform release without publishing it."

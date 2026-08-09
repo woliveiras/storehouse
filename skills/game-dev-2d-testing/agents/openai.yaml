@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Testing 2D"
+  short_description: "Test deterministic 2D game behavior"
+  default_prompt: "Use $game-dev-2d-testing to design and run focused tests for this 2D game behavior."

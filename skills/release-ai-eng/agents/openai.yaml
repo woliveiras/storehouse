@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Engineering Release"
+  short_description: "Prepare verifiable AI system releases"
+  default_prompt: "Use $release-ai-eng to prepare and verify this AI system release candidate."

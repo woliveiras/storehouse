@@ -13,16 +13,16 @@ class SddPackageTests(unittest.TestCase):
     def test_sdd_collection_is_canonical_selective_and_installable(self) -> None:
         catalog = json.loads((ROOT / "catalog/collections.json").read_text(encoding="utf-8"))
         sdd = next(item for item in catalog["collections"] if item["name"] == "sdd")
-        self.assertEqual(["spec"], sdd["skills"])
+        self.assertEqual(["sdd-specification"], sdd["skills"])
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("### `sdd`", readme)
-        self.assertIn("--skill spec", readme)
+        self.assertIn("--skill sdd-specification", readme)
 
     def test_spec_skill_owns_the_complete_sdd_method(self) -> None:
-        root = SKILLS / "spec"
+        root = SKILLS / "sdd-specification"
         skill = (root / "SKILL.md").read_text(encoding="utf-8")
         metadata = (root / "agents/openai.yaml").read_text(encoding="utf-8")
-        self.assertIn("name: spec", skill)
+        self.assertIn("name: sdd-specification", skill)
         for required in (
             "metadata-first",
             "stable acceptance criteria",
@@ -45,7 +45,7 @@ class SddPackageTests(unittest.TestCase):
             self.assertTrue((root / relative).is_file(), relative)
 
     def test_sdd_is_independent_and_composes_by_capability(self) -> None:
-        text = "\n".join(path.read_text(encoding="utf-8") for path in (SKILLS / "spec").rglob("*.md"))
+        text = "\n".join(path.read_text(encoding="utf-8") for path in (SKILLS / "sdd-specification").rglob("*.md"))
         self.assertIn("optional", text.lower())
         self.assertIn("TDD capability", text)
         self.assertIn("review capability", text)
@@ -55,11 +55,11 @@ class SddPackageTests(unittest.TestCase):
     def test_baseline_workflows_are_not_duplicated(self) -> None:
         inventory = {path.name for path in SKILLS.iterdir() if path.is_dir()}
         self.assertFalse({"tdd", "bugfix", "verify"} & inventory)
-        self.assertIn("spec", inventory)
+        self.assertIn("sdd-specification", inventory)
 
     def test_catalog_provenance_distinguishes_owned_sdd_from_migration(self) -> None:
         catalog = json.loads((ROOT / "catalog/skills.json").read_text(encoding="utf-8"))
-        spec = next(item for item in catalog["skills"] if item["name"] == "spec")
+        spec = next(item for item in catalog["skills"] if item["name"] == "sdd-specification")
         self.assertEqual("storehouse", spec["ownership"])
         self.assertEqual("sdd", spec["categories"][0])
         self.assertTrue(spec["compatibility"]["standalone"])
@@ -69,7 +69,7 @@ class SddPackageTests(unittest.TestCase):
         for relative in ("specs", "docs/migration.md"):
             self.assertFalse((ROOT / relative).exists(), relative)
         contract = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-        reconciliation = (SKILLS / "spec/references/reconciliation.md").read_text(encoding="utf-8")
+        reconciliation = (SKILLS / "sdd-specification/references/reconciliation.md").read_text(encoding="utf-8")
         self.assertIn("Git is the default archive", contract)
         self.assertIn("Git history is the default archive", reconciliation)
 

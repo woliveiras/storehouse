@@ -1,0 +1,4 @@
+interface:
+  display_name: "Android Release"
+  short_description: "Prepare verified Android release artifacts"
+  default_prompt: "Use $release-android to prepare and verify this Android release without publishing it."

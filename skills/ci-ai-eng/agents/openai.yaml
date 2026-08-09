@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Engineering CI"
+  short_description: "Validate AI systems safely in CI"
+  default_prompt: "Use $ci-ai-eng to design a bounded CI pipeline for this AI system."

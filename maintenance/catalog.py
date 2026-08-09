@@ -11,10 +11,11 @@ from maintenance.catalog_data import (
     CODEX_METADATA,
     COLLECTIONS,
     LICENSE_SHA256,
-    MIGRATED,
     OWNED,
+    RETIRED_MIGRATIONS,
     SENSITIVE,
     SKILLS,
+    SOURCE_TO_SKILL,
     SOURCE_COMMIT,
     SOURCE_TREE_SHA256,
 )
@@ -85,28 +86,36 @@ def render_install_commands() -> str:
     return "\n".join(blocks).rstrip() + "\n"
 
 
+def render_readme() -> str:
+    path = ROOT / "README.md"
+    current = path.read_text(encoding="utf-8")
+    start = "<!-- collections:start -->"
+    end = "<!-- collections:end -->"
+    if current.count(start) != 1 or current.count(end) != 1:
+        raise RuntimeError("README collection markers must occur exactly once")
+    before, remainder = current.split(start, 1)
+    _old, after = remainder.split(end, 1)
+    return f"{before}{start}\n{render_install_commands()}{end}{after}"
+
+
 def adaptation_note(relative: str) -> str:
-    if relative == "skill-authoring/SKILL.md":
-        return "Rewritten around the official Agent Skills format and standalone distribution."
     if relative in {
-        "gcloud-operation/SKILL.md",
-        "postgres-query-review/SKILL.md",
-        "terraform-change/SKILL.md",
+        "cloud-ops/SKILL.md",
+        "database-postgresql/SKILL.md",
+        "infra-terraform/SKILL.md",
     }:
         return "Replaced the Geremmyas target marker with portable target evidence."
     if relative in {
-        "manage-state-with-zustand/SKILL.md",
-        "model-state-with-xstate/SKILL.md",
-        "validate-with-zod/SKILL.md",
+        "web-state-zustand/SKILL.md",
+        "web-state-xstate/SKILL.md",
+        "web-validation-zod/SKILL.md",
     }:
         return "Removed reliance on Geremmyas-installed auto-loading instruction files."
-    if relative == "migrate-react-router/SKILL.md":
-        return "Made dependency updates respect the consumer project's package manager."
-    if relative == "game-art-2d/SKILL.md":
+    if relative == "game-dev-2d-art/SKILL.md":
         return "Kept deliberate Codex image tooling while adding a standalone cross-client fallback."
-    if relative == "scientific-paper/SKILL.md":
+    if relative == "research-paper-authoring/SKILL.md":
         return "Made companion-skill composition optional and changed script execution to UV."
-    if relative.endswith("/SKILL.md") and relative.split("/", 1)[0].startswith(("game-", "gameplay", "procedural")):
+    if relative.endswith("/SKILL.md") and relative.split("/", 1)[0].startswith(("game-dev-", "release-game-dev-")):
         return "Made companion specialized-skill composition explicitly optional."
     return "Adapted for standalone portable use."
 
@@ -118,8 +127,8 @@ def build_skills_catalog(source: Path) -> dict[str, object]:
         for skill in SKILLS
     }
     skills: list[dict[str, object]] = []
-    for name in MIGRATED:
-        source_root = source / "content" / "skills" / name
+    for source_name, name in SOURCE_TO_SKILL:
+        source_root = source / "content" / "skills" / source_name
         destination_root = ROOT / "skills" / name
         source_files = sorted(item for item in source_root.rglob("*") if item.is_file())
         destination_paths = {
@@ -151,14 +160,23 @@ def build_skills_catalog(source: Path) -> dict[str, object]:
             files.append(entry)
         source_paths = {item.relative_to(source_root).as_posix() for item in source_files}
         unexpected = destination_paths - source_paths
-        if unexpected:
-            raise RuntimeError(f"unowned destination files in {name}: {sorted(unexpected)}")
+        for path in sorted(unexpected):
+            destination_file = destination_root / path
+            files.append(
+                {
+                    "path": path,
+                    "disposition": "owned",
+                    "destination_sha256": sha256(destination_file),
+                    "note": "Added by Storehouse after migration.",
+                }
+            )
         domains = SENSITIVE.get(name, [])
         skills.append(
             {
                 "name": name,
                 "ownership": "migrated",
-                "source_path": f"content/skills/{name}",
+                "source_name": source_name,
+                "source_path": f"content/skills/{source_name}",
                 "source_tree_sha256": tree_sha256(source_root),
                 "categories": categories[name],
                 "security": {
@@ -215,8 +233,26 @@ def build_skills_catalog(source: Path) -> dict[str, object]:
                 ],
             }
         )
+    retired: list[dict[str, object]] = []
+    for source_name, reason in RETIRED_MIGRATIONS:
+        source_root = source / "content" / "skills" / source_name
+        retired.append(
+            {
+                "source_name": source_name,
+                "source_path": f"content/skills/{source_name}",
+                "source_tree_sha256": tree_sha256(source_root),
+                "reason": reason,
+                "files": [
+                    {
+                        "path": item.relative_to(source_root).as_posix(),
+                        "source_sha256": sha256(item),
+                    }
+                    for item in sorted(path for path in source_root.rglob("*") if path.is_file())
+                ],
+            }
+        )
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "source": {
             "repository": "woliveiras/geremmyas",
             "commit": SOURCE_COMMIT,
@@ -226,6 +262,7 @@ def build_skills_catalog(source: Path) -> dict[str, object]:
             "license_scope": "Geremmyas repository files at the frozen source commit; no skill-local exception was found.",
         },
         "skills": skills,
+        "retired_migrations": retired,
     }
 
 
@@ -235,6 +272,7 @@ def rendered_files(source: Path) -> dict[Path, str]:
     return {
         ROOT / "catalog" / "collections.json": json.dumps(collections, indent=2, ensure_ascii=False) + "\n",
         ROOT / "catalog" / "skills.json": json.dumps(skills, indent=2, ensure_ascii=False) + "\n",
+        ROOT / "README.md": render_readme(),
     }
 
 

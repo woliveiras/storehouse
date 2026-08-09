@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Dev 2D Release"
+  short_description: "Prepare verified 2D game releases"
+  default_prompt: "Use $release-game-dev-2d to create and verify a reproducible release artifact for this 2D game."

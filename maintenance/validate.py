@@ -41,8 +41,8 @@ def _syntax_checks() -> None:
 
 
 def _script_smokes() -> None:
-    art = ROOT / "skills" / "game-art-2d" / "scripts"
-    bibliography = ROOT / "skills" / "scientific-paper" / "scripts" / "validate-bib.py"
+    art = ROOT / "skills" / "game-dev-2d-art" / "scripts"
+    bibliography = ROOT / "skills" / "research-paper-authoring" / "scripts" / "validate-bib.py"
     with tempfile.TemporaryDirectory(prefix="storehouse-script-smoke-", dir=safe_temp_parent()) as raw:
         work = Path(raw).resolve()
         first = work / "first.png"

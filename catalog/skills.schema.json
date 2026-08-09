@@ -3,10 +3,11 @@
   "$id": "https://github.com/woliveiras/storehouse/catalog/skills.schema.json",
   "title": "Storehouse provenance inventory",
   "type": "object",
-  "required": ["schema_version", "source", "skills"],
+  "required": ["schema_version", "source", "skills", "retired_migrations"],
   "properties": {
-    "schema_version": { "const": 2 },
+    "schema_version": { "const": 3 },
     "source": { "type": "object" },
-    "skills": { "type": "array", "minItems": 34, "maxItems": 34 }
+    "skills": { "type": "array", "minItems": 42, "maxItems": 42 },
+    "retired_migrations": { "type": "array", "minItems": 2, "maxItems": 2 }
   }
 }

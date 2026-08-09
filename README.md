@@ -9,7 +9,7 @@ plugin for horizontal engineering workflows such as proportional measurement,
 TDD, review, documentation, architecture, decisions, security, and session
 continuity. Baseline provides the foundation. Storehouse provides optional depth
 through specialized skills and owns the optional SDD methodology through the
-standalone `spec` skill and `sdd` collection. Either product works independently;
+standalone `sdd-specification` skill and `sdd` collection. Either product works independently;
 when both are present, approved SDD artifacts may feed installed TDD and review
 capabilities without a physical or runtime dependency.
 
@@ -33,7 +33,7 @@ npx skills add woliveiras/storehouse --list
 Install one skill:
 
 ```bash
-npx skills add woliveiras/storehouse --skill gameplay-programming-2d
+npx skills add woliveiras/storehouse --skill game-dev-2d-gameplay
 ```
 
 Choose target agents or copy mode with the official CLI flags when the default
@@ -51,8 +51,8 @@ Core 2D gameplay programming and deterministic game testing.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill gameplay-programming-2d \
-  --skill game-testing-2d
+  --skill game-dev-2d-gameplay \
+  --skill game-dev-2d-testing
 ```
 
 ### `game-ui`
@@ -61,8 +61,8 @@ Accessible 2D game interfaces and moment-to-moment feel.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill game-ui-accessibility \
-  --skill game-feel-2d
+  --skill game-dev-2d-ui-accessibility \
+  --skill game-dev-2d-feel
 ```
 
 ### `game-systems`
@@ -71,9 +71,9 @@ AI, procedural generation, saves, and progression for Phaser and Godot 2D.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill game-ai-2d \
-  --skill procedural-generation-2d \
-  --skill game-save-n-progress
+  --skill game-dev-2d-ai \
+  --skill game-dev-2d-procedural-generation \
+  --skill game-dev-2d-save-progression
 ```
 
 ### `game-performance`
@@ -82,7 +82,7 @@ Measured 2D game performance work.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill game-performance-2d
+  --skill game-dev-2d-performance
 ```
 
 ### `game-audio`
@@ -91,7 +91,7 @@ npx skills add woliveiras/storehouse \
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill game-audio-2d
+  --skill game-dev-2d-audio
 ```
 
 ### `game-art`
@@ -100,62 +100,107 @@ npx skills add woliveiras/storehouse \
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill game-art-2d
+  --skill game-dev-2d-art
 ```
 
-### `game-delivery`
+### `game-ci`
 
-Reproducible Phaser and Godot build and release evidence.
+Continuous integration for Phaser and Godot 2D projects.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill game-build-and-release
+  --skill ci-game-dev-2d
+```
+
+### `game-release`
+
+Versioned Phaser and Godot 2D release artifacts and evidence.
+
+```bash
+npx skills add woliveiras/storehouse \
+  --skill release-game-dev-2d
 ```
 
 ### `game-dev`
 
-Complete aggregate of the seven focused Phaser and Godot 2D collections.
+Complete aggregate of the focused Phaser and Godot 2D collections.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill gameplay-programming-2d \
-  --skill game-testing-2d \
-  --skill game-ui-accessibility \
-  --skill game-feel-2d \
-  --skill game-ai-2d \
-  --skill procedural-generation-2d \
-  --skill game-save-n-progress \
-  --skill game-performance-2d \
-  --skill game-audio-2d \
-  --skill game-art-2d \
-  --skill game-build-and-release
+  --skill game-dev-2d-gameplay \
+  --skill game-dev-2d-testing \
+  --skill game-dev-2d-ui-accessibility \
+  --skill game-dev-2d-feel \
+  --skill game-dev-2d-ai \
+  --skill game-dev-2d-procedural-generation \
+  --skill game-dev-2d-save-progression \
+  --skill game-dev-2d-performance \
+  --skill game-dev-2d-audio \
+  --skill game-dev-2d-art \
+  --skill ci-game-dev-2d \
+  --skill release-game-dev-2d
+```
+
+### `ci`
+
+Continuous integration for AI engineering, Android, game development 2D, Go, Python, Rust, Terraform, and TypeScript.
+
+```bash
+npx skills add woliveiras/storehouse \
+  --skill ci-ai-eng \
+  --skill ci-android \
+  --skill ci-game-dev-2d \
+  --skill ci-go \
+  --skill ci-python \
+  --skill ci-rust \
+  --skill ci-terraform \
+  --skill ci-typescript
+```
+
+### `release`
+
+Release engineering for AI engineering, Android, game development 2D, Go, Python, Rust, Terraform, and TypeScript.
+
+```bash
+npx skills add woliveiras/storehouse \
+  --skill release-ai-eng \
+  --skill release-android \
+  --skill release-game-dev-2d \
+  --skill release-go \
+  --skill release-python \
+  --skill release-rust \
+  --skill release-terraform \
+  --skill release-typescript
 ```
 
 ### `android`
 
-Android CI and delivery checks.
+Android CI and release engineering.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill android-ci-setup
+  --skill ci-android \
+  --skill release-android
 ```
 
 ### `go`
 
-Go CI and supply-chain checks.
+Go CI and release engineering.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill go-ci-setup
+  --skill ci-go \
+  --skill release-go
 ```
 
 ### `python`
 
-Python CI, validation, and publishing preparation.
+Python CI and release engineering.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill python-ci-setup
+  --skill ci-python \
+  --skill release-python
 ```
 
 ### `rust`
@@ -164,100 +209,107 @@ Rust CI and release engineering.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill rust-ci-setup \
-  --skill rust-release
+  --skill ci-rust \
+  --skill release-rust
+```
+
+### `terraform`
+
+Terraform infrastructure, CI, and release engineering.
+
+```bash
+npx skills add woliveiras/storehouse \
+  --skill infra-terraform \
+  --skill ci-terraform \
+  --skill release-terraform
 ```
 
 ### `typescript`
 
-TypeScript CI and boundary validation.
+TypeScript CI, release, and boundary validation.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill typescript-ci-setup \
-  --skill validate-with-zod
+  --skill ci-typescript \
+  --skill release-typescript \
+  --skill web-validation-zod
 ```
 
 ### `web`
 
-React Router migration plus Zustand, XState, and Zod recipes.
+Zustand, XState, and Zod recipes for web applications.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill migrate-react-router \
-  --skill manage-state-with-zustand \
-  --skill model-state-with-xstate \
-  --skill validate-with-zod
+  --skill web-state-zustand \
+  --skill web-state-xstate \
+  --skill web-validation-zod
 ```
 
 ### `data`
 
-PostgreSQL, ChromaDB/RAG, and Supabase workflows.
+PostgreSQL, RAG storage, and Supabase workflows.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill postgres-query-review \
-  --skill chromadb-rag-workflow \
-  --skill supabase-workflow
+  --skill database-postgresql \
+  --skill ai-eng-rag-pipeline \
+  --skill cloud-supabase
 ```
 
 ### `infrastructure`
 
-Google Cloud and Terraform operations.
+Cloud operations, Supabase, and Terraform infrastructure.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill gcloud-operation \
-  --skill terraform-change
+  --skill cloud-ops \
+  --skill cloud-supabase \
+  --skill infra-terraform
 ```
 
-### `ai`
+### `ai-engineering`
 
-LangGraph, LLM service, and RAG design and review.
+Agent, LLM service, RAG pipeline, CI, and release engineering.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill langgraph-agent-design \
-  --skill llm-integration-review \
-  --skill chromadb-rag-workflow
+  --skill ai-eng-agent-design \
+  --skill ai-eng-llm-integration \
+  --skill ai-eng-rag-pipeline \
+  --skill ci-ai-eng \
+  --skill release-ai-eng
 ```
 
 ### `scientific-research`
 
-Scientific papers, empirical case studies, and academic draft review.
+Scientific papers, empirical case studies, and academic draft editing.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill scientific-paper \
-  --skill scientific-case-study-research \
-  --skill paper-review
+  --skill research-paper-authoring \
+  --skill research-case-study-design \
+  --skill writing-academic-edit
 ```
 
 ### `writing`
 
-Evidence-preserving technical blog review.
+Technical blog authoring and evidence-preserving editing.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill text-review
-```
-
-### `skill-maintenance`
-
-Portable Agent Skill authoring and review.
-
-```bash
-npx skills add woliveiras/storehouse \
-  --skill skill-authoring
+  --skill writing-blog-post \
+  --skill writing-technical-edit \
+  --skill writing-academic-edit
 ```
 
 ### `sdd`
 
-Optional Specification-Driven Development with durable specs, oracle matrices, reconciliation, and formal review.
+Optional Specification-Driven Development with durable specifications, oracle matrices, reconciliation, and formal review.
 
 ```bash
 npx skills add woliveiras/storehouse \
-  --skill spec
+  --skill sdd-specification
 ```
 <!-- collections:end -->
 
@@ -268,13 +320,13 @@ Check for updates across installed skills, or update a named skill:
 ```bash
 npx skills check
 npx skills update
-npx skills update gameplay-programming-2d
+npx skills update game-dev-2d-gameplay
 ```
 
 Remove a skill from the current project:
 
 ```bash
-npx skills remove gameplay-programming-2d
+npx skills remove game-dev-2d-gameplay
 ```
 
 Removing a collection means removing its individual skill names; collections
@@ -282,11 +334,11 @@ have no installed identity.
 
 ## Compatibility and privacy
 
-The 34 directories validate against the Agent Skills contract. Clean-room
+The 42 directories validate against the Agent Skills contract. Clean-room
 installer checks cover repository listing plus representative individual and
 multi-skill discovery; exact tested agents are recorded in
-[`docs/compatibility.md`](docs/compatibility.md). Eleven game skills retain
-deliberate Codex `agents/openai.yaml` metadata. `game-art-2d` can use Codex
+[`docs/compatibility.md`](docs/compatibility.md). Twelve game skills retain
+deliberate Codex `agents/openai.yaml` metadata. `game-dev-2d-art` can use Codex
 image generation when available, but documents a non-generation fallback.
 Support claims do not extend beyond those checks.
 

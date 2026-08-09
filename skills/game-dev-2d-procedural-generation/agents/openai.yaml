@@ -1,0 +1,4 @@
+interface:
+  display_name: "Procedural Generation 2D"
+  short_description: "Build deterministic procedural content"
+  default_prompt: "Use $game-dev-2d-procedural-generation to design deterministic, validated procedural content for this 2D game."

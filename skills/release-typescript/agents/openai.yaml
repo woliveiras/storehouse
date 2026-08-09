@@ -1,0 +1,4 @@
+interface:
+  display_name: "TypeScript Release"
+  short_description: "Prepare verified npm package releases"
+  default_prompt: "Use $release-typescript to prepare and verify this TypeScript package release without publishing it."

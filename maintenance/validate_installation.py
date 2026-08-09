@@ -35,7 +35,7 @@ def installation_commands(collection: list[str]) -> dict[str, list[str]]:
     multi.extend(["--agent", "claude-code", "opencode", "github-copilot", "--copy", "-y"])
     return {
         "list": [str(CLI), "add", str(ROOT), "--list"],
-        "single": [str(CLI), "add", str(ROOT), "--skill", "gameplay-programming-2d", "--agent", "codex", "--copy", "-y"],
+        "single": [str(CLI), "add", str(ROOT), "--skill", "game-dev-2d-gameplay", "--agent", "codex", "--copy", "-y"],
         "collection": multi,
     }
 
@@ -62,10 +62,10 @@ def main() -> int:
         commands = installation_commands(collection)
         listed = _run(commands["list"], project, env)
         listing = listed.stdout + listed.stderr
-        if not {"gameplay-programming-2d", "spec"} <= set(listing.split()):
+        if not {"game-dev-2d-gameplay", "sdd-specification"} <= set(listing.split()):
             raise RuntimeError("official CLI did not discover representative and SDD skills")
         _run(commands["single"], project, env)
-        single_path = project / ".agents/skills/gameplay-programming-2d/SKILL.md"
+        single_path = project / ".agents/skills/game-dev-2d-gameplay/SKILL.md"
         if not single_path.is_file():
             raise RuntimeError("Codex project installation was not discoverable")
         multi = _run(commands["collection"], project, env)
@@ -75,12 +75,12 @@ def main() -> int:
             raise RuntimeError(f"multi-skill installation discovery incomplete: universal={sorted(universal)} claude={sorted(claude)}")
         sdd = installation_commands(sdd_collection)
         _run(sdd["collection"], project, env)
-        for relative in (".agents/skills/spec/SKILL.md", ".claude/skills/spec/SKILL.md"):
+        for relative in (".agents/skills/sdd-specification/SKILL.md", ".claude/skills/sdd-specification/SKILL.md"):
             if not (project / relative).is_file():
                 raise RuntimeError(f"SDD collection installation missing {relative}")
         report = {
             "cli_version": _run([str(CLI), "--version"], project, env).stdout.strip(),
-            "single": "gameplay-programming-2d",
+            "single": "game-dev-2d-gameplay",
             "collection": "game-core",
             "collection_skills": collection,
             "sdd_collection_skills": sdd_collection,

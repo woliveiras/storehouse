@@ -1,0 +1,2 @@
+platform=android
+version=1.2.3

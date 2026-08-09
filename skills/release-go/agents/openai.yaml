@@ -1,0 +1,4 @@
+interface:
+  display_name: "Go Release"
+  short_description: "Prepare Go modules and binary releases"
+  default_prompt: "Use $release-go to prepare and verify this Go release without publishing it."

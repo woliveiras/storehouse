@@ -26,21 +26,21 @@ class MaintenanceContractTests(unittest.TestCase):
         self.assertNotIn("CODEX_HOME", env)
         self.assertNotIn("OPENAI_API_KEY", env)
         self.assertNotIn("CODEX_API_KEY", env)
-        commands = installation_commands(["gameplay-programming-2d", "game-testing-2d"])
+        commands = installation_commands(["game-dev-2d-gameplay", "game-dev-2d-testing"])
         self.assertIn("--list", commands["list"])
         self.assertIn("--copy", commands["single"])
         self.assertNotIn("--global", commands["single"])
         self.assertEqual(2, commands["collection"].count("--skill"))
         self.assertIn("github-copilot", commands["collection"])
 
-    def test_as_016_official_validator_invokes_exactly_34_skills(self) -> None:
+    def test_as_016_official_validator_invokes_exactly_42_skills(self) -> None:
         from maintenance import official_validate
         from maintenance.catalog_data import SKILLS
 
         completed = mock.Mock(returncode=0, stdout="Valid skill", stderr="")
         with mock.patch.object(official_validate.shutil, "which", return_value="/validator"), mock.patch.object(official_validate.subprocess, "run", return_value=completed) as run:
             self.assertEqual(0, official_validate.main())
-        self.assertEqual(34, run.call_count)
+        self.assertEqual(42, run.call_count)
         self.assertEqual(set(SKILLS), {Path(call.args[0][-1]).name for call in run.call_args_list})
         self.assertTrue(all(call.args[0][:2] == ["/validator", "validate"] for call in run.call_args_list))
 

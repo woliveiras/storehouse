@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Dev 2D CI"
+  short_description: "Validate Phaser and Godot builds in CI"
+  default_prompt: "Use $ci-game-dev-2d to design a reproducible CI pipeline for this 2D game."

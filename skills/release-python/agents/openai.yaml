@@ -1,0 +1,4 @@
+interface:
+  display_name: "Python Release"
+  short_description: "Prepare verified Python distributions"
+  default_prompt: "Use $release-python to prepare and verify this Python package release without publishing it."

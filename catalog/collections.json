@@ -5,58 +5,65 @@
       "name": "game-core",
       "description": "Core 2D gameplay programming and deterministic game testing.",
       "skills": [
-        "gameplay-programming-2d",
-        "game-testing-2d"
+        "game-dev-2d-gameplay",
+        "game-dev-2d-testing"
       ]
     },
     {
       "name": "game-ui",
       "description": "Accessible 2D game interfaces and moment-to-moment feel.",
       "skills": [
-        "game-ui-accessibility",
-        "game-feel-2d"
+        "game-dev-2d-ui-accessibility",
+        "game-dev-2d-feel"
       ]
     },
     {
       "name": "game-systems",
       "description": "AI, procedural generation, saves, and progression for Phaser and Godot 2D.",
       "skills": [
-        "game-ai-2d",
-        "procedural-generation-2d",
-        "game-save-n-progress"
+        "game-dev-2d-ai",
+        "game-dev-2d-procedural-generation",
+        "game-dev-2d-save-progression"
       ]
     },
     {
       "name": "game-performance",
       "description": "Measured 2D game performance work.",
       "skills": [
-        "game-performance-2d"
+        "game-dev-2d-performance"
       ]
     },
     {
       "name": "game-audio",
       "description": "2D game audio systems and lifecycle.",
       "skills": [
-        "game-audio-2d"
+        "game-dev-2d-audio"
       ]
     },
     {
       "name": "game-art",
       "description": "2D runtime art production, processing, and integration.",
       "skills": [
-        "game-art-2d"
+        "game-dev-2d-art"
       ]
     },
     {
-      "name": "game-delivery",
-      "description": "Reproducible Phaser and Godot build and release evidence.",
+      "name": "game-ci",
+      "description": "Continuous integration for Phaser and Godot 2D projects.",
       "skills": [
-        "game-build-and-release"
+        "ci-game-dev-2d"
+      ]
+    },
+    {
+      "name": "game-release",
+      "description": "Versioned Phaser and Godot 2D release artifacts and evidence.",
+      "skills": [
+        "release-game-dev-2d"
       ]
     },
     {
       "name": "game-dev",
-      "description": "Complete aggregate of the seven focused Phaser and Godot 2D collections.",
+      "description": "Complete aggregate of the focused Phaser and Godot 2D collections.",
       "includes": [
         "game-core",
         "game-ui",
@@ -64,110 +71,149 @@
         "game-performance",
         "game-audio",
         "game-art",
-        "game-delivery"
+        "game-ci",
+        "game-release"
+      ]
+    },
+    {
+      "name": "ci",
+      "description": "Continuous integration for AI engineering, Android, game development 2D, Go, Python, Rust, Terraform, and TypeScript.",
+      "skills": [
+        "ci-ai-eng",
+        "ci-android",
+        "ci-game-dev-2d",
+        "ci-go",
+        "ci-python",
+        "ci-rust",
+        "ci-terraform",
+        "ci-typescript"
+      ]
+    },
+    {
+      "name": "release",
+      "description": "Release engineering for AI engineering, Android, game development 2D, Go, Python, Rust, Terraform, and TypeScript.",
+      "skills": [
+        "release-ai-eng",
+        "release-android",
+        "release-game-dev-2d",
+        "release-go",
+        "release-python",
+        "release-rust",
+        "release-terraform",
+        "release-typescript"
       ]
     },
     {
       "name": "android",
-      "description": "Android CI and delivery checks.",
+      "description": "Android CI and release engineering.",
       "skills": [
-        "android-ci-setup"
+        "ci-android",
+        "release-android"
       ]
     },
     {
       "name": "go",
-      "description": "Go CI and supply-chain checks.",
+      "description": "Go CI and release engineering.",
       "skills": [
-        "go-ci-setup"
+        "ci-go",
+        "release-go"
       ]
     },
     {
       "name": "python",
-      "description": "Python CI, validation, and publishing preparation.",
+      "description": "Python CI and release engineering.",
       "skills": [
-        "python-ci-setup"
+        "ci-python",
+        "release-python"
       ]
     },
     {
       "name": "rust",
       "description": "Rust CI and release engineering.",
       "skills": [
-        "rust-ci-setup",
-        "rust-release"
+        "ci-rust",
+        "release-rust"
+      ]
+    },
+    {
+      "name": "terraform",
+      "description": "Terraform infrastructure, CI, and release engineering.",
+      "skills": [
+        "infra-terraform",
+        "ci-terraform",
+        "release-terraform"
       ]
     },
     {
       "name": "typescript",
-      "description": "TypeScript CI and boundary validation.",
+      "description": "TypeScript CI, release, and boundary validation.",
       "skills": [
-        "typescript-ci-setup",
-        "validate-with-zod"
+        "ci-typescript",
+        "release-typescript",
+        "web-validation-zod"
       ]
     },
     {
       "name": "web",
-      "description": "React Router migration plus Zustand, XState, and Zod recipes.",
+      "description": "Zustand, XState, and Zod recipes for web applications.",
       "skills": [
-        "migrate-react-router",
-        "manage-state-with-zustand",
-        "model-state-with-xstate",
-        "validate-with-zod"
+        "web-state-zustand",
+        "web-state-xstate",
+        "web-validation-zod"
       ]
     },
     {
       "name": "data",
-      "description": "PostgreSQL, ChromaDB/RAG, and Supabase workflows.",
+      "description": "PostgreSQL, RAG storage, and Supabase workflows.",
       "skills": [
-        "postgres-query-review",
-        "chromadb-rag-workflow",
-        "supabase-workflow"
+        "database-postgresql",
+        "ai-eng-rag-pipeline",
+        "cloud-supabase"
       ]
     },
     {
       "name": "infrastructure",
-      "description": "Google Cloud and Terraform operations.",
+      "description": "Cloud operations, Supabase, and Terraform infrastructure.",
       "skills": [
-        "gcloud-operation",
-        "terraform-change"
+        "cloud-ops",
+        "cloud-supabase",
+        "infra-terraform"
       ]
     },
     {
-      "name": "ai",
-      "description": "LangGraph, LLM service, and RAG design and review.",
+      "name": "ai-engineering",
+      "description": "Agent, LLM service, RAG pipeline, CI, and release engineering.",
       "skills": [
-        "langgraph-agent-design",
-        "llm-integration-review",
-        "chromadb-rag-workflow"
+        "ai-eng-agent-design",
+        "ai-eng-llm-integration",
+        "ai-eng-rag-pipeline",
+        "ci-ai-eng",
+        "release-ai-eng"
       ]
     },
     {
       "name": "scientific-research",
-      "description": "Scientific papers, empirical case studies, and academic draft review.",
+      "description": "Scientific papers, empirical case studies, and academic draft editing.",
       "skills": [
-        "scientific-paper",
-        "scientific-case-study-research",
-        "paper-review"
+        "research-paper-authoring",
+        "research-case-study-design",
+        "writing-academic-edit"
       ]
     },
     {
       "name": "writing",
-      "description": "Evidence-preserving technical blog review.",
+      "description": "Technical blog authoring and evidence-preserving editing.",
       "skills": [
-        "text-review"
-      ]
-    },
-    {
-      "name": "skill-maintenance",
-      "description": "Portable Agent Skill authoring and review.",
-      "skills": [
-        "skill-authoring"
+        "writing-blog-post",
+        "writing-technical-edit",
+        "writing-academic-edit"
       ]
     },
     {
       "name": "sdd",
-      "description": "Optional Specification-Driven Development with durable specs, oracle matrices, reconciliation, and formal review.",
+      "description": "Optional Specification-Driven Development with durable specifications, oracle matrices, reconciliation, and formal review.",
       "skills": [
-        "spec"
+        "sdd-specification"
       ]
     }
   ]

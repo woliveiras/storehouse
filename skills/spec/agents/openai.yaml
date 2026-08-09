@@ -1,6 +1,0 @@
-interface:
-  display_name: "Spec"
-  short_description: "Run optional specification-driven development"
-  default_prompt: "Use $spec to create and reconcile an active SDD specification."
-policy:
-  allow_implicit_invocation: true

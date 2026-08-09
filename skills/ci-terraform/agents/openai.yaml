@@ -1,0 +1,4 @@
+interface:
+  display_name: "Terraform CI"
+  short_description: "Validate Terraform changes safely in CI"
+  default_prompt: "Use $ci-terraform to design safe continuous integration for this Terraform project."

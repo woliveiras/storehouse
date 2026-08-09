@@ -12,6 +12,13 @@ from urllib.parse import unquote
 
 import yaml
 
+from maintenance.catalog_data import COLLECTIONS as CATALOG_DATA
+from maintenance.catalog_data import EXCLUDED as EXCLUDED_DATA
+from maintenance.catalog_data import MIGRATED as MIGRATED_DATA
+from maintenance.catalog_data import OWNED as OWNED_DATA
+from maintenance.catalog_data import RETIRED_MIGRATIONS
+from maintenance.catalog_data import SOURCE_TO_SKILL
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_ROOT = ROOT / "skills"
@@ -21,87 +28,13 @@ GEREMMYAS_TREE_DIGEST = "7de30d71108e8c4e73641a70aaa2d9541ce97f6b826cca528f6eeed
 BASELINE_TREE_DIGEST = "3b0a2de4895921a4dee1996101fffcb28c8419b68a66f92f86a5af41b27b561f"
 GEREMMYAS_LICENSE_DIGEST = "24923e703cfafa4e2c5098f4d5b0442ab43f9405dbdbb9fd961707c32e5e4702"
 
-MIGRATED = {
-    "android-ci-setup",
-    "chromadb-rag-workflow",
-    "game-ai-2d",
-    "game-art-2d",
-    "game-audio-2d",
-    "game-build-and-release",
-    "game-feel-2d",
-    "game-performance-2d",
-    "game-save-n-progress",
-    "game-testing-2d",
-    "game-ui-accessibility",
-    "gameplay-programming-2d",
-    "gcloud-operation",
-    "go-ci-setup",
-    "langgraph-agent-design",
-    "llm-integration-review",
-    "manage-state-with-zustand",
-    "migrate-react-router",
-    "model-state-with-xstate",
-    "paper-review",
-    "postgres-query-review",
-    "procedural-generation-2d",
-    "python-ci-setup",
-    "rust-ci-setup",
-    "rust-release",
-    "scientific-case-study-research",
-    "scientific-paper",
-    "skill-authoring",
-    "supabase-workflow",
-    "terraform-change",
-    "text-review",
-    "typescript-ci-setup",
-    "validate-with-zod",
-}
-
-EXCLUDED = {
-    "brainstorming",
-    "bugfix",
-    "ci-workflow",
-    "decision-framework",
-    "design-deep-modules",
-    "docs",
-    "git-commit",
-    "improve-architecture",
-    "premortem",
-    "refine",
-    "session-bridge",
-    "shape-domain",
-    "spec",
-    "tdd",
-    "technical-research",
-    "verify",
-}
-
-OWNED = {"spec"}
+SOURCE_MIGRATED = {source for source, _ in SOURCE_TO_SKILL}
+RETIRED = {source for source, _ in RETIRED_MIGRATIONS}
+MIGRATED = set(MIGRATED_DATA)
+EXCLUDED = set(EXCLUDED_DATA)
+OWNED = set(OWNED_DATA)
 SKILLS = MIGRATED | OWNED
-
-COLLECTIONS = {
-    "game-core",
-    "game-ui",
-    "game-systems",
-    "game-performance",
-    "game-audio",
-    "game-art",
-    "game-delivery",
-    "game-dev",
-    "android",
-    "go",
-    "python",
-    "rust",
-    "typescript",
-    "web",
-    "data",
-    "infrastructure",
-    "ai",
-    "scientific-research",
-    "writing",
-    "skill-maintenance",
-    "sdd",
-}
+COLLECTIONS = {item["name"] for item in CATALOG_DATA}
 
 SKILL_NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 LINK = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
@@ -235,10 +168,13 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertEqual([], violations)
 
     def test_as_001_exact_inventory_equation(self) -> None:
-        self.assertEqual(33, len(MIGRATED))
+        self.assertEqual(31, len(SOURCE_MIGRATED))
+        self.assertEqual(2, len(RETIRED))
         self.assertEqual(16, len(EXCLUDED))
-        self.assertFalse(MIGRATED & EXCLUDED)
-        self.assertEqual(49, len(MIGRATED | EXCLUDED))
+        self.assertFalse(SOURCE_MIGRATED & RETIRED)
+        self.assertFalse((SOURCE_MIGRATED | RETIRED) & EXCLUDED)
+        self.assertEqual(49, len(SOURCE_MIGRATED | RETIRED | EXCLUDED))
+        self.assertEqual(42, len(SKILLS))
 
     def test_as_002_optional_live_source_baseline(self) -> None:
         geremmyas = os.environ.get("STOREHOUSE_GEREMMYAS_SOURCE")
@@ -266,16 +202,20 @@ class RepositoryContractTests(unittest.TestCase):
             for path in (Path(geremmyas) / "content" / "skills").iterdir()
             if path.is_dir()
         }
-        self.assertEqual(MIGRATED | EXCLUDED, source_names)
+        self.assertEqual(SOURCE_MIGRATED | RETIRED | EXCLUDED, source_names)
         catalog = json.loads((ROOT / "catalog" / "skills.json").read_text(encoding="utf-8"))
         by_name = {item["name"]: item for item in catalog["skills"]}
-        for name in MIGRATED:
-            source_root = Path(geremmyas) / "content" / "skills" / name
+        for source_name, name in SOURCE_TO_SKILL:
+            source_root = Path(geremmyas) / "content" / "skills" / source_name
             source_files = {
                 path.relative_to(source_root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
                 for path in source_root.rglob("*") if path.is_file()
             }
-            dispositions = {item["path"]: item for item in by_name[name]["files"]}
+            dispositions = {
+                item["path"]: item
+                for item in by_name[name]["files"]
+                if "source_sha256" in item
+            }
             self.assertEqual(source_files, {path: item["source_sha256"] for path, item in dispositions.items()})
             for relative, item in dispositions.items():
                 destination = SKILLS_ROOT / name / relative
@@ -291,8 +231,8 @@ class RepositoryContractTests(unittest.TestCase):
     def test_as_003_exact_destination_inventory(self) -> None:
         found = {path.name for path in SKILLS_ROOT.iterdir() if path.is_dir()}
         self.assertEqual(SKILLS, found)
-        self.assertFalse((EXCLUDED - OWNED) & found)
-        self.assertEqual(34, len(list(SKILLS_ROOT.rglob("SKILL.md"))))
+        self.assertFalse(EXCLUDED & found)
+        self.assertEqual(42, len(list(SKILLS_ROOT.rglob("SKILL.md"))))
 
     def test_as_005_skill_frontmatter_and_routing(self) -> None:
         names: list[str] = []
@@ -372,7 +312,7 @@ class RepositoryContractTests(unittest.TestCase):
         script_metadata = "\n".join(path.read_text(encoding="utf-8") for path in SKILLS_ROOT.rglob("*.py"))
         self.assertNotIn("Pillow>=", script_metadata)
         self.assertIn("Pillow==12.0.0", script_metadata)
-        rust_guidance = (SKILLS_ROOT / "rust-ci-setup/SKILL.md").read_text(encoding="utf-8") + (SKILLS_ROOT / "rust-release/SKILL.md").read_text(encoding="utf-8")
+        rust_guidance = (SKILLS_ROOT / "ci-rust/SKILL.md").read_text(encoding="utf-8") + (SKILLS_ROOT / "release-rust/SKILL.md").read_text(encoding="utf-8")
         self.assertNotIn("rust-toolchain@stable", rust_guidance)
         self.assertNotIn("cargo +nightly miri", rust_guidance)
         migrated_pattern = "|".join(re.escape(name) for name in sorted(MIGRATED, key=len, reverse=True))
@@ -381,13 +321,13 @@ class RepositoryContractTests(unittest.TestCase):
             for match in re.finditer(rf"\$(?:{migrated_pattern})", text):
                 nearby = text[max(0, match.start() - 180):match.start()].casefold()
                 self.assertTrue("if installed" in nearby or "optional" in nearby, f"mandatory companion reference in {skill}")
-        art = (SKILLS_ROOT / "game-art-2d" / "SKILL.md").read_text(encoding="utf-8")
+        art = (SKILLS_ROOT / "game-dev-2d-art" / "SKILL.md").read_text(encoding="utf-8")
         self.assertIn("optional helpers", art)
         self.assertIn("skill itself does not", art)
         self.assertIn("fallback", art.casefold())
 
     def test_as_008_game_scope(self) -> None:
-        game_names = {name for name in MIGRATED if name.startswith("game-") or name in {"gameplay-programming-2d", "procedural-generation-2d"}}
+        game_names = {name for name in SKILLS if "game-dev-2d" in name}
         for name in game_names:
             text = (SKILLS_ROOT / name / "SKILL.md").read_text(encoding="utf-8")
             self.assertIn("2D", text, name)
@@ -411,7 +351,7 @@ class RepositoryContractTests(unittest.TestCase):
 
     def test_as_009_provenance_inventory_is_complete(self) -> None:
         catalog = json.loads((ROOT / "catalog" / "skills.json").read_text(encoding="utf-8"))
-        self.assertEqual(2, catalog["schema_version"])
+        self.assertEqual(3, catalog["schema_version"])
         self.assertEqual(GEREMMYAS_COMMIT, catalog["source"]["commit"])
         self.assertEqual(GEREMMYAS_LICENSE_DIGEST, catalog["source"]["license_sha256"])
         entries = catalog["skills"]
@@ -420,19 +360,28 @@ class RepositoryContractTests(unittest.TestCase):
         owned_entries = [item for item in entries if item["ownership"] == "storehouse"]
         self.assertEqual(MIGRATED, {item["name"] for item in migrated_entries})
         self.assertEqual(OWNED, {item["name"] for item in owned_entries})
-        self.assertEqual(106, sum(len(item["files"]) for item in migrated_entries))
-        disposition_counts = {kind: 0 for kind in ("preserved", "adapted", "excluded")}
+        retired_entries = catalog["retired_migrations"]
+        self.assertEqual(RETIRED, {item["source_name"] for item in retired_entries})
+        source_file_count = sum(
+            1
+            for item in migrated_entries
+            for file_item in item["files"]
+            if "source_sha256" in file_item
+        ) + sum(len(item["files"]) for item in retired_entries)
+        self.assertEqual(106, source_file_count)
+        disposition_counts = {kind: 0 for kind in ("preserved", "adapted", "excluded", "owned")}
         for item in migrated_entries:
-            self.assertEqual(f"content/skills/{item['name']}", item["source_path"])
+            self.assertEqual(f"content/skills/{item['source_name']}", item["source_path"])
             self.assertRegex(item["source_tree_sha256"], r"^[0-9a-f]{64}$")
             self.assertTrue(item["categories"])
             self.assertIn(item["security"]["sensitive"], {True, False})
             self.assertTrue(item["compatibility"]["standalone"])
             self.assertTrue(item["files"])
             for file_item in item["files"]:
-                self.assertIn(file_item["disposition"], {"preserved", "adapted", "excluded"})
+                self.assertIn(file_item["disposition"], {"preserved", "adapted", "excluded", "owned"})
                 disposition_counts[file_item["disposition"]] += 1
-                self.assertRegex(file_item["source_sha256"], r"^[0-9a-f]{64}$")
+                if "source_sha256" in file_item:
+                    self.assertRegex(file_item["source_sha256"], r"^[0-9a-f]{64}$")
                 if file_item["disposition"] != "excluded":
                     destination = SKILLS_ROOT / item["name"] / file_item["path"]
                     self.assertTrue(destination.is_file())
@@ -442,7 +391,16 @@ class RepositoryContractTests(unittest.TestCase):
                 elif file_item["disposition"] == "adapted":
                     self.assertNotEqual(file_item["source_sha256"], file_item["destination_sha256"])
                     self.assertTrue(file_item.get("note"))
-        self.assertEqual({"preserved": 77, "adapted": 29, "excluded": 0}, disposition_counts)
+                elif file_item["disposition"] == "owned":
+                    self.assertNotIn("source_sha256", file_item)
+                    self.assertTrue(file_item.get("note"))
+        self.assertEqual(0, disposition_counts["excluded"])
+        self.assertGreater(disposition_counts["adapted"], 0)
+        self.assertGreater(disposition_counts["owned"], 0)
+        for item in retired_entries:
+            self.assertEqual(f"content/skills/{item['source_name']}", item["source_path"])
+            self.assertTrue(item["reason"])
+            self.assertTrue(item["files"])
         for item in owned_entries:
             self.assertRegex(item["source_tree_sha256"], r"^[0-9a-f]{64}$")
             self.assertNotIn("origin", item)
@@ -470,17 +428,18 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertEqual(SKILLS, set().union(*(set(value) for value in expanded.values())))
         self.assertEqual(
             [
-                "gameplay-programming-2d",
-                "game-testing-2d",
-                "game-ui-accessibility",
-                "game-feel-2d",
-                "game-ai-2d",
-                "procedural-generation-2d",
-                "game-save-n-progress",
-                "game-performance-2d",
-                "game-audio-2d",
-                "game-art-2d",
-                "game-build-and-release",
+                "game-dev-2d-gameplay",
+                "game-dev-2d-testing",
+                "game-dev-2d-ui-accessibility",
+                "game-dev-2d-feel",
+                "game-dev-2d-ai",
+                "game-dev-2d-procedural-generation",
+                "game-dev-2d-save-progression",
+                "game-dev-2d-performance",
+                "game-dev-2d-audio",
+                "game-dev-2d-art",
+                "ci-game-dev-2d",
+                "release-game-dev-2d",
             ],
             expanded["game-dev"],
         )
@@ -488,13 +447,13 @@ class RepositoryContractTests(unittest.TestCase):
     def test_as_011_invalid_collection_graphs_fail(self) -> None:
         with self.assertRaises(AssertionError):
             expand_collections({"collections": [
-                {"name": "a", "skills": ["game-ai-2d"], "includes": ["b"]},
+                {"name": "a", "skills": ["game-dev-2d-ai"], "includes": ["b"]},
                 {"name": "b", "includes": ["a"]},
             ]})
         with self.assertRaises(AssertionError):
             expand_collections({"collections": [
-                {"name": "a", "skills": ["game-ai-2d"], "includes": ["b"]},
-                {"name": "b", "skills": ["game-ai-2d"]},
+                {"name": "a", "skills": ["game-dev-2d-ai"], "includes": ["b"]},
+                {"name": "b", "skills": ["game-dev-2d-ai"]},
             ]})
         with self.assertRaises(KeyError):
             expand_collections({"collections": [{"name": "a", "includes": ["missing"]}]})
