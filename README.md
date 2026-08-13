@@ -4,14 +4,17 @@ A curated set of skills for product design and performance, Phaser, Godot, Andro
 
 ## Storehouse and Baseline
 
-[Baseline](https://github.com/woliveiras/baseline) is the recommended global Codex
-plugin for horizontal engineering workflows such as proportional measurement,
-TDD, review, documentation, architecture, decisions, security, and session
-continuity. Baseline provides the foundation. Storehouse provides optional depth
-through specialized skills and owns the optional SDD methodology through the
-standalone `sdd-specification` skill and `sdd` collection. Either product works independently;
-when both are present, approved SDD artifacts may feed installed TDD and review
-capabilities without a physical or runtime dependency.
+[Baseline](https://github.com/woliveiras/baseline) is the recommended portable
+foundation for horizontal engineering workflows such as proportional
+measurement, TDD, review, documentation, architecture, decisions, security, and
+session continuity. It follows the open Agent Skills and Agent Plugins
+specifications, with documented installation routes for Codex, GitHub Copilot,
+Claude Code, Cursor, OpenCode, and Pi. Baseline provides the foundation.
+Storehouse provides optional depth through specialized skills and owns the
+optional SDD methodology through the standalone `sdd-specification` skill and
+`sdd` collection. Either product works independently; when both are present,
+approved SDD artifacts may feed installed TDD and review capabilities without a
+physical or runtime dependency.
 
 Collections below are documented groups of ordinary `--skill` arguments. They
 are not packs, a package manager, dependency declarations, or executable
