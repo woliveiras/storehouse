@@ -210,6 +210,13 @@
       ]
     },
     {
+      "name": "product-design",
+      "description": "Product UI/UX Design for usable web and mobile SaaS, e-commerce, CMS, CRM, and ERP experiences.",
+      "skills": [
+        "product-ui-ux-design"
+      ]
+    },
+    {
       "name": "sdd",
       "description": "Optional Specification-Driven Development with durable specifications, oracle matrices, reconciliation, and formal review.",
       "skills": [

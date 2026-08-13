@@ -204,6 +204,24 @@ def _artifact_checks(skill: str, workspace: Path) -> list[dict[str, object]]:
         code = _source(workspace, "src/payload-schema.ts")
         test = _source(workspace, "tests/payload-schema.test.ts")
         checks += [("implementation-validates-fields", all(token in code for token in ("z.object", ".uuid()", ".int()", ".nonnegative()"))), ("implementation-safe-boundary", "input:unknown" in code.replace(" ", "") and "safeParse(input)" in code), ("tests-valid-invalid", all(token in test for token in ("count:1", "id:'bad'", "count:-1", "throw new Error")))]
+    elif skill == "product-ui-ux-design":
+        evidence = _json(workspace, "product-evidence.json")
+        report = _source(workspace, "product-ux-audit.md")
+        scenarios = evidence.get("scenarios", [])
+        scenario_ids = {
+            item.get("id") for item in scenarios if isinstance(item, dict)
+        } if isinstance(scenarios, list) else set()
+        checks += [
+            ("fixture-declares-missing-runtime", evidence.get("runtime_available") is False and evidence.get("analytics_available") is False and evidence.get("research_available") is False),
+            ("all-domain-scenarios-derived", scenario_ids == {"saas-onboarding", "ecommerce-checkout", "cms-editorial", "crm-mobile-capture", "erp-purchase-approval"}),
+            ("evidence-boundary", all(token in report for token in ("Verified fixture evidence", "Runtime verification: not performed", "Heuristics:", "Hypotheses:", "Limitation:"))),
+            ("priority-table", report.count("| P0 |") >= 3 and report.count("| P1 |") >= 2),
+            ("complete-states", all(token in report for token in ("loading", "empty state", "validation error", "system error and recovery", "lack of permission", "offline state", "confirmation", "cancellation", "success", "next step"))),
+            ("experience-performance-boundary", all(token in report for token in ("## Experience performance boundary", "field measurement", "laboratory measurement", "first acknowledgement", "usable state", "Core Web Vitals", "TTID", "TTFD", "Profiling is required before assigning a technical root cause", "engineering performance"))),
+            ("domain-acceptance", all(f"## {heading}" in report for heading in ("SaaS onboarding", "E-commerce checkout", "CMS editorial flow", "CRM mobile capture", "ERP purchase approval")) and report.count("Acceptance:") >= 5),
+            ("accessibility-limits", all(token in report for token in ("keyboard", "touch", "screen-reader", "zoom/text scaling", "Automated checks", "cannot establish WCAG conformance", "human review"))),
+            ("audit-only", "implemented the product" not in report.casefold() and "runtime verification: passed" not in report.casefold()),
+        ]
     return [{"id": f"artifact:{name}", "pass": passed} for name, passed in checks]
 
 

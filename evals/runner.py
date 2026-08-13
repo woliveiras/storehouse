@@ -26,7 +26,18 @@ def _cases(catalog: dict[str, object], suite: str) -> dict[str, list[str]]:
     if suite in {"routing", "full"}:
         values: list[str] = []
         for item in catalog["routing"]:
-            values.extend(f"{item['criterion']}:{kind}" for kind in ("explicit", "implicit", "negative", "baseline-presence"))
+            values.extend(
+                f"{item['criterion']}:{kind}"
+                for kind in ("explicit", "implicit", "baseline-presence")
+            )
+            negatives = item.get("negatives")
+            if negatives:
+                values.extend(
+                    f"{item['criterion']}:negative-{negative['name']}"
+                    for negative in negatives
+                )
+            else:
+                values.append(f"{item['criterion']}:negative")
         cases["routing"] = values
     if suite in {"behavior", "full"}:
         cases["behavior"] = [f"{item['criterion']}:{variant}" for item in catalog["behavior"] for variant in ("control", "focal")]
@@ -112,8 +123,16 @@ def _record(catalog: dict[str, object], case_id: str) -> dict[str, Any]:
     if head.startswith("RT-"):
         item = _lookup(catalog, "routing", head)
         variant = parts[0]
-        if variant == "negative":
-            request, expected, avoided = item["negative"]["prompt"], item["negative"]["against"], item["skill"]
+        if variant.startswith("negative"):
+            if variant == "negative":
+                negative = item["negative"]
+            else:
+                negative_name = variant.removeprefix("negative-")
+                negative = next(
+                    value for value in item["negatives"]
+                    if value["name"] == negative_name
+                )
+            request, expected, avoided = negative["prompt"], negative["against"], item["skill"]
         elif variant == "implicit":
             request, expected, avoided = item["implicit"]["prompt"], item["skill"], ""
         elif variant == "baseline-presence":

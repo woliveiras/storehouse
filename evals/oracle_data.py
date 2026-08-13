@@ -9,6 +9,75 @@ def json_file(path: str, sample: str, *keys: str) -> dict[str, object]:
     return {"path": path, "format": "json", "keys": list(keys), "sample": sample}
 
 
+PRODUCT_UI_UX_EVIDENCE = '{"runtime_available":false,"analytics_available":false,"research_available":false,"scenarios":[{"id":"saas-onboarding","domain":"SaaS","platform":"web","actor":"invited member","evidence":"Invitation opens an empty workspace; a five-dialog tour appears before the task; the member cannot dismiss step three."},{"id":"ecommerce-checkout","domain":"e-commerce","platform":"web-mobile","actor":"guest shopper","evidence":"Guest checkout exists; shipping and tax appear only after payment details; a declined payment clears the address."},{"id":"cms-editorial","domain":"CMS","platform":"web","actor":"author and editor","evidence":"Autosave has no visible state; preview has no locale label; rejected content returns without reviewer reason."},{"id":"crm-mobile-capture","domain":"CRM","platform":"mobile","actor":"field representative","evidence":"Contact update requires nine fields; offline save shows success; reconnect conflict overwrites the server value."},{"id":"erp-purchase-approval","domain":"ERP","platform":"web","actor":"purchase approver","evidence":"A 24-column table supports bulk approval; currency and company are off-screen; ineligible locked rows remain selected and failure is generic."}]}\n'
+
+PRODUCT_UI_UX_SAMPLE = """# Product UI/UX audit
+
+## Scope and evidence boundary
+
+- Verified fixture evidence: five supplied scenario descriptions in `product-evidence.json`.
+- Runtime verification: not performed; the interface is not executable.
+- Supplied analytics and user research: none.
+- Heuristics: task continuity, visible system status, error prevention, recovery, and inclusive operation.
+- Hypotheses: proposed effects require representative user and runtime validation.
+- Limitation: browser, device, responsive, keyboard, touch, screen reader, performance, and accessibility conformance remain unverified.
+
+## Prioritized findings
+
+| Priority | Scenario | Verified evidence | Risk | Decision direction |
+| --- | --- | --- | --- | --- |
+| P0 | CRM mobile capture | Offline save reports success and reconnect overwrites the server value. | Silent data loss and false status. | Distinguish pending, synced, failed, and conflicted states; require explicit conflict resolution. |
+| P0 | E-commerce checkout | Declined payment clears the address. | Recovery cost and checkout abandonment. | Preserve non-sensitive fields and return focus to an actionable payment error. |
+| P0 | ERP purchase approval | Locked rows remain selected and bulk failure is generic. | Ineligible or ambiguous financial action. | Preview eligible scope and report row-level outcomes. |
+| P1 | SaaS onboarding | Five dialogs precede the task and step three cannot be dismissed. | Blocked activation and obstructed cancellation. | Teach in context and preserve skip/resume. |
+| P1 | CMS editorial | Autosave, locale preview, and rejection reason are not visible. | Lost work or incorrect publication. | Expose save state, locale, and reviewer reason. |
+
+## Complete state model
+
+For each scenario verify entry, primary path, alternative path, loading, empty state, validation error, system error and recovery, lack of permission, unavailable or offline state, confirmation, cancellation, destructive or financial consequence, success, and next step.
+
+## Experience performance boundary
+
+No field measurement or laboratory measurement was supplied. For each critical task, a later check must identify the user action, first acknowledgement, usable state, completion, and recovery under representative browser, device, connection, data-volume, startup, and resume conditions. Core Web Vitals, TTID, TTFD, hangs, and hitches are platform signals rather than proof of task usability.
+
+This audit owns observable loading, pending, stale, offline, timeout, conflict, success, and failure behavior. Profiling is required before assigning a technical root cause. Bundle, main-thread, API, database, rendering, memory, and energy optimization remain engineering performance work and are not authorized by this audit.
+
+## SaaS onboarding
+
+Decision: open on the first real workspace task, show role and workspace context, replace the dialog sequence with contextual guidance, and allow skip and resume. Empty workspace guidance must name the first useful action and permission limits.
+
+Acceptance: an invited member can reach and complete the first task without completing a tour; skip persists; no-permission and invite-expired states explain recovery.
+
+## E-commerce checkout
+
+Decision: show shipping, tax, currency, and final total before payment; preserve address and cart after a decline; keep guest checkout; reconcile an unknown payment result before allowing a retry.
+
+Acceptance: a declined payment retains non-sensitive data and exposes focusable error guidance; duplicate submission cannot create a second order; confirmation names authoritative order state.
+
+## CMS editorial flow
+
+Decision: show saving, saved, failed, and offline states; label preview locale/channel; return rejected content with reviewer reason and next action; keep publish permission explicit.
+
+Acceptance: an author recovers an interrupted draft, an editor can return with a reason, and preview/publish expose locale, version, actor, and status.
+
+## CRM mobile capture
+
+Decision: stage required capture fields, keep additional detail available, label local pending state honestly, and resolve reconnect conflicts without silent overwrite.
+
+Acceptance: keyboard and touch users can save minimum credible data offline; reconnect produces synced or conflicted, never false success; server and local values are reviewable before resolution.
+
+## ERP purchase approval
+
+Decision: retain dense comparison while pinning identity, company, currency, amount, and eligibility; show selected scope; exclude or explain locked rows before approval; report partial results per row.
+
+Acceptance: keyboard-only approval exposes all critical columns and focus; bulk confirmation states eligible count and financial scope; locked/no-permission/closed-period rows remain unchanged and get actionable outcomes.
+
+## Accessibility and human verification
+
+Verify visible focus, semantic names and table relationships, non-color status, screen-reader announcements, zoom/text scaling, target spacing, reduced motion, localization expansion, and error recovery on supported platforms. Automated checks may assist but cannot establish WCAG conformance or usability. Representative human review remains required.
+"""
+
+
 # Independent, executable oracles for the controlled fixtures. Samples are
 # calibration mutants for unit tests; they are never copied into provider workspaces.
 ORACLES: dict[str, dict[str, object]] = {
@@ -189,6 +258,27 @@ ORACLES: dict[str, dict[str, object]] = {
     "web-validation-zod": {
         "inputs": {"src/api.ts": "export function acceptPayload(input: unknown){ return input }\n"},
         "outputs": [text("src/payload-schema.ts", "import { z } from 'zod'\nexport const PayloadSchema=z.object({id:z.string().uuid(),count:z.number().int().nonnegative()})\nexport type Payload=z.infer<typeof PayloadSchema>\nexport const parsePayload=(input:unknown)=>PayloadSchema.safeParse(input)\n", "z.object", "safeParse", "z.infer", "unknown"), text("tests/payload-schema.test.ts", "import { parsePayload } from '../src/payload-schema'\nif(!parsePayload({id:'123e4567-e89b-12d3-a456-426614174000',count:1}).success) throw new Error('valid')\nif(parsePayload({id:'bad',count:1}).success) throw new Error('uuid')\nif(parsePayload({id:'123e4567-e89b-12d3-a456-426614174000',count:-1}).success) throw new Error('count')\n", "parsePayload", "count:-1", "id:'bad'", "throw new Error")],
+    },
+    "product-ui-ux-design": {
+        "inputs": {"product-evidence.json": PRODUCT_UI_UX_EVIDENCE},
+        "outputs": [text(
+            "product-ux-audit.md",
+            PRODUCT_UI_UX_SAMPLE,
+            "Verified fixture evidence",
+            "Runtime verification: not performed",
+            "Prioritized findings",
+            "Complete state model",
+            "SaaS onboarding",
+            "E-commerce checkout",
+            "CMS editorial flow",
+            "CRM mobile capture",
+            "ERP purchase approval",
+            "Accessibility and human verification",
+            "Experience performance boundary",
+            "Profiling is required before assigning a technical root cause",
+            "Acceptance:",
+            forbids=("WCAG compliant", "runtime verification: passed", "implemented the product"),
+        )],
     },
 }
 

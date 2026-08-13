@@ -6,6 +6,10 @@ Each directory owns its `SKILL.md` and optional `agents/`, `references/`,
 code or depend on Baseline, another skill, or repository test and evaluation
 dependencies.
 
+The current flat domain-first inventory contains 43 skills. The `product`
+namespace owns cross-platform product UI/UX design; game interfaces remain in
+the separate `game-dev-2d` namespace.
+
 `catalog/collections.json` is a declarative documentation source. Includes are
 expanded in declared order, reject cycles and duplicates, and never execute an
 install. `tests/` validates deterministic repository contracts. `evals/` owns

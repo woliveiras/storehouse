@@ -43,6 +43,7 @@ IMPLEMENTATION_MUTANTS = {
     "infra-terraform": ("change.tf", "project  = var.project_id", 'project  = "real-project"'),
     "ci-typescript": (".github/workflows/typescript.yml", "runs-on: ubuntu-latest", "runner-missing: true"),
     "web-validation-zod": ("src/payload-schema.ts", ".uuid()", ""),
+    "product-ui-ux-design": ("product-ux-audit.md", "Runtime verification: not performed", "Runtime verification: passed"),
 }
 
 
@@ -65,6 +66,13 @@ class EvalCatalogTests(unittest.TestCase):
             self.assertNotIn("do not select", item["negative"]["prompt"].casefold())
             self.assertNotIn(f"${item['negative']['against']}", item["negative"]["prompt"])
             self.assertNotIn(f"${item['skill']}", item["negative"]["prompt"])
+            for negative in item.get("negatives", []):
+                self.assertIn(negative["against"], EXPECTED_SKILLS - {item["skill"]})
+                self.assertRegex(negative["name"], r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+                self.assertTrue(negative["prompt"])
+                self.assertNotIn("do not select", negative["prompt"].casefold())
+                self.assertNotIn(f"${negative['against']}", negative["prompt"])
+                self.assertNotIn(f"${item['skill']}", negative["prompt"])
             self.assertTrue(item["baseline_presence_prompt"])
             self.assertFalse(item["network_required"])
 
@@ -199,6 +207,7 @@ class EvalCatalogTests(unittest.TestCase):
             ("web-state-xstate", "tests/checkout-machine.test.ts", "invalid.send({type:'RETRY'})", "// invalid event omitted"),
             ("game-dev-2d-feel", "src/jump_feedback.gd", "    var shake", "    return 2\n    var shake"),
             ("game-dev-2d-save-progression", "src/save_store.gd", "    if data.version >", "    return data\n    if data.version >"),
+            ("product-ui-ux-design", "product-ux-audit.md", "Profiling is required before assigning a technical root cause.", "The database is the verified technical root cause."),
         )
         for skill, relative, original, replacement in mutants:
             with self.subTest(skill=skill, relative=relative), tempfile.TemporaryDirectory() as temp:
@@ -318,11 +327,11 @@ class EvalCatalogTests(unittest.TestCase):
         from evals.runner import _approval_token, _cases, authorize_execution, build_budget
 
         budget = build_budget(self.catalog, "full")
-        self.assertEqual(425, budget["target_calls"])
-        self.assertEqual(42, budget["secondary_judgments"])
-        self.assertEqual(467, budget["upper_bound_calls"])
+        self.assertEqual(437, budget["target_calls"])
+        self.assertEqual(43, budget["secondary_judgments"])
+        self.assertEqual(480, budget["upper_bound_calls"])
         self.assertEqual(
-            {"routing": 168, "behavior": 84, "composition": 143, "security": 30},
+            {"routing": 174, "behavior": 86, "composition": 146, "security": 31},
             {shard["name"]: shard["count"] for shard in budget["shards"]},
         )
         self.assertEqual(

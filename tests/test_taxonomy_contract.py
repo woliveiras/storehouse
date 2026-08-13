@@ -37,6 +37,7 @@ EXPECTED_SKILLS = {
     "game-dev-2d-testing",
     "game-dev-2d-ui-accessibility",
     "infra-terraform",
+    "product-ui-ux-design",
     "release-android",
     "release-ai-eng",
     "release-game-dev-2d",
@@ -61,7 +62,7 @@ class TaxonomyContractTests(unittest.TestCase):
     def test_exact_domain_first_inventory(self) -> None:
         found = {path.name for path in SKILLS_ROOT.iterdir() if path.is_dir()}
         self.assertEqual(EXPECTED_SKILLS, found)
-        self.assertEqual(42, len(found))
+        self.assertEqual(43, len(found))
 
     def test_directory_and_frontmatter_names_match(self) -> None:
         for name in sorted(EXPECTED_SKILLS):
@@ -109,6 +110,20 @@ class TaxonomyContractTests(unittest.TestCase):
                 "voice-and-style.md",
                 "astro-mdx.md",
                 "quality-checklist.md",
+            },
+            "product-ui-ux-design": {
+                "product-ux-foundations.md",
+                "accessibility-and-inclusive-design.md",
+                "web-product-design.md",
+                "mobile-product-design.md",
+                "design-systems.md",
+                "saas.md",
+                "ecommerce.md",
+                "cms.md",
+                "crm.md",
+                "erp.md",
+                "experience-performance.md",
+                "usability-verification.md",
             },
         }
         for skill, references in expected.items():
