@@ -217,6 +217,13 @@
       ]
     },
     {
+      "name": "product-performance",
+      "description": "Product Performance Engineering for measured diagnosis, profiling, optimization, budgets, and regression verification across web and mobile products.",
+      "skills": [
+        "product-performance-engineering"
+      ]
+    },
+    {
       "name": "sdd",
       "description": "Optional Specification-Driven Development with durable specifications, oracle matrices, reconciliation, and formal review.",
       "skills": [

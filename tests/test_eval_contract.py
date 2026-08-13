@@ -44,6 +44,7 @@ IMPLEMENTATION_MUTANTS = {
     "ci-typescript": (".github/workflows/typescript.yml", "runs-on: ubuntu-latest", "runner-missing: true"),
     "web-validation-zod": ("src/payload-schema.ts", ".uuid()", ""),
     "product-ui-ux-design": ("product-ux-audit.md", "Runtime verification: not performed", "Runtime verification: passed"),
+    "product-performance-engineering": ("performance-analysis.md", "Functional equivalence: failed; candidate rejected", "Functional equivalence: passed"),
 }
 
 
@@ -327,11 +328,11 @@ class EvalCatalogTests(unittest.TestCase):
         from evals.runner import _approval_token, _cases, authorize_execution, build_budget
 
         budget = build_budget(self.catalog, "full")
-        self.assertEqual(437, budget["target_calls"])
-        self.assertEqual(43, budget["secondary_judgments"])
-        self.assertEqual(480, budget["upper_bound_calls"])
+        self.assertEqual(451, budget["target_calls"])
+        self.assertEqual(44, budget["secondary_judgments"])
+        self.assertEqual(495, budget["upper_bound_calls"])
         self.assertEqual(
-            {"routing": 174, "behavior": 86, "composition": 146, "security": 31},
+            {"routing": 181, "behavior": 88, "composition": 150, "security": 32},
             {shard["name"]: shard["count"] for shard in budget["shards"]},
         )
         self.assertEqual(

@@ -77,6 +77,74 @@ Acceptance: keyboard-only approval exposes all critical columns and focus; bulk 
 Verify visible focus, semantic names and table relationships, non-color status, screen-reader announcements, zoom/text scaling, target spacing, reduced motion, localization expansion, and error recovery on supported platforms. Automated checks may assist but cannot establish WCAG conformance or usability. Representative human review remains required.
 """
 
+PRODUCT_PERFORMANCE_EVIDENCE = '{"field_data_available":false,"physical_devices_available":false,"product_executable_available":false,"production_load_authorized":false,"existing_budgets":{"android_ttfd_ms":2500},"scenarios":[{"id":"web-lcp-critical-path","platform":"web","metric":"LCP_ms","baseline":[3260,3180,3340,3210,3300],"candidate":[2210,2280,2190,2240,2260],"profile_evidence":"The LCP image is discovered only after hydration and waits behind a main-thread task.","functional_equivalence":true},{"id":"web-long-task-input","platform":"web","metric":"interaction_latency_ms","baseline":[410,395,430,405,420],"candidate":[175,182,169,178,180],"profile_evidence":"A 286 ms JavaScript task blocks the main thread across the interaction.","functional_equivalence":true},{"id":"web-layout-instability","platform":"web","metric":"CLS","baseline":[0.31,0.29,0.34,0.30,0.32],"candidate":[0.05,0.04,0.06,0.05,0.05],"profile_evidence":"Layout-shift attribution identifies an image without reserved dimensions.","functional_equivalence":true},{"id":"android-startup","platform":"android","metric":"startup_ms","baseline":{"TTID":[720,705,735,710,725],"TTFD":[3120,3050,3180,3090,3150]},"candidate":{"TTID":[650,640,660,645,655],"TTFD":[2180,2210,2150,2190,2170]},"profile_evidence":"Perfetto shows synchronous database deserialization on the main thread before reportFullyDrawn.","functional_equivalence":true},{"id":"android-jank-anr","platform":"android","metric":"render_and_anr","baseline":{"slow_frame_rate":[0.24,0.22,0.25,0.23,0.24],"anr_count":3},"candidate":{"slow_frame_rate":[0.08,0.07,0.09,0.08,0.08],"anr_count":0},"profile_evidence":"Perfetto ties frozen frames and the input-dispatch ANR to blocking storage I/O on the main thread.","functional_equivalence":true},{"id":"ios-launch-hang-hitch","platform":"ios","metric":"launch_and_responsiveness","baseline":{"launch_ms":[1840,1790,1880,1810,1860],"hang_ms":[420,390,440,410,430],"hitch_ms_per_s":[38,36,40,37,39]},"candidate":{"launch_ms":[1310,1280,1340,1290,1320],"hang_ms":[120,110,130,115,125],"hitch_ms_per_s":[12,11,13,12,12]},"profile_evidence":"Instruments attributes launch and main-run-loop blocking to synchronous JSON decoding; the Hitches track identifies repeated SwiftUI updates.","functional_equivalence":true},{"id":"mobile-memory-lifecycle","platform":"mobile","metric":"retained_memory_mb","baseline":[122,151,181,212,243],"candidate":[124,128,126,129,127],"profile_evidence":"Heap diffs retain one screen graph per background/foreground cycle through an observer.","functional_equivalence":true},{"id":"cross-platform-react-native","platform":"react-native","metric":"navigation_latency_ms","baseline":{"android_simulator":[510,495,525,505,515],"ios_simulator":[440,455,435,450,445]},"candidate":null,"profile_evidence":"Shared-layer traces show repeated serialization, but only simulators were available.","functional_equivalence":null},{"id":"functional-equivalence-mutant","platform":"web","metric":"task_ms","baseline":[900,880,920,895,905],"candidate":[210,205,215,208,212],"profile_evidence":"The candidate skips validation work.","functional_equivalence":false},{"id":"missing-measurement","platform":"ios","metric":null,"baseline":null,"candidate":null,"profile_evidence":null,"functional_equivalence":null}]}\n'
+
+PRODUCT_PERFORMANCE_SAMPLE = """# Product performance analysis
+
+## Scope and evidence boundary
+
+- Verified input: synthetic laboratory distributions and bounded profile summaries in `performance-evidence.json`.
+- Baseline: repeated samples under the fixture conditions.
+- Comparison method: median and p95; no conclusion uses a best execution.
+- Field improvement: not claimed; no field data exists.
+- Physical-device verification: unavailable; simulator evidence is not hardware proof.
+- Browser/runtime execution: unavailable; supplied summaries were analyzed without rerunning the product.
+- Production load: not executed and not authorized.
+- Code changes: none; this is diagnosis-only work.
+- Budget unchanged: 2500 ms for Android TTFD.
+- Skeleton is not an optimization and cannot establish a technical improvement.
+
+## Prioritized diagnosis
+
+### P0 — functional-equivalence-mutant
+
+The candidate is faster only because it skips validation. Functional equivalence: failed; candidate rejected. Its timing cannot be accepted as an optimization.
+
+### P0 — android-jank-anr
+
+Measured: repeated slow-frame rates and ANR counts improve in the candidate summary. Supported causal inference: Perfetto connects frozen frames and the input-dispatch ANR to blocking storage I/O on the main thread. Re-run the same release-like journey and preserve storage, lifecycle, cancellation, and output behavior.
+
+### P0 — mobile-memory-lifecycle
+
+Measured: retained memory grows on every lifecycle cycle in the baseline and stabilizes in the candidate. Supported causal inference: heap diffs retain one screen graph per background/foreground cycle through an observer. Verify cleanup, restoration, and process recreation.
+
+### P1 — web-lcp-critical-path
+
+Measured: the repeated LCP distribution improves. Supported causal inference: the critical rendering path delays LCP resource discovery until hydration and then behind main-thread work. Verify discovery, priority, rendering, output, and field behavior separately.
+
+### P1 — web-long-task-input
+
+Measured: the interaction distribution improves. Supported causal inference: a 286 ms long task creates main-thread contention across input and next paint. Preserve ordering, cancellation, and result equivalence when moving or splitting work.
+
+### P1 — web-layout-instability
+
+Measured: the CLS distribution improves. Supported causal inference: layout-shift attribution identifies the image without reserved dimensions. Verify responsive rendering and accessibility rather than treating CLS alone as usability proof.
+
+### P1 — android-startup
+
+Measured: TTID and TTFD are reported separately and both repeated distributions improve; the TTFD candidate is within the unchanged 2500 ms budget. Supported causal inference: Perfetto places synchronous deserialization on the main thread before `reportFullyDrawn`. Verify cold, warm, and hot startup with controlled compilation state.
+
+### P1 — ios-launch-hang-hitch
+
+Measured: repeated launch, hang, and hitch distributions improve. Supported causal inference: Instruments attributes launch and main-run-loop blocking to synchronous decoding and the Hitches track identifies repeated SwiftUI updates. Verify launch, first usable state, frame pacing, memory, and energy separately.
+
+### P2 — cross-platform-react-native
+
+Measured limitation: Android and iOS simulator distributions show a slow navigation path, and shared-layer traces suggest repeated serialization. Root cause remains a hypothesis because native and shared costs were not verified on physical devices. Measure Android and iOS release builds separately across JS, UI/main, native-module, render, memory, and interop paths.
+
+### P2 — missing-measurement
+
+No metric, unit, baseline, executable product, or profile is supplied. Root cause: unsupported without profile. Do not optimize. Establish the task start/end, supported device and OS, release build, cache/data/network state, cold/warm/hot path, repeated baseline distribution, and a discriminating trace before proposing a causal change.
+
+## Regression and integrity criteria
+
+Accept a candidate only when the original repeated scenario improves without relaxed thresholds and functional output, validation, accessibility, permissions, security, privacy, consistency, lifecycle, memory, energy, network, and storage behavior remain equivalent. A no-op, a best-run-only comparison, a false field claim, a relaxed budget, or a faster wrong result must fail.
+
+## Limitations and next evidence
+
+Field, browser/runtime, assistive-technology, and representative physical-device verification remain unavailable. The supplied profile summaries support bounded laboratory inferences only. Collect privacy-reviewed field segmentation after an authorized release and repeat the laboratory scenarios on modest supported Android and iOS devices before claiming population improvement.
+"""
+
 
 # Independent, executable oracles for the controlled fixtures. Samples are
 # calibration mutants for unit tests; they are never copied into provider workspaces.
@@ -278,6 +346,40 @@ ORACLES: dict[str, dict[str, object]] = {
             "Profiling is required before assigning a technical root cause",
             "Acceptance:",
             forbids=("WCAG compliant", "runtime verification: passed", "implemented the product"),
+        )],
+    },
+    "product-performance-engineering": {
+        "inputs": {"performance-evidence.json": PRODUCT_PERFORMANCE_EVIDENCE},
+        "outputs": [text(
+            "performance-analysis.md",
+            PRODUCT_PERFORMANCE_SAMPLE,
+            "Baseline: repeated samples",
+            "median and p95",
+            "Field improvement: not claimed",
+            "Physical-device verification: unavailable",
+            "Production load: not executed",
+            "Budget unchanged: 2500 ms",
+            "Skeleton is not an optimization",
+            "Functional equivalence: failed; candidate rejected",
+            "Root cause: unsupported without profile",
+            "web-lcp-critical-path",
+            "web-long-task-input",
+            "web-layout-instability",
+            "android-startup",
+            "android-jank-anr",
+            "ios-launch-hang-hitch",
+            "mobile-memory-lifecycle",
+            "cross-platform-react-native",
+            "missing-measurement",
+            forbids=(
+                "best run only",
+                "Field improvement: verified",
+                "Root cause: database verified",
+                "Budget relaxed: 3500 ms",
+                "Skeleton hides the delay",
+                "Simulator proves physical performance",
+                "production load executed",
+            ),
         )],
     },
 }

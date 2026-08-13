@@ -6,9 +6,13 @@ Each directory owns its `SKILL.md` and optional `agents/`, `references/`,
 code or depend on Baseline, another skill, or repository test and evaluation
 dependencies.
 
-The current flat domain-first inventory contains 43 skills. The `product`
-namespace owns cross-platform product UI/UX design; game interfaces remain in
-the separate `game-dev-2d` namespace.
+The current flat domain-first inventory contains 44 skills. The `product`
+namespace owns independent cross-platform product UI/UX design and product
+performance engineering capabilities. `product-ui-ux-design` owns observable
+experience under latency; `product-performance-engineering` owns measurement,
+profiling, technical root cause, optimization, budgets, and causal regression
+tests. Either can be installed alone, and game interfaces and performance remain
+in the separate `game-dev-2d` namespace.
 
 `catalog/collections.json` is a declarative documentation source. Includes are
 expanded in declared order, reject cycles and duplicates, and never execute an

@@ -168,6 +168,8 @@ class ProductUiUxDesignContractTests(unittest.TestCase):
             "experience-performance.md",
             self.skill,
         )
+        self.assertIn("product-performance-engineering", self.skill)
+        self.assertIn("product-performance-engineering", reference)
         self.assertRegex(
             self.skill.casefold(),
             r"experience-performance\.md.*(?:latency|loading|startup|responsiveness)",

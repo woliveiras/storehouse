@@ -222,6 +222,52 @@ def _artifact_checks(skill: str, workspace: Path) -> list[dict[str, object]]:
             ("accessibility-limits", all(token in report for token in ("keyboard", "touch", "screen-reader", "zoom/text scaling", "Automated checks", "cannot establish WCAG conformance", "human review"))),
             ("audit-only", "implemented the product" not in report.casefold() and "runtime verification: passed" not in report.casefold()),
         ]
+    elif skill == "product-performance-engineering":
+        evidence = _json(workspace, "performance-evidence.json")
+        report = _source(workspace, "performance-analysis.md")
+        scenarios = evidence.get("scenarios", [])
+        by_id = {
+            item.get("id"): item
+            for item in scenarios
+            if isinstance(item, dict) and isinstance(item.get("id"), str)
+        } if isinstance(scenarios, list) else {}
+        expected_ids = {
+            "web-lcp-critical-path",
+            "web-long-task-input",
+            "web-layout-instability",
+            "android-startup",
+            "android-jank-anr",
+            "ios-launch-hang-hitch",
+            "mobile-memory-lifecycle",
+            "cross-platform-react-native",
+            "functional-equivalence-mutant",
+            "missing-measurement",
+        }
+
+        def has_repeated_samples(value: object) -> bool:
+            if isinstance(value, list):
+                return len(value) >= 5 and all(isinstance(item, (int, float)) for item in value)
+            if isinstance(value, dict):
+                return any(has_repeated_samples(item) for item in value.values())
+            return False
+
+        measured_ids = expected_ids - {"missing-measurement"}
+        checks += [
+            ("fixture-evidence-boundary", evidence.get("field_data_available") is False and evidence.get("physical_devices_available") is False and evidence.get("product_executable_available") is False and evidence.get("production_load_authorized") is False),
+            ("all-required-scenarios", set(by_id) == expected_ids),
+            ("measured-scenarios-have-distributions", all(has_repeated_samples(by_id[item].get("baseline")) for item in measured_ids)),
+            ("profile-evidence-is-bounded", all(bool(by_id[item].get("profile_evidence")) for item in measured_ids) and by_id["missing-measurement"].get("profile_evidence") is None),
+            ("existing-budget-preserved", evidence.get("existing_budgets") == {"android_ttfd_ms": 2500} and "Budget unchanged: 2500 ms" in report),
+            ("all-scenarios-analyzed", all(item in report for item in expected_ids)),
+            ("distribution-not-best-run", all(token in report for token in ("Baseline: repeated samples", "median and p95", "no conclusion uses a best execution")) and "best run only" not in report.casefold()),
+            ("profile-supported-causality", report.count("Supported causal inference:") >= 7 and "Root cause: unsupported without profile" in report and "Root cause remains a hypothesis" in report),
+            ("functional-equivalence-rejects-mutant", by_id["functional-equivalence-mutant"].get("functional_equivalence") is False and "Functional equivalence: failed; candidate rejected" in report),
+            ("no-false-field-or-device-proof", all(token in report for token in ("Field improvement: not claimed", "Physical-device verification: unavailable", "simulator evidence is not hardware proof")) and "Field improvement: verified" not in report and "Simulator proves physical performance" not in report),
+            ("missing-measurement-plan", all(token in report for token in ("No metric, unit, baseline, executable product, or profile is supplied", "Do not optimize", "repeated baseline distribution", "discriminating trace"))),
+            ("latency-not-masked", "Skeleton is not an optimization" in report and "Skeleton hides the delay" not in report),
+            ("diagnosis-authority", all(token in report for token in ("Production load: not executed", "Code changes: none", "diagnosis-only work")) and "production load executed" not in report.casefold()),
+            ("integrity-regressions-covered", all(token in report for token in ("accessibility", "permissions", "security", "privacy", "consistency", "lifecycle", "memory", "energy", "network", "storage"))),
+        ]
     return [{"id": f"artifact:{name}", "pass": passed} for name, passed in checks]
 
 

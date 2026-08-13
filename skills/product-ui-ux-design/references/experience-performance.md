@@ -64,4 +64,4 @@ Verify real critical tasks, not only metric dashboards. Segment field evidence b
 
 This skill owns observable behavior, user control, state communication, task continuity, prioritization, and implementation-ready experience acceptance criteria. Engineering performance owns instrumentation, profiling, technical root cause, code and infrastructure optimization, runtime budgets, and causal regression tests.
 
-Do not claim a technical root cause or prescribe a causal optimization without profiling evidence. If diagnosis or optimization is requested, compose optionally with an applicable engineering performance capability while keeping this skill independent. An audit-only request never authorizes either UX implementation or performance optimization.
+Do not claim a technical root cause or prescribe a causal optimization without profiling evidence. If diagnosis or optimization is requested, compose optionally with `product-performance-engineering` when separately installed while keeping both skills independent. An audit-only request never authorizes either UX implementation or performance optimization.
