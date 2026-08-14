@@ -53,7 +53,27 @@ def _artifact_checks(skill: str, workspace: Path) -> list[dict[str, object]]:
         "ci-rust": (".github/workflows/rust.yml", ("actions/checkout@v4", "dtolnay/rust-toolchain@1.88.0", "EmbarkStudios/cargo-deny-action@v2")),
         "ci-typescript": (".github/workflows/typescript.yml", ("actions/checkout@v4", "actions/setup-node@v4")),
     }
-    if skill == "backend-service-architecture":
+    if skill == "web-nextjs-architecture":
+        evidence = _json(workspace, "nextjs-inventory.json")
+        report = _source(workspace, "nextjs-architecture-review.md")
+        observations = evidence.get("observations", [])
+        observation_ids = {
+            item.get("id") for item in observations if isinstance(item, dict)
+        } if isinstance(observations, list) else set()
+        checks += [
+            ("fixture-evidence-derived", evidence.get("runtime_available") is False and evidence.get("router") == "app" and evidence.get("cache_components") is True and observation_ids == {"client-root-layout", "internal-handler-round-trip", "unsafe-order-action", "shared-tenant-cache", "proxy-only-authorization", "unsupported-deployment-assumptions"}),
+            ("evidence-boundary", all(token in report for token in ("Verified evidence", "Runtime and browser execution were unavailable", "not proof of production behavior"))),
+            ("all-observations-reviewed", all(token in report for token in observation_ids)),
+            ("server-client-boundary", all(token in report for token in ("Server Component by default", "small Client Component boundary", "server-only module graph", "serializable props"))),
+            ("data-entrypoints", all(token in report for token in ("direct server-side catalog operation", "remove the internal HTTP round trip", "Server Action", "Route Handler", "public-facing entrypoint"))),
+            ("cache-consistency", all(token in report for token in ("Cache Components", "cacheLife", "cacheTag", "updateTag", "tenant and authorization inputs", "multi-instance invalidation"))),
+            ("security-boundary", all(token in report for token in ("secure authorization inside", "Proxy remains optimistic", "idempotency", "error disclosure"))),
+            ("deployment-boundary", all(token in report for token in ("writable persistent filesystem is unsupported", "shared process memory is unsupported", "durable WebSockets are unsupported", "deployment adapter"))),
+            ("backend-composition", all(token in report for token in ("Next.js remains the focal owner", "backend-service-architecture is optional", "order transaction and idempotency policy"))),
+            ("incremental-verification", all(token in report for token in ("fail-first characterization checks", "production build", "direct load", "route transition", "authorization denial", "rollback"))),
+            ("authority-boundary", "No deployment, production mutation, secret access, or backend decomposition is authorized" in report),
+        ]
+    elif skill == "backend-service-architecture":
         evidence = _json(workspace, "service-inventory.json")
         report = _source(workspace, "backend-architecture-review.md")
         services = evidence.get("services", [])

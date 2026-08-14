@@ -1,0 +1,4 @@
+interface:
+  display_name: "Next.js Architecture"
+  short_description: "Design full-stack Next.js architecture"
+  default_prompt: "Use $web-nextjs-architecture to design or review this Next.js application's architecture."

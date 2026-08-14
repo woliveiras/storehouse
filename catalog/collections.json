@@ -163,6 +163,13 @@
       ]
     },
     {
+      "name": "nextjs",
+      "description": "Full-stack Next.js architecture across routing, rendering, data, caching, runtimes, and deployment.",
+      "skills": [
+        "web-nextjs-architecture"
+      ]
+    },
+    {
       "name": "backend",
       "description": "Backend service architecture for NestJS, FastAPI, and Fiber.",
       "skills": [

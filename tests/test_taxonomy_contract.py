@@ -51,6 +51,7 @@ EXPECTED_SKILLS = {
     "research-case-study-design",
     "research-paper-authoring",
     "sdd-specification",
+    "web-nextjs-architecture",
     "web-state-xstate",
     "web-state-zustand",
     "web-validation-zod",
@@ -64,7 +65,7 @@ class TaxonomyContractTests(unittest.TestCase):
     def test_exact_domain_first_inventory(self) -> None:
         found = {path.name for path in SKILLS_ROOT.iterdir() if path.is_dir()}
         self.assertEqual(EXPECTED_SKILLS, found)
-        self.assertEqual(45, len(found))
+        self.assertEqual(46, len(found))
 
     def test_directory_and_frontmatter_names_match(self) -> None:
         for name in sorted(EXPECTED_SKILLS):
@@ -137,6 +138,16 @@ class TaxonomyContractTests(unittest.TestCase):
                 "performance-testing-and-budgets.md",
                 "field-observability.md",
                 "experience-and-integrity-boundaries.md",
+            },
+            "web-nextjs-architecture": {
+                "app-router-and-project-structure.md",
+                "server-client-boundaries.md",
+                "data-actions-and-bff.md",
+                "rendering-streaming-and-navigation.md",
+                "caching-and-revalidation.md",
+                "runtimes-and-deployment.md",
+                "security-and-verification.md",
+                "pages-router-migration.md",
             },
         }
         for skill, references in expected.items():

@@ -149,6 +149,67 @@ Field, browser/runtime, assistive-technology, and representative physical-device
 # Independent, executable oracles for the controlled fixtures. Samples are
 # calibration mutants for unit tests; they are never copied into provider workspaces.
 ORACLES: dict[str, dict[str, object]] = {
+    "web-nextjs-architecture": {
+        "inputs": {
+            "nextjs-inventory.json": '{"runtime_available":false,"nextjs_version":"16.1.0","react_version":"19.2.0","router":"app","cache_components":true,"deployment":"serverless-multi-instance","observations":[{"id":"client-root-layout","evidence":"app/(shop)/layout.tsx has use client and imports the database-backed catalog module through its dependency graph."},{"id":"internal-handler-round-trip","evidence":"The products Server Component fetches the application\u0027s own /api/products Route Handler."},{"id":"unsafe-order-action","evidence":"The createOrder Server Action mutates order state without an authorization check, idempotency contract, or cache invalidation."},{"id":"shared-tenant-cache","evidence":"A use cache function reads tenant data from ambient session state and has no cacheLife, cacheTag, or tenant key."},{"id":"proxy-only-authorization","evidence":"Proxy redirects unauthenticated page requests, but the Server Action and Route Handler perform no secure authorization."},{"id":"unsupported-deployment-assumptions","evidence":"The design assumes writable persistent filesystem, shared process memory, durable WebSockets, and coherent invalidation across serverless instances."}],"backend_boundary":"Order transaction and idempotency policy need separate validation; no backend decomposition or microservice extraction is authorized."}\n'
+        },
+        "outputs": [text(
+            "nextjs-architecture-review.md",
+            """# Next.js architecture review
+
+## Evidence boundary
+
+Verified evidence is limited to `nextjs-inventory.json`: a declared Next.js 16.1 App Router application with Cache Components and a serverless multi-instance deployment. Runtime and browser execution were unavailable, as were source, configuration, build, adapter, and production evidence. This target is not proof of production behavior.
+
+## Findings and target boundaries
+
+- client-root-layout: return the shop layout to a Server Component by default. Put interaction behind a small Client Component boundary, keep the catalog in a server-only module graph, and cross the boundary with serializable props.
+- internal-handler-round-trip: call a direct server-side catalog operation from the products Server Component and remove the internal HTTP round trip. Keep a Route Handler only for a real external HTTP client.
+- unsafe-order-action: keep the UI mutation as a Server Action but treat it as a public-facing entrypoint. Add secure authorization inside the action, validated input, explicit idempotency, transaction ownership, stable failure mapping, and deliberate invalidation after commit.
+- shared-tenant-cache: with Cache Components, replace ambient session capture with explicit tenant and authorization inputs. Define `cacheLife`, `cacheTag`, and `updateTag` behavior and validate multi-instance invalidation before shared reuse.
+- proxy-only-authorization: Proxy remains optimistic navigation filtering. Add secure authorization inside each Server Action, Route Handler, and protected data operation; bound validation, status mapping, and error disclosure at the entrypoint.
+- unsupported-deployment-assumptions: for the declared serverless shape, writable persistent filesystem is unsupported, shared process memory is unsupported, and durable WebSockets are unsupported until the deployment adapter proves otherwise. Verify cache sharing, invalidation propagation, connection lifetime, and regional behavior against that adapter.
+
+## Rendering and route behavior
+
+Map layouts, pages, loading, error, and not-found ownership separately from business capabilities. Place request-time work behind focused Suspense boundaries, start independent reads in parallel, and verify direct load, route transition, hydration, loading, error, recovery, mutation, and fresh post-mutation output.
+
+## Backend composition boundary
+
+Next.js remains the focal owner for route, RSC graph, entrypoint, cache, rendering, and deployment decisions. `backend-service-architecture is optional` is expressed operationally as: backend-service-architecture is optional for the deeper order transaction and idempotency policy, ports, or decomposition review. It is not required by this Next.js target, and no microservice extraction follows from using server-side Next.js.
+
+## Incremental verification and rollback
+
+1. Add fail-first characterization checks for current URLs, output, authorization denial, order retry, tenant isolation, cache invalidation, and error states.
+2. Narrow the client-root-layout boundary and verify a production build plus direct load and route transition behavior.
+3. Replace the internal handler call with direct server access while preserving the external Route Handler contract if a real client exists.
+4. Secure the action and data paths, then introduce explicit Cache Components keys and invalidation.
+5. Validate the deployment adapter in a representative multi-instance environment before accepting topology claims.
+
+Keep each previous route or implementation seam available for rollback until its production-like checks pass. No deployment, production mutation, secret access, or backend decomposition is authorized.
+
+## Limitations
+
+Exact source, `next.config`, dependency graph, production build, browser behavior, deployment adapter, runtime limits, shared cache, and production behavior remain unverified.
+""",
+            "Verified evidence",
+            "client-root-layout",
+            "internal-handler-round-trip",
+            "unsafe-order-action",
+            "shared-tenant-cache",
+            "proxy-only-authorization",
+            "unsupported-deployment-assumptions",
+            "Server Component by default",
+            "remove the internal HTTP round trip",
+            "Cache Components",
+            "secure authorization inside",
+            "deployment adapter",
+            "Next.js remains the focal owner",
+            "fail-first characterization checks",
+            "## Limitations",
+            forbids=("runtime verified", "shared cache is safe", "Proxy is sufficient authorization", "deployment executed"),
+        )],
+    },
     "backend-service-architecture": {
         "inputs": {
             "service-inventory.json": '{"runtime_available":false,"services":[{"id":"orders-nestjs","framework":"NestJS","observations":["OrdersController coordinates OrderRepository, PaymentClient, and EventBus directly.","OrdersModule exports OrderRepository and PaymentClient to five modules.","A global interceptor opens and commits a database transaction."]},{"id":"catalog-fastapi","framework":"FastAPI","observations":["The APIRouter path operation creates the ORM session, applies pricing policy, commits, and publishes an event.","A Depends function performs authorization and inventory reservation.","The shared HTTP client is created at import time and has no visible shutdown."]},{"id":"billing-fiber","framework":"Fiber","observations":["The handler passes fiber.Ctx into the billing service and repository.","Database and payment clients are mutable package globals.","Middleware retries the complete request after any error."]}],"shared_invariant":"An accepted order records its state and outbox event atomically; payment retries use the same idempotency key.","nextjs_in_scope":false}\n'

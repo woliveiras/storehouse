@@ -249,6 +249,15 @@ npx skills add woliveiras/storehouse \
   --skill web-validation-zod
 ```
 
+### `nextjs`
+
+Full-stack Next.js architecture across routing, rendering, data, caching, runtimes, and deployment.
+
+```bash
+npx skills add woliveiras/storehouse \
+  --skill web-nextjs-architecture
+```
+
 ### `backend`
 
 Backend service architecture for NestJS, FastAPI, and Fiber.
@@ -364,7 +373,7 @@ have no installed identity.
 
 ## Compatibility and privacy
 
-The 45 directories validate against the Agent Skills contract. A clean-room
+The 46 directories validate against the Agent Skills contract. A clean-room
 official CLI installation smoke is required when distribution, collections, or
 skill layout changes. Twelve game skills retain deliberate Codex
 `agents/openai.yaml` metadata. `game-dev-2d-art` can use Codex image generation

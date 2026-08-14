@@ -1,0 +1,35 @@
+{
+  "runtime_available": false,
+  "nextjs_version": "16.1.0",
+  "react_version": "19.2.0",
+  "router": "app",
+  "cache_components": true,
+  "deployment": "serverless-multi-instance",
+  "observations": [
+    {
+      "id": "client-root-layout",
+      "evidence": "app/(shop)/layout.tsx has use client and imports the database-backed catalog module through its dependency graph."
+    },
+    {
+      "id": "internal-handler-round-trip",
+      "evidence": "The products Server Component fetches the application's own /api/products Route Handler."
+    },
+    {
+      "id": "unsafe-order-action",
+      "evidence": "The createOrder Server Action mutates order state without an authorization check, idempotency contract, or cache invalidation."
+    },
+    {
+      "id": "shared-tenant-cache",
+      "evidence": "A use cache function reads tenant data from ambient session state and has no cacheLife, cacheTag, or tenant key."
+    },
+    {
+      "id": "proxy-only-authorization",
+      "evidence": "Proxy redirects unauthenticated page requests, but the Server Action and Route Handler perform no secure authorization."
+    },
+    {
+      "id": "unsupported-deployment-assumptions",
+      "evidence": "The design assumes writable persistent filesystem, shared process memory, durable WebSockets, and coherent invalidation across serverless instances."
+    }
+  ],
+  "backend_boundary": "Order transaction and idempotency policy need separate validation; no backend decomposition or microservice extraction is authorized."
+}
