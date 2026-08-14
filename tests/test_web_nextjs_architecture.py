@@ -156,7 +156,7 @@ class WebNextjsArchitectureContractTests(unittest.TestCase):
         self.assertEqual(["web-nextjs-architecture"], collection["skills"])
         self.assertIn("Next.js architecture", (ROOT / "README.md").read_text(encoding="utf-8"))
         architecture = (ROOT / "docs" / "architecture.md").read_text(encoding="utf-8")
-        self.assertIn("46 skills", architecture)
+        self.assertIn("47 skills", architecture)
         self.assertIn("web-nextjs-architecture", architecture)
 
     def test_wna_013_016_evaluation_cases(self) -> None:

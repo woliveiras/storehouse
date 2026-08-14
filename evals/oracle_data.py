@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 
 def text(path: str, sample: str, *contains: str, forbids: tuple[str, ...] = ()) -> dict[str, object]:
     return {"path": path, "format": "text", "contains": list(contains), "forbids": list(forbids), "sample": sample}
@@ -143,6 +145,85 @@ Accept a candidate only when the original repeated scenario improves without rel
 ## Limitations and next evidence
 
 Field, browser/runtime, assistive-technology, and representative physical-device verification remain unavailable. The supplied profile summaries support bounded laboratory inferences only. Collect privacy-reviewed field segmentation after an authorized release and repeat the laboratory scenarios on modest supported Android and iOS devices before claiming population improvement.
+"""
+
+
+PRODUCT_SECURITY_PRIVACY_EVIDENCE = (
+    Path(__file__).parent
+    / "fixtures"
+    / "product-security-privacy-engineering"
+    / "security-privacy-evidence.json"
+).read_text(encoding="utf-8")
+
+PRODUCT_SECURITY_PRIVACY_SAMPLE = """# Product security and privacy review
+
+## Scope and evidence boundary
+
+- Verified evidence: the supplied synthetic web and mobile fixture only.
+- Runtime verification: unavailable; source, deployed behavior, production access, external scans, and penetration tests were not available or authorized.
+- Sensitive values: none were requested, printed, copied, or invented; this review uses data categories only.
+- Evidence classes: supplied observations are facts for this fixture; control proposals are engineering requirements or hardening; production effectiveness remains unknown.
+- Tests and scanners do not prove security, tenant isolation, or legal compliance.
+
+## Product threat model
+
+Actors are member, manager, tenant-admin, support-admin, and background-service. Assets include tenant records, account identity, contact detail, health-note, coarse-location, authentication-token, and payment-reference categories. Administrative and service identities are separate from ordinary users.
+
+Trust boundaries are browser-to-api, mobile-app-to-api, api-to-worker, api-to-tenant-database, service-to-log-platform, service-to-cache, service-to-backup, service-to-search-index, and service-to-analytics-vendor. Entrypoints are document-by-id, payment-retry, account-recovery, and mobile-record-link. Authentication establishes an identity; authorization must independently enforce action, ownership, tenant, and privilege on every authoritative read and write.
+
+## Confirmed findings
+
+| Priority | Finding | Observed consequence | Required control |
+| --- | --- | --- | --- |
+| P0 | IDOR: confirmed finding | `document-by-id` accepts a global id after authentication without ownership or tenant authorization. | Resolve the object inside the authenticated tenant and authorized ownership scope; deny by default. |
+| P0 | Cross-tenant access | An authenticated member can request another user's document in another tenant. Tenant crossing: denied by required test. | Bind subject, tenant, action, and object server-side; test both tenant directions. |
+| P0 | Service role: excessive privilege | The export worker can read, write, and delete every tenant and manage users/storage although one tenant export is needed. | Mint a short-lived, job-bound credential with one tenant, approved export scope, and least privilege; never accept caller tenant binding alone. |
+| P0 | Sensitive data in logs: confirmed finding | Tokens, email, health-note body, payment reference, and full mobile deep link are logged without redaction and retained indefinitely. | Stop collection at the source, redact structured fields, restrict access, rotate exposed credentials, and impose tested retention. |
+| P1 | Replay and enumeration | Payment retry has no replay control; recovery responses disclose whether an account exists. | Use an idempotency key bound to actor, tenant, operation, and result; normalize recovery response and timing. |
+| P1 | Retention: indefinite and rejected | Logs and daily backups have no finite retention although primary records target deletion after 30 days. | Approve purpose-specific schedules and verify expiration across primary and derived stores. |
+| P1 | Deletion: incomplete across backups and derived data | Cache, search, analytics, exports, mobile offline data, third parties, and backups are omitted. | Track a deletion ledger through every store, bounded backup expiry, vendor confirmation, retries, and auditable terminal state. |
+| P1 | Consent withdrawal is ineffective | The UI persists withdrawal but queued and vendor analytics collection continues. | Stop collection and queued delivery, propagate vendor state, and verify revocation without claiming legal sufficiency. |
+
+## Sensitive-data lifecycle
+
+Collection and processing serve care coordination and account operation. Primary tenant-tagged storage fans out to a cache whose key lacks tenant identity, a global-id search index, device offline state, long-lived export links, logs, daily backups, and third-party analytics. Sharing, retention, export, consent withdrawal, and deletion therefore require store-specific ownership and observable completion; changing only the primary row is not deletion.
+
+## Prioritized defense in depth
+
+1. Contain the P0 object and service paths: deny cross-tenant reads, revoke broad service credentials, invalidate affected caches and export links, stop sensitive logging, and preserve only access-controlled incident metadata.
+2. Centralize server-side authorization using subject, tenant, action, object ownership, and administrative purpose; keep tenant-admin, support-admin, and service grants explicit and time-bounded.
+3. Add replay-safe operation state and non-enumerating recovery responses; bind mobile deep links to an authorized lookup after route parsing and never place a session token in a logged URL.
+4. Maintain a data map and deletion ledger for primary storage, cache, search, analytics, exports, mobile offline state, third parties, logs, and backups, with finite retention and failure retries.
+
+## Fail-first adversarial verification
+
+Before an authorized implementation, create checks that fail for the observed reason:
+
+- positive: a member reads an owned document inside the bound tenant;
+- negative: an unauthenticated, wrong-owner, wrong-role, or unsupported action is denied without revealing object existence;
+- cross-tenant: tenant A cannot read, mutate, cache-hit, search, export, or delete tenant B data in either direction;
+- replay: repeating payment retry with the same operation key yields one authoritative attempt and result;
+- error: known and unknown recovery requests have equivalent public status, shape, and bounded timing;
+- rollback: a failed export or deletion step cannot widen access or report false completion;
+- recovery: revoked credentials, invalidated caches, resumed deletion, and restored service preserve tenant and least-privilege invariants.
+
+Credible mutants must fail: remove the tenant predicate, trust a caller-provided tenant id, broaden the service role, re-enable sensitive log fields, make retention indefinite, mark deletion complete after the primary row, or claim certification from scanner output.
+
+## Incident containment and recovery
+
+Contain affected endpoints and credentials, stop sensitive log ingestion, invalidate unsafe cache/export artifacts, and restrict incident access. Preserve evidence without copying sensitive payloads into this report. Determine affected tenants and stores from access-controlled records, notify only through the authorized incident process, remediate root conditions, and verify cross-tenant denial, credential rotation, deletion resumption, rollback safety, and recovery before restoring capability. Record residual unknowns and follow-up owners.
+
+## Claim and evidence classification
+
+- Confirmed findings: the fixture observations listed above.
+- Hardening: centralized policy, short-lived scoped credentials, lifecycle ledger, uniform recovery, detection, and adversarial regression checks.
+- External requirements: legal interpretation, notification duties, organizational controls, independent audit, and production penetration testing require separately authorized qualified owners.
+- Unknowns: runtime enforcement, production reachability, historical exposure, deployed retention jobs, vendor deletion, and mobile-device behavior.
+- Compliance status: not certified. This is engineering analysis, not legal advice, and it does not declare LGPD, GDPR, or HIPAA compliance.
+
+## Actions not executed
+
+No source or product mutation, dependency installation, external scan, penetration test, secret access, private-data upload, production access, incident declaration, legal certification, or remote action was executed.
 """
 
 
@@ -509,6 +590,46 @@ No code, exact installed versions, runtime, deployment topology, database behavi
                 "Skeleton hides the delay",
                 "Simulator proves physical performance",
                 "production load executed",
+            ),
+        )],
+    },
+    "product-security-privacy-engineering": {
+        "inputs": {
+            "security-privacy-evidence.json": PRODUCT_SECURITY_PRIVACY_EVIDENCE
+        },
+        "outputs": [text(
+            "security-privacy-review.md",
+            PRODUCT_SECURITY_PRIVACY_SAMPLE,
+            "Verified evidence: the supplied synthetic web and mobile fixture only",
+            "Authentication establishes an identity; authorization must independently enforce",
+            "IDOR: confirmed finding",
+            "Tenant crossing: denied by required test",
+            "Service role: excessive privilege",
+            "Sensitive data in logs: confirmed finding",
+            "Retention: indefinite and rejected",
+            "Deletion: incomplete across backups and derived data",
+            "positive:",
+            "negative:",
+            "cross-tenant:",
+            "replay:",
+            "error:",
+            "rollback:",
+            "recovery:",
+            "Preserve evidence",
+            "Compliance status: not certified",
+            "Tests and scanners do not prove security",
+            "No source or product mutation",
+            forbids=(
+                "IDOR: accepted",
+                "Tenant crossing: allowed",
+                "Service role: appropriate",
+                "Sensitive data in logs: acceptable",
+                "Retention: indefinite and accepted",
+                "Deletion: complete",
+                "Compliance status: certified",
+                "LGPD compliant",
+                "GDPR compliant",
+                "HIPAA compliant",
             ),
         )],
     },

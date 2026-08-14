@@ -39,6 +39,7 @@ EXPECTED_SKILLS = {
     "game-dev-2d-ui-accessibility",
     "infra-terraform",
     "product-performance-engineering",
+    "product-security-privacy-engineering",
     "product-ui-ux-design",
     "release-android",
     "release-ai-eng",
@@ -65,7 +66,7 @@ class TaxonomyContractTests(unittest.TestCase):
     def test_exact_domain_first_inventory(self) -> None:
         found = {path.name for path in SKILLS_ROOT.iterdir() if path.is_dir()}
         self.assertEqual(EXPECTED_SKILLS, found)
-        self.assertEqual(46, len(found))
+        self.assertEqual(47, len(found))
 
     def test_directory_and_frontmatter_names_match(self) -> None:
         for name in sorted(EXPECTED_SKILLS):
@@ -138,6 +139,16 @@ class TaxonomyContractTests(unittest.TestCase):
                 "performance-testing-and-budgets.md",
                 "field-observability.md",
                 "experience-and-integrity-boundaries.md",
+            },
+            "product-security-privacy-engineering": {
+                "security-privacy-foundations.md",
+                "identity-authorization-and-tenancy.md",
+                "web-and-api-security.md",
+                "mobile-product-security.md",
+                "sensitive-data-lifecycle.md",
+                "application-security-testing.md",
+                "incident-containment-and-recovery.md",
+                "regulated-data-and-compliance-claims.md",
             },
             "web-nextjs-architecture": {
                 "app-router-and-project-structure.md",

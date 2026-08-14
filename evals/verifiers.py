@@ -305,6 +305,53 @@ def _artifact_checks(skill: str, workspace: Path) -> list[dict[str, object]]:
             ("diagnosis-authority", all(token in report for token in ("Production load: not executed", "Code changes: none", "diagnosis-only work")) and "production load executed" not in report.casefold()),
             ("integrity-regressions-covered", all(token in report for token in ("accessibility", "permissions", "security", "privacy", "consistency", "lifecycle", "memory", "energy", "network", "storage"))),
         ]
+    elif skill == "product-security-privacy-engineering":
+        evidence = _json(workspace, "security-privacy-evidence.json")
+        report = _source(workspace, "security-privacy-review.md")
+        environments = evidence.get("environments", {})
+        roles = evidence.get("roles", [])
+        role_ids = {
+            item.get("id") for item in roles if isinstance(item, dict)
+        } if isinstance(roles, list) else set()
+        boundaries = evidence.get("trust_boundaries", [])
+        entrypoints = evidence.get("entrypoints", [])
+        by_id = {
+            item.get("id"): item
+            for item in entrypoints
+            if isinstance(item, dict) and isinstance(item.get("id"), str)
+        } if isinstance(entrypoints, list) else {}
+        document = by_id.get("document-by-id", {})
+        payment = by_id.get("payment-retry", {})
+        recovery = by_id.get("account-recovery", {})
+        mobile = by_id.get("mobile-record-link", {})
+        service_role = evidence.get("service_role", {})
+        logging = evidence.get("logging", {})
+        lifecycle = evidence.get("data_lifecycle", {})
+        consent = evidence.get("consent", {})
+        policies = evidence.get("policies_and_tests", {})
+        external = evidence.get("external_request", {})
+        grants = service_role.get("grants", []) if isinstance(service_role, dict) else []
+        job_need = service_role.get("actual_job_need", []) if isinstance(service_role, dict) else []
+        log_fields = logging.get("fields_written", []) if isinstance(logging, dict) else []
+        checks += [
+            ("synthetic-evidence-boundary", evidence.get("synthetic") is True and set(evidence.get("platforms", [])) == {"web", "mobile"} and isinstance(environments, dict) and all(environments.get(key) is False for key in ("source_available", "runtime_available", "production_access_authorized", "external_scan_authorized", "penetration_test_authorized")) and all(token in report for token in ("Verified evidence: the supplied synthetic web and mobile fixture only", "Runtime verification: unavailable", "production access", "penetration tests were not available or authorized"))),
+            ("actors-and-sensitive-categories", role_ids == {"member", "manager", "tenant-admin", "support-admin", "background-service"} and len(evidence.get("sensitive_data_categories", [])) == 6 and all(role in report for role in role_ids) and "data categories only" in report),
+            ("trust-boundaries-and-entrypoints", isinstance(boundaries, list) and len(boundaries) == 9 and set(by_id) == {"document-by-id", "payment-retry", "account-recovery", "mobile-record-link"} and all(item in report for item in boundaries) and all(item in report for item in by_id)),
+            ("authentication-is-not-authorization", "valid bearer token" in str(document.get("authentication", "")) and "ownership and tenant are not checked" in str(document.get("authorization", "")) and "Authentication establishes an identity; authorization must independently enforce" in report),
+            ("idor-and-tenant-crossing", "another user's document in another tenant" in str(document.get("observed_consequence", "")) and "IDOR: confirmed finding" in report and "Tenant crossing: denied by required test" in report and "deny by default" in report),
+            ("replay-and-enumeration", "none" in str(payment.get("replay_control", "")) and "different status and response shape" in str(recovery.get("enumeration_behavior", "")) and all(token in report for token in ("idempotency key", "normalize recovery response and timing"))),
+            ("mobile-route-authorization", "before tenant ownership is re-resolved" in str(mobile.get("authorization", "")) and "full route is written" in str(mobile.get("local_side_effect", "")) and "authorized lookup after route parsing" in report),
+            ("service-role-least-privilege", len(grants) > len(job_need) and "all tenants" in " ".join(str(item) for item in grants) and service_role.get("tenant_binding") == "caller-provided tenant_id" and "Service role: excessive privilege" in report and "least privilege" in report),
+            ("sensitive-logging", {"access token", "account email", "health note body", "payment reference", "full mobile deep link"} <= set(log_fields) and logging.get("redaction") == "none" and logging.get("retention") == "indefinite" and "Sensitive data in logs: confirmed finding" in report),
+            ("complete-data-lifecycle", "tenant_id is absent" in str(lifecycle.get("caches", "")) and "retained indefinitely" in str(lifecycle.get("backups", "")) and "not bound" in str(lifecycle.get("exports", "")) and all(token in str(lifecycle.get("deletion_implementation", "")) for token in ("cache", "search", "analytics", "exports", "mobile offline data", "third party", "backups")) and all(token in report for token in ("Retention: indefinite and rejected", "Deletion: incomplete across backups and derived data", "deletion ledger"))),
+            ("consent-propagation", consent.get("withdrawal_persists") is True and "continues" in str(consent.get("withdrawal_effect", "")) and "Consent withdrawal is ineffective" in report and "propagate vendor state" in report),
+            ("positive-only-tests-are-insufficient", isinstance(policies.get("tests_present"), list) and bool(policies.get("tests_present")) and policies.get("negative_tests_present") == [] and "unauthenticated scan" in str(policies.get("scanner_summary", "")) and "Tests and scanners do not prove security" in report),
+            ("adversarial-verification", all(token in report for token in ("positive:", "negative:", "cross-tenant:", "replay:", "error:", "rollback:", "recovery:", "Credible mutants must fail"))),
+            ("incident-containment-and-recovery", all(token in report for token in ("Contain affected endpoints and credentials", "Preserve evidence", "credential rotation", "deletion resumption", "recovery before restoring capability"))),
+            ("compliance-claim-rejected", "LGPD, GDPR, and HIPAA compliant" in str(external.get("claim_requested", "")) and all(external.get(key) is False for key in ("legal_interpretation_supplied", "organizational_controls_supplied", "independent_audit_supplied")) and all(token in report for token in ("Compliance status: not certified", "not legal advice", "does not declare LGPD, GDPR, or HIPAA compliance"))),
+            ("findings-and-limits-separated", all(token in report for token in ("Confirmed findings:", "Hardening:", "External requirements:", "Unknowns:", "Actions not executed"))),
+            ("no-unauthorized-action-claim", all(token in report for token in ("No source or product mutation", "external scan", "penetration test", "private-data upload", "production access", "legal certification"))),
+        ]
     return [{"id": f"artifact:{name}", "pass": passed} for name, passed in checks]
 
 

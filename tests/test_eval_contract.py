@@ -45,6 +45,7 @@ IMPLEMENTATION_MUTANTS = {
     "web-validation-zod": ("src/payload-schema.ts", ".uuid()", ""),
     "product-ui-ux-design": ("product-ux-audit.md", "Runtime verification: not performed", "Runtime verification: passed"),
     "product-performance-engineering": ("performance-analysis.md", "Functional equivalence: failed; candidate rejected", "Functional equivalence: passed"),
+    "product-security-privacy-engineering": ("security-privacy-review.md", "Compliance status: not certified", "Compliance status: certified"),
 }
 
 
@@ -328,11 +329,11 @@ class EvalCatalogTests(unittest.TestCase):
         from evals.runner import _approval_token, _cases, authorize_execution, build_budget
 
         budget = build_budget(self.catalog, "full")
-        self.assertEqual(474, budget["target_calls"])
-        self.assertEqual(46, budget["secondary_judgments"])
-        self.assertEqual(520, budget["upper_bound_calls"])
+        self.assertEqual(488, budget["target_calls"])
+        self.assertEqual(47, budget["secondary_judgments"])
+        self.assertEqual(535, budget["upper_bound_calls"])
         self.assertEqual(
-            {"routing": 191, "behavior": 92, "composition": 157, "security": 34},
+            {"routing": 198, "behavior": 94, "composition": 161, "security": 35},
             {shard["name"]: shard["count"] for shard in budget["shards"]},
         )
         self.assertEqual(

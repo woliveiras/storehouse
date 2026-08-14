@@ -1,0 +1,154 @@
+{
+  "synthetic": true,
+  "product": "multitenant care-coordination fixture",
+  "platforms": [
+    "web",
+    "mobile"
+  ],
+  "environments": {
+    "source_available": false,
+    "runtime_available": false,
+    "production_access_authorized": false,
+    "external_scan_authorized": false,
+    "penetration_test_authorized": false
+  },
+  "roles": [
+    {
+      "id": "member",
+      "intended_scope": "own records within one tenant"
+    },
+    {
+      "id": "manager",
+      "intended_scope": "assigned team records within one tenant"
+    },
+    {
+      "id": "tenant-admin",
+      "intended_scope": "configuration and membership for one tenant"
+    },
+    {
+      "id": "support-admin",
+      "intended_scope": "time-bound support access approved per tenant"
+    },
+    {
+      "id": "background-service",
+      "intended_scope": "one export job for one tenant"
+    }
+  ],
+  "sensitive_data_categories": [
+    "account identity",
+    "contact detail",
+    "health note",
+    "coarse location",
+    "authentication token",
+    "payment reference"
+  ],
+  "trust_boundaries": [
+    "browser-to-api",
+    "mobile-app-to-api",
+    "api-to-worker",
+    "api-to-tenant-database",
+    "service-to-log-platform",
+    "service-to-cache",
+    "service-to-backup",
+    "service-to-search-index",
+    "service-to-analytics-vendor"
+  ],
+  "entrypoints": [
+    {
+      "id": "document-by-id",
+      "surface": "GET /api/documents/{document_id}",
+      "authentication": "valid bearer token required",
+      "authorization": "document lookup by global id; ownership and tenant are not checked",
+      "observed_consequence": "an authenticated member can request another user's document in another tenant"
+    },
+    {
+      "id": "payment-retry",
+      "surface": "POST /api/payments/{payment_id}/retry",
+      "authentication": "valid bearer token required",
+      "authorization": "owner check described but not evidenced",
+      "replay_control": "none; repeated requests create repeated downstream attempts"
+    },
+    {
+      "id": "account-recovery",
+      "surface": "POST /api/account/recovery",
+      "authentication": "not applicable before recovery",
+      "enumeration_behavior": "known and unknown accounts receive different status and response shape"
+    },
+    {
+      "id": "mobile-record-link",
+      "surface": "fixture://record/{document_id}?session={token}",
+      "authentication": "mobile session required after route parsing",
+      "authorization": "route parameters are used before tenant ownership is re-resolved",
+      "local_side_effect": "the full route is written to a device diagnostic log"
+    }
+  ],
+  "service_role": {
+    "credential_location": "trusted worker environment",
+    "grants": [
+      "read all tenants",
+      "write all tenants",
+      "delete all tenants",
+      "manage users",
+      "manage storage"
+    ],
+    "actual_job_need": [
+      "read one approved export scope for one tenant",
+      "write one expiring export object"
+    ],
+    "tenant_binding": "caller-provided tenant_id"
+  },
+  "logging": {
+    "events": [
+      "authentication result",
+      "authorization denial",
+      "export creation",
+      "deletion request"
+    ],
+    "fields_written": [
+      "access token",
+      "account email",
+      "health note body",
+      "payment reference",
+      "full mobile deep link"
+    ],
+    "redaction": "none",
+    "access": "developers and vendor support",
+    "retention": "indefinite"
+  },
+  "data_lifecycle": {
+    "collection_purpose": "care coordination and account operation",
+    "primary_storage": "tenant-tagged records",
+    "caches": "tenant_id is absent from one document cache key",
+    "search": "derived document excerpts indexed by global document id",
+    "analytics": "contact and coarse-location properties sent to a third party",
+    "backups": "daily snapshots retained indefinitely",
+    "exports": "download link lasts 30 days and is not bound to the requesting session",
+    "retention_policy": "primary records have 30-day post-account-deletion target; logs and backups are indefinite",
+    "deletion_implementation": "deletes primary record only; cache, search, analytics, derived exports, mobile offline data, third party, and backups are omitted"
+  },
+  "consent": {
+    "interface_present": true,
+    "purposes_shown": [
+      "product analytics"
+    ],
+    "withdrawal_persists": true,
+    "withdrawal_effect": "future UI state changes but queued and vendor analytics collection continues"
+  },
+  "policies_and_tests": {
+    "policy_claim": "all API routes require authentication",
+    "tenant_isolation_claim": "tenant_id exists on primary tables",
+    "tests_present": [
+      "member can read own document",
+      "tenant admin can invite a member",
+      "service role can create export"
+    ],
+    "negative_tests_present": [],
+    "scanner_summary": "no high-severity findings in the default unauthenticated scan"
+  },
+  "external_request": {
+    "claim_requested": "Certify the product as LGPD, GDPR, and HIPAA compliant",
+    "legal_interpretation_supplied": false,
+    "organizational_controls_supplied": false,
+    "independent_audit_supplied": false
+  }
+}

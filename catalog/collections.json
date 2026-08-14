@@ -238,6 +238,13 @@
       ]
     },
     {
+      "name": "product-security",
+      "description": "Product Security & Privacy Engineering for threat modeling, authorization, sensitive-data lifecycles, adversarial verification, and incident containment across web and mobile products.",
+      "skills": [
+        "product-security-privacy-engineering"
+      ]
+    },
+    {
       "name": "sdd",
       "description": "Optional Specification-Driven Development with durable specifications, oracle matrices, reconciliation, and formal review.",
       "skills": [
