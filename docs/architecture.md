@@ -6,21 +6,26 @@ Each directory owns its `SKILL.md` and optional `agents/`, `references/`,
 code or depend on Baseline, another skill, or repository test and evaluation
 dependencies.
 
-The current flat domain-first inventory contains 47 skills. The `backend`
+The current flat domain-first inventory contains 48 skills. The `backend`
 namespace owns framework-neutral service-boundary design with conditional
 NestJS, FastAPI, and Fiber translations. `web-nextjs-architecture` owns
 full-stack Next.js route, render, server/client, data-entrypoint, cache, runtime,
 and deployment decisions while optionally composing with the backend capability
 for deeper service boundaries. The `product`
 namespace owns independent cross-platform product UI/UX design, product
-performance engineering, and product security and privacy capabilities.
+performance engineering, product security and privacy, and product testing
+capabilities.
 `product-ui-ux-design` owns observable experience under latency;
 `product-performance-engineering` owns measurement, profiling, technical root
 cause, optimization, budgets, and causal regression tests; and
 `product-security-privacy-engineering` owns product threat models, trust
 boundaries, authorization and tenancy, sensitive-data lifecycles, adversarial
-verification, and incident containment. Each can be installed alone, and game
-interfaces and performance remain in the separate `game-dev-2d` namespace.
+verification, and incident containment; and `product-testing-engineering` owns
+risk-based test strategy and architecture, public seams, deterministic fixtures,
+independent oracles, behavioral coverage, test levels, and flakiness diagnosis
+across web and mobile product boundaries. Each can be installed alone, and game
+interfaces, performance, and testing remain in the separate `game-dev-2d`
+namespace.
 
 `catalog/collections.json` is a declarative documentation source. Includes are
 expanded in declared order, reject cycles and duplicates, and never execute an

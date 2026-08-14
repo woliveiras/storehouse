@@ -1,0 +1,71 @@
+{
+  "synthetic": true,
+  "strategy_only": true,
+  "runtime_available": false,
+  "network_authorized": false,
+  "production_authorized": false,
+  "external_e2e_authorized": false,
+  "device_farm_authorized": false,
+  "physical_devices_available": false,
+  "surfaces": [
+    "web",
+    "mobile",
+    "api",
+    "persistence",
+    "tenancy"
+  ],
+  "existing_suite": {
+    "reported_coverage": "100% lines",
+    "smells": [
+      "excessive mocks reproduce private implementation details",
+      "fixed sleep calls hide asynchronous races",
+      "wall clock and unseeded randomness",
+      "shared data and cleanup across parallel workers",
+      "assertions check only status codes and snapshots"
+    ],
+    "history": [
+      "offline mobile cases intermittently pass before queued work is durable",
+      "retry tests sometimes create duplicate operations",
+      "tenant tests share one identity and never cross boundaries",
+      "migration tests verify only command exit status",
+      "accessibility checks are an automated rule scan only"
+    ]
+  },
+  "governing_behaviors": [
+    {
+      "id": "web-checkout-state",
+      "risk": "A web refresh after acknowledgement can lose an accepted order.",
+      "invariant": "One acknowledged order remains observable after reload."
+    },
+    {
+      "id": "api-retry-duplicate",
+      "risk": "A timeout and retry can charge or persist the same operation twice.",
+      "invariant": "One idempotency key yields one authoritative operation and result."
+    },
+    {
+      "id": "mobile-offline-replay",
+      "risk": "Offline work can show false success, replay out of order, or overwrite a conflict after reconnect.",
+      "invariant": "Pending, synced, conflicted, and failed states remain truthful through process death and reconnect."
+    },
+    {
+      "id": "tenant-crossing",
+      "risk": "Tenant A can read or mutate Tenant B through a direct identifier, list, cache, or background job.",
+      "invariant": "Every authoritative path denies cross-tenant access in both directions without side effects."
+    },
+    {
+      "id": "persistence-migration",
+      "risk": "A migration drops legacy values or reports success after partial failure.",
+      "invariant": "Supported old data survives forward migration and failed work rolls back or recovers without false completion."
+    },
+    {
+      "id": "accessibility-journey",
+      "risk": "Keyboard or screen-reader users cannot identify an error or recover focus.",
+      "invariant": "Approved names, roles, focus order, error announcement, and recovery remain operable."
+    },
+    {
+      "id": "device-lifecycle",
+      "risk": "A simulator-only pass misses physical-device process, storage, notification, or accessibility-service behavior.",
+      "invariant": "Claims remain limited to the platform and device evidence actually observed."
+    }
+  ]
+}

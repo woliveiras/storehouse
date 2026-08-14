@@ -46,6 +46,7 @@ IMPLEMENTATION_MUTANTS = {
     "product-ui-ux-design": ("product-ux-audit.md", "Runtime verification: not performed", "Runtime verification: passed"),
     "product-performance-engineering": ("performance-analysis.md", "Functional equivalence: failed; candidate rejected", "Functional equivalence: passed"),
     "product-security-privacy-engineering": ("security-privacy-review.md", "Compliance status: not certified", "Compliance status: certified"),
+    "product-testing-engineering": ("product-test-strategy.md", "Coverage is supporting evidence, never proof.", "100% coverage proves the product is correct."),
 }
 
 
@@ -69,7 +70,12 @@ class EvalCatalogTests(unittest.TestCase):
             self.assertNotIn(f"${item['negative']['against']}", item["negative"]["prompt"])
             self.assertNotIn(f"${item['skill']}", item["negative"]["prompt"])
             for negative in item.get("negatives", []):
-                self.assertIn(negative["against"], EXPECTED_SKILLS - {item["skill"]})
+                external_baseline_skill = negative.get("external_baseline_skill")
+                if external_baseline_skill:
+                    self.assertEqual(negative["against"], external_baseline_skill)
+                    self.assertRegex(external_baseline_skill, r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+                else:
+                    self.assertIn(negative["against"], EXPECTED_SKILLS - {item["skill"]})
                 self.assertRegex(negative["name"], r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
                 self.assertTrue(negative["prompt"])
                 self.assertNotIn("do not select", negative["prompt"].casefold())
@@ -329,11 +335,11 @@ class EvalCatalogTests(unittest.TestCase):
         from evals.runner import _approval_token, _cases, authorize_execution, build_budget
 
         budget = build_budget(self.catalog, "full")
-        self.assertEqual(488, budget["target_calls"])
-        self.assertEqual(47, budget["secondary_judgments"])
-        self.assertEqual(535, budget["upper_bound_calls"])
+        self.assertEqual(503, budget["target_calls"])
+        self.assertEqual(48, budget["secondary_judgments"])
+        self.assertEqual(551, budget["upper_bound_calls"])
         self.assertEqual(
-            {"routing": 198, "behavior": 94, "composition": 161, "security": 35},
+            {"routing": 206, "behavior": 96, "composition": 165, "security": 36},
             {shard["name"]: shard["count"] for shard in budget["shards"]},
         )
         self.assertEqual(

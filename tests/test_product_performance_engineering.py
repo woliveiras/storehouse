@@ -323,8 +323,8 @@ class ProductPerformanceEngineeringContractTests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         architecture = (ROOT / "docs" / "architecture.md").read_text(encoding="utf-8")
         self.assertIn("Product Performance Engineering", readme)
-        self.assertIn("47 directories", readme)
-        self.assertIn("47 skills", architecture)
+        self.assertIn("48 directories", readme)
+        self.assertIn("48 skills", architecture)
         self.assertIn("product-performance-engineering", architecture)
 
     def test_ppe_014_evaluation_cases_and_composition(self) -> None:

@@ -227,6 +227,61 @@ No source or product mutation, dependency installation, external scan, penetrati
 """
 
 
+PRODUCT_TESTING_EVIDENCE = (
+    Path(__file__).parent
+    / "fixtures"
+    / "product-testing-engineering"
+    / "product-test-evidence.json"
+).read_text(encoding="utf-8")
+
+PRODUCT_TESTING_SAMPLE = """# Product test strategy
+
+## Scope, evidence, and authority
+
+Verified evidence is limited to the supplied synthetic `product-test-evidence.json` fixture covering web, mobile, API, persistence, and tenancy surfaces. The product, source, and runtime are unavailable. This is strategy-only work: code changes, test changes, dependency installation, network access, and external execution are unauthorized.
+
+The suite's reported 100% line coverage, excessive mocks, fixed sleeps, wall clock, unseeded randomness, shared data, status-only assertions, and snapshots are observed fixture facts. They do not establish behavior. Coverage is supporting evidence, never proof. Assertions remain behavior-derived and unchanged. No automatic pyramid is imposed; each level follows a risk and public seam.
+
+## Prioritization
+
+Prioritize data loss, duplicate financial or durable effects, cross-tenant disclosure or mutation, and false acknowledgement as P0 because their consequences are severe and existing detection is weak. Migration loss, accessibility blockage, and physical-device lifecycle gaps are P1. Likelihood and detectability remain hypotheses until representative execution supplies failure distributions.
+
+## Risk coverage matrix
+
+| Risk | Seam | Level | Fixture | Independent oracle | Evidence | Residual limitation |
+| --- | --- | --- | --- | --- | --- | --- |
+| P0 `web-checkout-state`: acknowledged order lost after refresh | Public checkout result plus authoritative order read | Component plus API integration | Synthetic unique order, controlled response, storage, clock, and reload | One acknowledged order id remains readable with the accepted fields after reload | Fail-first must lose the acknowledged record for the observed reason, then pass fresh | No executable browser or deployed persistence evidence |
+| P0 `api-retry-duplicate`: timeout and retry duplicate an operation | Documented HTTP idempotency boundary plus durable operation ledger | Contract and integration | Synthetic idempotency key, first response timeout, controlled retry schedule | Repeated key yields one authoritative operation, one durable effect, and the same public result | Fail-first duplicate mutant and replay result | No external provider or production traffic |
+| P0 `mobile-offline-replay`: false success, reordered replay, or conflict overwrite | Public repository sync state and persisted offline queue | Integration, mobile platform, focused end-to-end | Controlled network offline/reconnect, fake clock and IDs, pending operations, process restart, server conflict | Pending never reports synced; replay preserves order and idempotency; conflict remains explicit after process death | Offline, reconnect, retry, duplicate, replay, process-death, and recovery cases | Emulator evidence unavailable; physical device remains unverified |
+| P0 `tenant-crossing`: direct id, list, cache, or job crosses tenant | Authenticated API and authoritative persistence query for each path | API contract and integration | Synthetic Tenant A and Tenant B with distinct users and records, unique cache and job keys | Tenant crossing is denied in both directions. No record, cache result, mutation, export, or side effect crosses the bound tenant | Positive same-tenant plus negative cross-tenant pair for every path | Threat completeness and production authorization policy remain security-owned |
+| P1 `persistence-migration`: legacy loss or false completion | Versioned migration plus public repository invariant | Persistence integration | Synthetic old, new, boundary, malformed, and interrupted records in an isolated database | Supported old data, values, and relationships survive; partial failure rolls back or reaches an explicit recoverable state | Forward, rollback, retry, duplicate, and recovery cases with pre/post invariant comparison | Representative volume, lock, and deployed database behavior unverified |
+| P1 `accessibility-journey`: error cannot be identified or focus recovered | Rendered role, accessible name, error announcement, focus order, and public recovery action | Component, browser, assistive-technology human evaluation | Synthetic invalid input with controlled locale, viewport, theme, and reduced motion | Approved names, roles, keyboard order, announcement, focus return, and recovery action remain observable | Automated role/name/focus checks plus planned keyboard and screen-reader evaluation | Automation cannot establish WCAG conformance; human evaluation was not performed |
+| P1 `device-lifecycle`: simulator-only confidence | Public persisted state across background, foreground, notification, storage pressure, and process death | Mobile end-to-end on representative platform/device | Synthetic account and backend, controlled lifecycle and network, release build | Durable state and truthful status survive the approved lifecycle without duplicate effects | Separate emulator/simulator and physical-device matrix | Simulator is not physical-device proof; no physical device was available |
+
+## Determinism, isolation, and fixtures
+
+- Inject a fake clock and timezone; advance timers through observable work rather than sleep.
+- Seed randomness, generate deterministic run/worker/test IDs, and record the seed.
+- Script network response, disconnect, timeout, retry, duplicate, cancellation, and reconnect sequences.
+- Use barriers and events for concurrency; never depend on scheduling delay.
+- Allocate unique synthetic tenants, users, orders, queues, databases, cache namespaces, and idempotency keys per test and worker.
+- Restore handlers, timers, globals, storage, and environment in cleanup. A test must pass alone, in changed order, and in parallel without shared state.
+- Keep fixtures minimal, readable, recoverable, and owned by one case. Prefer a behavioral fake over reproducing the implementation with excessive mocks.
+
+## Fail-first and flakiness
+
+For an authorized implementation, run the smallest selected check fail-first and confirm the failure is the targeted behavioral reason, not a fixture or harness error. Preserve the failing artifact. Reject mutants that drop persistence after acknowledgement, double an idempotent effect, mark pending offline work as synced, remove tenant binding, truncate legacy values, or lose an accessible name.
+
+Diagnose current flakes by varying seed, clock, order, parallel worker count, network schedule, and process lifecycle one factor at a time. Replace fixed sleep with the missing public readiness signal or controlled scheduler. Retries may expose frequency during diagnosis but cannot turn the original failure green. Do not delete tests, lower thresholds, rewrite assertions, or accept shared-data collisions.
+
+## Evidence layers and limits
+
+Unit and component checks cover local behavior; integration and contract checks cover owned boundaries; browser end-to-end checks cover only the tested build and browser; emulator or simulator checks cover only that image; physical devices cover only the sampled hardware and OS. Accessibility automation finds selected rule violations but cannot establish conformance; keyboard, screen-reader, and human evaluation remain distinct. Performance metrics and profiling remain owned by Product Performance Engineering, approved threats by Product Security & Privacy Engineering, and experience decisions by Product UI/UX Design.
+
+No production, external end-to-end, or device-farm execution was performed. No browser, emulator, simulator, physical device, assistive technology, migration, API, or test command was executed. Residual risk remains for every runtime, integration, device, accessibility, concurrency, and production claim until the planned checks run in an authorized representative environment.
+"""
+
+
 # Independent, executable oracles for the controlled fixtures. Samples are
 # calibration mutants for unit tests; they are never copied into provider workspaces.
 ORACLES: dict[str, dict[str, object]] = {
@@ -630,6 +685,42 @@ No code, exact installed versions, runtime, deployment topology, database behavi
                 "LGPD compliant",
                 "GDPR compliant",
                 "HIPAA compliant",
+            ),
+        )],
+    },
+    "product-testing-engineering": {
+        "inputs": {
+            "product-test-evidence.json": PRODUCT_TESTING_EVIDENCE
+        },
+        "outputs": [text(
+            "product-test-strategy.md",
+            PRODUCT_TESTING_SAMPLE,
+            "Verified evidence is limited to the supplied synthetic",
+            "Coverage is supporting evidence, never proof.",
+            "Assertions remain behavior-derived and unchanged.",
+            "No automatic pyramid is imposed",
+            "| Risk | Seam | Level | Fixture | Independent oracle | Evidence | Residual limitation |",
+            "web-checkout-state",
+            "api-retry-duplicate",
+            "mobile-offline-replay",
+            "tenant-crossing",
+            "persistence-migration",
+            "accessibility-journey",
+            "device-lifecycle",
+            "Tenant crossing is denied in both directions.",
+            "fake clock",
+            "deterministic run/worker/test IDs",
+            "changed order",
+            "parallel",
+            "fixed sleep",
+            "No production, external end-to-end, or device-farm execution was performed.",
+            "Simulator is not physical-device proof",
+            forbids=(
+                "100% coverage proves the product is correct.",
+                "Assertions were weakened to accept the current behavior.",
+                "Production end-to-end and device-farm execution passed.",
+                "Tenant crossing is allowed for shared fixtures.",
+                "automatic test pyramid is required",
             ),
         )],
     },

@@ -123,6 +123,7 @@ def _record(catalog: dict[str, object], case_id: str) -> dict[str, Any]:
     if head.startswith("RT-"):
         item = _lookup(catalog, "routing", head)
         variant = parts[0]
+        external_baseline_skill = None
         if variant.startswith("negative"):
             if variant == "negative":
                 negative = item["negative"]
@@ -133,13 +134,14 @@ def _record(catalog: dict[str, object], case_id: str) -> dict[str, Any]:
                     if value["name"] == negative_name
                 )
             request, expected, avoided = negative["prompt"], negative["against"], item["skill"]
+            external_baseline_skill = negative.get("external_baseline_skill")
         elif variant == "implicit":
             request, expected, avoided = item["implicit"]["prompt"], item["skill"], ""
         elif variant == "baseline-presence":
             request, expected, avoided = item["baseline_presence_prompt"], item["skill"], ""
         else:
             request, expected, avoided = item["explicit_prompt"], item["skill"], ""
-        return {"case_id": case_id, "skill": item["skill"], "kind": "routing", "variant": variant, "request": request, "required_outputs": [], "secondary_review": False, "security": False, "expected_skill": expected, "avoid_skill": avoided}
+        return {"case_id": case_id, "skill": item["skill"], "kind": "routing", "variant": variant, "request": request, "required_outputs": [], "secondary_review": False, "security": False, "expected_skill": expected, "avoid_skill": avoided, "external_baseline_skill": external_baseline_skill}
     if head.startswith("BH-"):
         item = _lookup(catalog, "behavior", head)
         request = f"{item['request']}\n\nRequired observable result: {item['expected_result']}"
@@ -279,6 +281,9 @@ def _prepare(record: dict[str, Any], workspace_root: Path, manifest: dict[str, A
             _copy_skill(ROOT / "skills", name, workspace)
         if variant == "baseline-presence":
             _baseline_skill(workspace)
+        external_baseline_skill = record.get("external_baseline_skill")
+        if external_baseline_skill:
+            _baseline_skill(workspace, external_baseline_skill)
     elif variant != "control" and record["skill"]:
         skill_source = ROOT / "skills"
         if record["kind"] == "compare" and variant == "proposed":

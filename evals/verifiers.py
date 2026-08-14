@@ -305,6 +305,40 @@ def _artifact_checks(skill: str, workspace: Path) -> list[dict[str, object]]:
             ("diagnosis-authority", all(token in report for token in ("Production load: not executed", "Code changes: none", "diagnosis-only work")) and "production load executed" not in report.casefold()),
             ("integrity-regressions-covered", all(token in report for token in ("accessibility", "permissions", "security", "privacy", "consistency", "lifecycle", "memory", "energy", "network", "storage"))),
         ]
+    elif skill == "product-testing-engineering":
+        evidence = _json(workspace, "product-test-evidence.json")
+        report = _source(workspace, "product-test-strategy.md")
+        behaviors = evidence.get("governing_behaviors", [])
+        behavior_ids = {
+            item.get("id") for item in behaviors if isinstance(item, dict)
+        } if isinstance(behaviors, list) else set()
+        suite = evidence.get("existing_suite", {})
+        smells = suite.get("smells", []) if isinstance(suite, dict) else []
+        history = suite.get("history", []) if isinstance(suite, dict) else []
+        expected_ids = {
+            "web-checkout-state",
+            "api-retry-duplicate",
+            "mobile-offline-replay",
+            "tenant-crossing",
+            "persistence-migration",
+            "accessibility-journey",
+            "device-lifecycle",
+        }
+        checks += [
+            ("synthetic-strategy-only-boundary", evidence.get("synthetic") is True and evidence.get("strategy_only") is True and evidence.get("runtime_available") is False and all(evidence.get(key) is False for key in ("network_authorized", "production_authorized", "external_e2e_authorized", "device_farm_authorized", "physical_devices_available")) and "strategy-only work" in report),
+            ("required-product-surfaces", set(evidence.get("surfaces", [])) == {"web", "mobile", "api", "persistence", "tenancy"}),
+            ("all-governing-behaviors-covered", behavior_ids == expected_ids and all(item in report for item in expected_ids)),
+            ("fragile-suite-evidence-derived", suite.get("reported_coverage") == "100% lines" and len(smells) == 5 and len(history) == 5 and all(token in report for token in ("100% line coverage", "excessive mocks", "fixed sleeps", "wall clock", "shared data", "status-only assertions"))),
+            ("risk-seam-oracle-matrix", "| Risk | Seam | Level | Fixture | Independent oracle | Evidence | Residual limitation |" in report and report.count("| P0 `") >= 4 and report.count("| P1 `") >= 3 and all(token in report for token in ("public", "Synthetic", "Fail-first", "Residual limitation"))),
+            ("coverage-and-pyramid-claims-bounded", all(token in report for token in ("Coverage is supporting evidence, never proof.", "Assertions remain behavior-derived and unchanged.", "No automatic pyramid is imposed")) and "100% coverage proves the product is correct." not in report),
+            ("determinism-and-isolation", all(token in report for token in ("fake clock", "Seed randomness", "deterministic run/worker/test IDs", "Script network response", "barriers and events", "unique synthetic tenants", "changed order", "parallel", "cleanup"))),
+            ("offline-retry-duplicate-recovery", all(token in report for token in ("offline", "reconnect", "retry", "duplicate", "replay", "process-death", "recovery"))),
+            ("tenant-isolation-bidirectional", "Tenant crossing is denied in both directions." in report and all(token in report for token in ("Tenant A", "Tenant B", "No record, cache result, mutation, export, or side effect"))),
+            ("migration-oracle", all(token in report for token in ("Supported old data", "partial failure", "rolls back", "Forward, rollback, retry, duplicate, and recovery"))),
+            ("flakiness-causal-not-masked", all(token in report for token in ("varying seed, clock, order, parallel worker count, network schedule, and process lifecycle", "Replace fixed sleep", "cannot turn the original failure green", "Do not delete tests, lower thresholds, rewrite assertions"))),
+            ("accessibility-and-device-limits", all(token in report for token in ("cannot establish WCAG conformance", "keyboard", "screen-reader", "human evaluation", "Simulator is not physical-device proof", "physical device"))),
+            ("no-invented-or-unauthorized-execution", "No production, external end-to-end, or device-farm execution was performed." in report and "No browser, emulator, simulator, physical device, assistive technology, migration, API, or test command was executed." in report and "Production end-to-end and device-farm execution passed." not in report),
+        ]
     elif skill == "product-security-privacy-engineering":
         evidence = _json(workspace, "security-privacy-evidence.json")
         report = _source(workspace, "security-privacy-review.md")

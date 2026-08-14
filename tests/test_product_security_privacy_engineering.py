@@ -312,8 +312,8 @@ class ProductSecurityPrivacyEngineeringContractTests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         architecture = (ROOT / "docs" / "architecture.md").read_text(encoding="utf-8")
         self.assertIn("Product Security & Privacy Engineering", readme)
-        self.assertIn("47 directories", readme)
-        self.assertIn("47 skills", architecture)
+        self.assertIn("48 directories", readme)
+        self.assertIn("48 skills", architecture)
         self.assertIn("product-security-privacy-engineering", architecture)
 
     def test_pspe_012_routing_cases_are_complete_and_use_next_id(self) -> None:

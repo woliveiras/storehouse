@@ -245,6 +245,13 @@
       ]
     },
     {
+      "name": "product-testing",
+      "description": "Product Testing Engineering for risk-based test strategy, deterministic fixtures, independent oracles, and reliable web and mobile product test systems.",
+      "skills": [
+        "product-testing-engineering"
+      ]
+    },
+    {
       "name": "sdd",
       "description": "Optional Specification-Driven Development with durable specifications, oracle matrices, reconciliation, and formal review.",
       "skills": [
