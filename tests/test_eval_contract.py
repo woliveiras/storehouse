@@ -328,11 +328,11 @@ class EvalCatalogTests(unittest.TestCase):
         from evals.runner import _approval_token, _cases, authorize_execution, build_budget
 
         budget = build_budget(self.catalog, "full")
-        self.assertEqual(451, budget["target_calls"])
-        self.assertEqual(44, budget["secondary_judgments"])
-        self.assertEqual(495, budget["upper_bound_calls"])
+        self.assertEqual(461, budget["target_calls"])
+        self.assertEqual(45, budget["secondary_judgments"])
+        self.assertEqual(506, budget["upper_bound_calls"])
         self.assertEqual(
-            {"routing": 181, "behavior": 88, "composition": 150, "security": 32},
+            {"routing": 185, "behavior": 90, "composition": 153, "security": 33},
             {shard["name"]: shard["count"] for shard in budget["shards"]},
         )
         self.assertEqual(

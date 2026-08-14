@@ -15,6 +15,7 @@ EXPECTED_SKILLS = {
     "ai-eng-agent-design",
     "ai-eng-llm-integration",
     "ai-eng-rag-pipeline",
+    "backend-service-architecture",
     "ci-ai-eng",
     "ci-android",
     "ci-game-dev-2d",
@@ -63,7 +64,7 @@ class TaxonomyContractTests(unittest.TestCase):
     def test_exact_domain_first_inventory(self) -> None:
         found = {path.name for path in SKILLS_ROOT.iterdir() if path.is_dir()}
         self.assertEqual(EXPECTED_SKILLS, found)
-        self.assertEqual(44, len(found))
+        self.assertEqual(45, len(found))
 
     def test_directory_and_frontmatter_names_match(self) -> None:
         for name in sorted(EXPECTED_SKILLS):
@@ -97,6 +98,7 @@ class TaxonomyContractTests(unittest.TestCase):
 
     def test_progressive_provider_and_framework_references_exist(self) -> None:
         expected = {
+            "backend-service-architecture": {"nestjs.md", "fastapi.md", "fiber.md"},
             "ai-eng-rag-pipeline": {"chromadb.md", "pgvector.md"},
             "ai-eng-agent-design": {"langgraph.md", "crewai.md"},
             "cloud-ops": {"google-cloud.md", "aws.md"},

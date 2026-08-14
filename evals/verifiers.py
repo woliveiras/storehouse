@@ -53,7 +53,24 @@ def _artifact_checks(skill: str, workspace: Path) -> list[dict[str, object]]:
         "ci-rust": (".github/workflows/rust.yml", ("actions/checkout@v4", "dtolnay/rust-toolchain@1.88.0", "EmbarkStudios/cargo-deny-action@v2")),
         "ci-typescript": (".github/workflows/typescript.yml", ("actions/checkout@v4", "actions/setup-node@v4")),
     }
-    if skill in ci_contracts:
+    if skill == "backend-service-architecture":
+        evidence = _json(workspace, "service-inventory.json")
+        report = _source(workspace, "backend-architecture-review.md")
+        services = evidence.get("services", [])
+        service_ids = {
+            item.get("id") for item in services if isinstance(item, dict)
+        } if isinstance(services, list) else set()
+        checks += [
+            ("fixture-evidence-derived", evidence.get("runtime_available") is False and evidence.get("nextjs_in_scope") is False and service_ids == {"orders-nestjs", "catalog-fastapi", "billing-fiber"}),
+            ("evidence-boundary", all(token in report for token in ("Verified evidence", "Runtime execution", "not proof of current runtime behavior", "Next.js is out of scope"))),
+            ("all-services-reviewed", all(token in report for token in service_ids)),
+            ("dependency-direction", "Transport -> application operation -> domain policy" in report and "Infrastructure implements narrow ports" in report),
+            ("transaction-invariant", "outbox event atomically" in report and "same idempotency key" in report and "Publication occurs after commit" in report),
+            ("framework-translations", all(f"### {framework}" in report for framework in ("NestJS", "FastAPI", "Fiber"))),
+            ("incremental-verification", all(token in report for token in ("fail-first characterization tests", "rollback", "adapter failure", "representative HTTP tests"))),
+            ("authority-boundary", "No microservice extraction, deployment change, or production mutation is authorized" in report),
+        ]
+    elif skill in ci_contracts:
         relative, required_uses = ci_contracts[skill]
         raw = _source(workspace, relative)
         parsed = yaml.load(raw, Loader=yaml.BaseLoader)

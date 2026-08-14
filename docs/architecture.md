@@ -6,7 +6,10 @@ Each directory owns its `SKILL.md` and optional `agents/`, `references/`,
 code or depend on Baseline, another skill, or repository test and evaluation
 dependencies.
 
-The current flat domain-first inventory contains 44 skills. The `product`
+The current flat domain-first inventory contains 45 skills. The `backend`
+namespace owns framework-neutral service-boundary design with conditional
+NestJS, FastAPI, and Fiber translations; full-stack Next.js architecture remains
+outside that contract. The `product`
 namespace owns independent cross-platform product UI/UX design and product
 performance engineering capabilities. `product-ui-ux-design` owns observable
 experience under latency; `product-performance-engineering` owns measurement,

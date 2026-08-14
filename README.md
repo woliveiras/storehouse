@@ -1,6 +1,6 @@
 # Storehouse
 
-A curated set of skills for product design and performance, Phaser, Godot, Android Native, TypeScript, Python, Golang, Rust, Terraform, data modeling, cloud infrastructure, research, writing, and AI engineering.
+A curated set of skills for product design and performance, backend service architecture, Phaser, Godot, Android Native, TypeScript, Python, Golang, Rust, Terraform, data modeling, cloud infrastructure, research, writing, and AI engineering.
 
 ## Storehouse and Baseline
 
@@ -249,6 +249,15 @@ npx skills add woliveiras/storehouse \
   --skill web-validation-zod
 ```
 
+### `backend`
+
+Backend service architecture for NestJS, FastAPI, and Fiber.
+
+```bash
+npx skills add woliveiras/storehouse \
+  --skill backend-service-architecture
+```
+
 ### `data`
 
 PostgreSQL, RAG storage, and Supabase workflows.
@@ -355,7 +364,7 @@ have no installed identity.
 
 ## Compatibility and privacy
 
-The 44 directories validate against the Agent Skills contract. A clean-room
+The 45 directories validate against the Agent Skills contract. A clean-room
 official CLI installation smoke is required when distribution, collections, or
 skill layout changes. Twelve game skills retain deliberate Codex
 `agents/openai.yaml` metadata. `game-dev-2d-art` can use Codex image generation

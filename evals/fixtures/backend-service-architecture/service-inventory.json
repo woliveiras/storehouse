@@ -1,0 +1,34 @@
+{
+  "runtime_available": false,
+  "services": [
+    {
+      "id": "orders-nestjs",
+      "framework": "NestJS",
+      "observations": [
+        "OrdersController coordinates OrderRepository, PaymentClient, and EventBus directly.",
+        "OrdersModule exports OrderRepository and PaymentClient to five modules.",
+        "A global interceptor opens and commits a database transaction."
+      ]
+    },
+    {
+      "id": "catalog-fastapi",
+      "framework": "FastAPI",
+      "observations": [
+        "The APIRouter path operation creates the ORM session, applies pricing policy, commits, and publishes an event.",
+        "A Depends function performs authorization and inventory reservation.",
+        "The shared HTTP client is created at import time and has no visible shutdown."
+      ]
+    },
+    {
+      "id": "billing-fiber",
+      "framework": "Fiber",
+      "observations": [
+        "The handler passes fiber.Ctx into the billing service and repository.",
+        "Database and payment clients are mutable package globals.",
+        "Middleware retries the complete request after any error."
+      ]
+    }
+  ],
+  "shared_invariant": "An accepted order records its state and outbox event atomically; payment retries use the same idempotency key.",
+  "nextjs_in_scope": false
+}

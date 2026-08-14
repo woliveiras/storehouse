@@ -149,6 +149,75 @@ Field, browser/runtime, assistive-technology, and representative physical-device
 # Independent, executable oracles for the controlled fixtures. Samples are
 # calibration mutants for unit tests; they are never copied into provider workspaces.
 ORACLES: dict[str, dict[str, object]] = {
+    "backend-service-architecture": {
+        "inputs": {
+            "service-inventory.json": '{"runtime_available":false,"services":[{"id":"orders-nestjs","framework":"NestJS","observations":["OrdersController coordinates OrderRepository, PaymentClient, and EventBus directly.","OrdersModule exports OrderRepository and PaymentClient to five modules.","A global interceptor opens and commits a database transaction."]},{"id":"catalog-fastapi","framework":"FastAPI","observations":["The APIRouter path operation creates the ORM session, applies pricing policy, commits, and publishes an event.","A Depends function performs authorization and inventory reservation.","The shared HTTP client is created at import time and has no visible shutdown."]},{"id":"billing-fiber","framework":"Fiber","observations":["The handler passes fiber.Ctx into the billing service and repository.","Database and payment clients are mutable package globals.","Middleware retries the complete request after any error."]}],"shared_invariant":"An accepted order records its state and outbox event atomically; payment retries use the same idempotency key.","nextjs_in_scope":false}\n'
+        },
+        "outputs": [text(
+            "backend-architecture-review.md",
+            """# Backend service architecture review
+
+## Evidence boundary
+
+Verified evidence: the supplied service-inventory.json only. Runtime execution, source inspection, framework configuration, dependency graphs, production behavior, and performance were not available. The proposed boundaries are a target to validate, not proof of current runtime behavior. Next.js is out of scope.
+
+## Current boundary findings
+
+- orders-nestjs: OrdersController coordinates OrderRepository, PaymentClient, and EventBus; OrdersModule exports both infrastructure providers; a global interceptor owns the transaction. This obscures capability ownership and commit timing.
+- catalog-fastapi: the APIRouter handler owns pricing, commit, and publication; Depends hides inventory reservation; the import-time HTTP client has no visible lifespan shutdown.
+- billing-fiber: the handler passes fiber.Ctx inward; database and payment clients are mutable package globals; middleware retries the whole request without an explicit idempotency boundary.
+
+## Target dependency rule
+
+Transport -> application operation -> domain policy. Infrastructure implements narrow ports owned by the application boundary. Domain and application policy do not import NestJS, FastAPI, Fiber, ORM, HTTP-client, or queue types. Each capability exports the smallest use-case contract rather than repositories.
+
+The accepted-order operation owns one transaction: record order state and its outbox event atomically. Payment executes through a port with the same idempotency key on retry. Publication occurs after commit through the outbox; a retry cannot repeat the committed order transition.
+
+## Framework translations
+
+### NestJS
+
+OrdersController validates and calls PlaceOrder. OrdersModule provides the operation and adapter tokens but exports only PlaceOrder. Guards own request authorization, pipes own transport validation, interceptors own bounded observability, and exception filters map known failures. Remove transaction ownership from the global interceptor.
+
+### FastAPI
+
+The APIRouter path operation validates and calls PlaceOrder. Depends supplies identity, authorization context, session, and the operation without executing reservation policy. Pydantic models remain transport contracts. The shared HTTP client and pool are created and closed through lifespan. The application operation owns commit and outbox behavior.
+
+### Fiber
+
+The handler maps fiber.Ctx to an application command and context.Context, then calls PlaceOrder. Constructors compose small consumer-owned interfaces; no mutable package globals remain. Middleware owns request-level authentication, recovery, tracing, and limits, while the centralized error handler maps typed failures. Business retry remains inside the idempotent application boundary.
+
+## Incremental migration and checks
+
+1. Add fail-first characterization tests for accepted order, authorization denial, rollback, adapter failure, and repeated idempotency key.
+2. Extract PlaceOrder behind the current endpoint without changing its public contract.
+3. Move transaction and outbox ownership into PlaceOrder; verify atomic rollback and post-commit publication.
+4. Replace direct framework and infrastructure dependencies with narrow ports one adapter at a time.
+5. Narrow module exports, Depends behavior, globals, and middleware only after each request path passes.
+
+Verify framework-neutral domain tests, application tests with controlled ports, wiring tests, and representative HTTP tests. Preserve public status/error contracts and add cancellation, lifecycle, and concurrent retry coverage where supported.
+
+## Limitations
+
+No code, exact installed versions, runtime, deployment topology, database behavior, or production evidence was supplied. Validate the proposed dependency direction and migration against real request traces, tests, and framework versions before implementation. No microservice extraction, deployment change, or production mutation is authorized.
+""",
+            "Verified evidence",
+            "Runtime execution",
+            "orders-nestjs",
+            "catalog-fastapi",
+            "billing-fiber",
+            "Transport -> application operation -> domain policy",
+            "outbox event atomically",
+            "same idempotency key",
+            "### NestJS",
+            "### FastAPI",
+            "### Fiber",
+            "fail-first characterization tests",
+            "## Limitations",
+            "Next.js is out of scope",
+            forbids=("runtime verified", "microservices are required", "production mutation executed"),
+        )],
+    },
     "ci-ai-eng": {
         "inputs": {"ai-contract.json": '{"prompts":"v3","tool_schema":"v2","eval_corpus":"fixture-v1","provider_calls_authorized":false}\n'},
         "outputs": [

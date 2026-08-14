@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backend Service Architecture"
+  short_description: "Design modular backend service boundaries"
+  default_prompt: "Use $backend-service-architecture to design or review this backend service architecture."

@@ -163,6 +163,13 @@
       ]
     },
     {
+      "name": "backend",
+      "description": "Backend service architecture for NestJS, FastAPI, and Fiber.",
+      "skills": [
+        "backend-service-architecture"
+      ]
+    },
+    {
       "name": "data",
       "description": "PostgreSQL, RAG storage, and Supabase workflows.",
       "skills": [
