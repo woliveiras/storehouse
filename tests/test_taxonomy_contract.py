@@ -112,6 +112,7 @@ class TaxonomyContractTests(unittest.TestCase):
                 "migrations-and-operations.md",
             },
             "writing-blog-post": {
+                "information-density.md",
                 "technical-blog-structure.md",
                 "voice-and-style.md",
                 "astro-mdx.md",

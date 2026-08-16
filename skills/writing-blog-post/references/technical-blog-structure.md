@@ -12,7 +12,7 @@ Use when the reader should complete a task.
 4. Expected observation after meaningful steps
 5. Troubleshooting and rollback
 6. Trade-offs and limitations
-7. Conclusion and primary references
+7. Primary references and, only when useful, a concluding implication or action
 
 ## Conceptual explainer
 
@@ -24,7 +24,7 @@ Use when the reader needs a mental model.
 4. Concrete example
 5. Trade-off comparison
 6. Pitfalls and boundary cases
-7. Conclusion and primary references
+7. Primary references and, only when useful, a concluding implication
 
 ## Engineering opinion
 
@@ -35,8 +35,7 @@ Use when experience supports a reasoned position.
 3. Observations versus external evidence
 4. Counterargument and trade-offs
 5. Current practice or recommendation
-6. Concise conclusion
+6. Concluding implication only when it adds to the recommendation
 
 Do not stretch a short point into a tutorial or present an opinion as measured
 evidence.
-

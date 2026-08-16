@@ -5,6 +5,28 @@ description: "Rewrite academic drafts to remove AI writing patterns while preser
 
 Rewrite the given text directly. No preamble, no explanation, no list of changes — deliver the rewritten text and nothing else.
 
+## Information density
+
+Match length to complexity, venue requirements, and the scientific work each
+section must perform. Accuracy outranks brevity: preserve claims, citations,
+methods, results, definitions, legitimate uncertainty, and every limitation
+needed to interpret the evidence.
+
+- Make each paragraph add a fact, result, argument, methodological detail,
+  boundary, or necessary transition. Merge paragraphs that repeat a contribution.
+- Remove topic announcements, field-importance padding, outline narration, and
+  section recaps that add no scientific content.
+- Use headings and lists only when required by the venue or when they materially
+  improve navigation or comparison.
+- Keep examples that define a construct, disambiguate a method, or support a
+  scientific argument; remove decorative examples.
+- Keep necessary caveats adjacent to the claims they constrain. Compress double
+  hedges, but never strengthen a claim beyond the evidence.
+
+Run a loss test on every sentence: if removing it preserves scientific meaning,
+evidence, attribution, uncertainty, and compliance with the target format,
+delete or merge it. Do not manufacture evidence or certainty to fill a gap.
+
 ## What to eliminate
 
 ### General AI tells (applies to all sections)
@@ -45,7 +67,8 @@ Fix every instance of:
 
 Fix every instance of:
 
-- **Abstract that does not follow the 5-beat structure** (see Rewrite Rules below)
+- **Abstract with no discernible problem, method, result, or implication** when
+  the target venue does not prescribe another structure
 - **Introduction that restates the abstract**: the Introduction adds context and motivation; if it copies abstract sentences, cut the copies
 - **Discussion that merely narrates results**: Discussion interprets, not narrates — "X was higher" belongs in Results; "X was higher because Y, which suggests Z" belongs in Discussion
 - **Conclusion that summarizes without implication**: end with what the findings mean for practice or future work, not a recap of your own paper
@@ -54,16 +77,17 @@ Fix every instance of:
 
 ### Shared rules (apply to all sections)
 
-1. **Start with the point.** First sentence of any section: the finding, the problem, or the claim — not context about why the field matters.
+1. **Start with the section's work.** Lead with the finding, problem, method, or claim the section must establish, not generic field-importance context.
 2. **Cut anything that does not add a fact, result, or argument.** If a sentence could be deleted without losing scientific content, delete it.
-3. **Replace double hedges with single or none.** "may potentially" → "may"; if the evidence supports a stronger claim, make it.
+3. **Replace double hedges with one precise qualifier.** "may potentially" → "may"; preserve legitimate uncertainty and do not infer stronger support.
 4. **Prefer specific.** Real numbers, real baselines, real effect sizes over qualitative claims.
-5. **One idea per paragraph.** If a paragraph ends and it covered two arguments, split it.
+5. **Keep paragraphs coherent.** Split unrelated arguments and merge semantically duplicate paragraphs.
 6. **Preserve every technical fact and every citation.** Do not alter, omit, or strengthen claims beyond what the original supports.
 
 ### Abstract rewrite rule
 
-Enforce this five-beat structure. Each beat is one sentence, two at most:
+Follow the target venue's abstract requirements. When none are supplied, use up
+to five beats, each in one sentence where possible:
 
 1. **Problem / Gap** — what is missing or broken in the field (one sentence, active voice preferred)
 2. **What we did** — method or approach, stated as past tense action ("We analyzed…", "We introduce…")
@@ -71,7 +95,9 @@ Enforce this five-beat structure. Each beat is one sentence, two at most:
 4. **Secondary result or scope** — supporting finding or boundary conditions
 5. **Implication** — what this means for practitioners, researchers, or the field
 
-Do not add a sixth beat. Do not expand any beat beyond two sentences.
+Omit a beat that has no distinct content, and do not add sentences merely to
+complete the template. Preserve a necessary design detail or boundary even when
+that makes the abstract longer.
 
 ### Contribution framing rule
 
@@ -97,11 +123,12 @@ Contributions must be stated with result verbs, not intention verbs:
 
 ### Limitations / Threats rule
 
-Each limitation must specify:
-- **What** is limited (the construct, the sample, the method)
-- **To whom** it does not generalize
-- **Why** the limitation exists
-- **What future work** could address it (one sentence, specific)
+State the dimensions needed to interpret each limitation:
+
+- **What** is limited: the construct, sample, method, measurement, or inference
+- **Where or to whom** the result may not generalize
+- **Why** the limitation follows from the design or evidence
+- **What future work** could address it, only when a concrete next study adds value
 
 "This may limit generalizability" alone is not a valid limitation statement.
 

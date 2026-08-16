@@ -8,11 +8,20 @@
 
 ## Reader value
 
-- Introduction states what, why, audience, and expected outcome
+- Opening states the reader problem, thesis, or concrete case without generic
+  context-setting
 - Structure matches tutorial, conceptual, or opinion intent
 - Commands include files/paths/placeholders and expected results
 - Examples are reproducible or explicitly illustrative
 - Trade-offs, prerequisites, limitations, and failure modes are visible
+
+## Information density
+
+- Length matches the problem's complexity and the audience's existing knowledge
+- Each paragraph adds information; duplicate claims and section recaps are gone
+- Headings, lists, examples, and transitions justify the space they consume
+- The loss test removes sentences whose deletion changes no meaning or evidence
+- Every necessary caveat remains adjacent to the claim it constrains
 
 ## Evidence and safety
 
@@ -27,7 +36,7 @@
 - Title and description are direct and searchable
 - Voice matches the target without imitating another author
 - Code fences, links, images, tables, diagrams, and internal links validate
-- Conclusion gives a useful takeaway rather than repeating the introduction
+- Conclusion adds an implication or action, or is omitted when it would only
+  repeat the post
 - Repository content checks, lint, and build pass where applicable
 - Publishing, deployment, and promotion remain separately authorized
-
